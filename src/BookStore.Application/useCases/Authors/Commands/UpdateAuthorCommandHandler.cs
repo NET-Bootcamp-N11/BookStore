@@ -14,7 +14,7 @@ namespace BookStore.Application.useCases.Authors.Commands
 
         public async Task<Author> Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
         {
-            var author = await _context.Author.FirstOrDefaultAsync(x => x.Id == request.Id);
+            var author = await _context.Authors.FirstOrDefaultAsync(x => x.Id == request.Id);
 
             if (author is not null)
             {
@@ -26,6 +26,5 @@ namespace BookStore.Application.useCases.Authors.Commands
 
             return null;
         }
-
     }
 }

@@ -13,7 +13,7 @@ namespace BookStore.Application.useCases.Authors.Queries
 
         public async Task<List<Author>> Handle(GetAllAuthorsQuery request, CancellationToken cancellationToken)
         {
-            return _appDbContext.Author.ToList();// chetkiy
+            return _appDbContext.Authors.ToList();// chetkiy
         }
     }
 }

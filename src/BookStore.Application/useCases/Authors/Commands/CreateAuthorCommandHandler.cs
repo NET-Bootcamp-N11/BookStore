@@ -15,7 +15,7 @@ namespace BookStore.Application.useCases.Authors.Commands
         public async Task<Author> Handle(CreateAuthorCommand command, CancellationToken cancellation)
         {
             var author = command.Adapt<Author>();
-            var res = await _context.Author.AddAsync(author);
+            var res = await _context.Authors.AddAsync(author);
             await _context.SaveChangesAsync();
 
             return res.Entity;
