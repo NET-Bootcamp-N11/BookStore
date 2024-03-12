@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BookStore.Domain.Entities;
+using MediatR;
 
 namespace BookStore.Application.useCases.Books.Commands
 {
-    public class CreateBookCommandHandler
+    public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand, Book>
     {
+        public Task<Book> Handle(CreateBookCommand request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
