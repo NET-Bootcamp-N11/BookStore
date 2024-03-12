@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using BookStore.Domain.Entities;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Application.useCases.Books.Commands
 {
-    public class UpdateBookCommand:IRequest
+    public class UpdateBookCommand:IRequest<Book>
 
     {
         public long Id { get; set; }

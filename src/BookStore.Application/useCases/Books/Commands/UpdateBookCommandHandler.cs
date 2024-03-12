@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Application.useCases.Books.Commands
 {
-    public class UpdateBookCommandHandler:IRequest<UpdateBookCommand>
+    public class UpdateBookCommandHandler:IRequestHandler<UpdateBookCommand,Book>
     {
         private readonly IAppDbContext _appDbContext;
 
