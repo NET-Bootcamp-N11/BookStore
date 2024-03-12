@@ -1,6 +1,6 @@
 ﻿using BookStore.Application.Abstractions;
 using BookStore.Domain.Entities;
-using MapsterMapper;
+using Mapster;
 using MediatR;
 
 namespace BookStore.Application.useCases.Books.Commands
@@ -10,7 +10,7 @@ namespace BookStore.Application.useCases.Books.Commands
         private readonly IAppDbContext _appDbContext;
         public CreateBookCommandHandler(IAppDbContext appDbContext)
             => _appDbContext = appDbContext;
-        
+
         public async Task<Book> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
             var book = request.Adapt<Book>();
