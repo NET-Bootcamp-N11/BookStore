@@ -1,4 +1,4 @@
-using BookStore.Domain.Entities;
+﻿using BookStore.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
