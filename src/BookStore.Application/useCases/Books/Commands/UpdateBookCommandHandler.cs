@@ -25,10 +25,13 @@ namespace BookStore.Application.useCases.Books.Commands
             var book = await _appDbContext.Books.FirstOrDefaultAsync(x => x.Id == updateBookCommand.Id);
             if (book != null)
             {
+
                 book = updateBookCommand.Adapt<Book>();
                 _appDbContext.SaveChangesAsync();
                 return book;
+
             }
+
             return null;
         }
 
