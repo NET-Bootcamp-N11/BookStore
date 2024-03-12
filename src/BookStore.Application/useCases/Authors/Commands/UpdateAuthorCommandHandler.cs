@@ -1,17 +1,11 @@
 ﻿using BookStore.Application.Abstractions;
 using BookStore.Domain.Entities;
-using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BookStore.Application.useCases.Books.Commands
+namespace BookStore.Application.useCases.Authors.Commands
 {
-    public class UpdateAuthorCommandHandler: IRequestHandler<UpdateAuthorCommand, Author>
+    public class UpdateAuthorCommandHandler : IRequestHandler<UpdateAuthorCommand, Author>
     {
 
         private readonly IAppDbContext _context;

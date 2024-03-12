@@ -1,10 +1,11 @@
 ﻿using BookStore.Domain.Entities;
 using MediatR;
 
-namespace BookStore.Application.useCases.Authors.Queries
+namespace BookStore.Application.useCases.Authors.Commands
 {
-    public class GetAllAuthorsQuery : IRequest<List<Author>>
+    public class UpdateAuthorCommand : IRequest<Author>
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     }
