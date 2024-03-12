@@ -1,4 +1,7 @@
-﻿using MediatR;
+﻿using BookStore.Application.Abstractions;
+using BookStore.Domain.Entities;
+using Mapster;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +12,18 @@ namespace BookStore.Application.useCases.Authors.Commands
 {
     public class CreateAuthorCommandHanler : IRequestHandler<CreateAuthorCommand, string>
     {
-        public Task<string> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
+        private readonly IAppDbContext _appDbContext;
+
+        public CreateAuthorCommandHanler(IAppDbContext appDbContext)
         {
-            throw new NotImplementedException();
+            _appDbContext = appDbContext;
+        }
+
+        public async Task<string> Handle(CreateAuthorCommand request, CancellationToken cancellationToken)
+        {
+            var author = request.Adapt<Author>();
+            await _appDbContext.Authors.AddAsync(author);
+            return "Author added";
         }
     }
 }
