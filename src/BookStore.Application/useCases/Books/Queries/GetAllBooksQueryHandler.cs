@@ -15,13 +15,9 @@ namespace BookStore.Application.useCases.Books.Queries
         private readonly IAppDbContext _appDbContext;
 
         public GetAllBooksQueryHandler(IAppDbContext appDbContext)
-        {
-            _appDbContext = appDbContext;
-        }
+            => _appDbContext = appDbContext;
 
         public async Task<List<Book>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
-        {
-            return  _appDbContext.Books.ToList();
-        }
+            =>  _appDbContext.Books.ToList();
     }
 }
