@@ -15,12 +15,8 @@ namespace BookStore.Application.useCases.Books.Commands
     {
 
         private readonly IAppDbContext _context;
-        private readonly IMapper _mapper;
-        public UpdateAuthorCommandHandler(IAppDbContext context, IMapper mapper)
-        {
-            _context = context;
-            _mapper = mapper;
-        }
+        public UpdateAuthorCommandHandler(IAppDbContext context)
+            => _context = context;
 
         public async Task<Author> Handle(UpdateAuthorCommand request, CancellationToken cancellationToken)
         {
