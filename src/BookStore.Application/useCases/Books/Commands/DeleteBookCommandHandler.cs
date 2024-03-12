@@ -22,12 +22,16 @@ namespace BookStore.Application.useCases.Books.Commands
         public async Task<Book> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
         {
             var user = await _context.Books.FirstOrDefaultAsync(x => x.Id == request.Id);
+            
+            if (user is not null)
+            {
+                _context.Books.Remove(user);
     
-            _context.Books.Remove(user);
+                await _context.SaveChangesAsync();
     
-            await _context.SaveChangesAsync();
-    
-            return user;
+                return user;
+            }
+            return null;
         }
     }
 }
