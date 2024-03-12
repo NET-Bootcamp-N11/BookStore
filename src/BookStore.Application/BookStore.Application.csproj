@@ -17,4 +17,9 @@
     <ProjectReference Include="..\BookStore.Domain\BookStore.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="useCases\Authors\Queries\" />
+    <Folder Include="useCases\Books\" />
+  </ItemGroup>
+
 </Project>
