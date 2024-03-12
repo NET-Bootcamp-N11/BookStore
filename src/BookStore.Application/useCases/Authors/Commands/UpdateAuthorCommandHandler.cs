@@ -20,8 +20,10 @@ namespace BookStore.Application.useCases.Authors.Commands
             {
                 author.Name = request.Name;
                 author.Description = request.Description;
-
+                var entry = _context.Authors.Update(author);
                 await _context.SaveChangesAsync();
+
+                return entry.Entity;
             }
 
             return null;
