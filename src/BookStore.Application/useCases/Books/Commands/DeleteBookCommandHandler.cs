@@ -11,28 +11,23 @@ using System.Threading.Tasks;
 
 namespace BookStore.Application.useCases.Books.Commands
 {
-    public class DeleteBookCommandHandler
+    public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand, Book>
     {
-        public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand, Book>
+        private readonly IAppDbContext _context;
+        public DeleteBookCommandHandler(IAppDbContext context)
         {
-            private readonly IAppDbContext _context;
-            private readonly IMapper _mapper;
-            public DeleteBookCommandHandler(IAppDbContext context, IMapper mapper)
-            {
-                _context = context;
-                _mapper = mapper;
-            }
-
-            public async Task<Book> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
-            {
-                var user = await _context.Books.FirstOrDefaultAsync(x => x.Id == request.Id);
-
-                _context.Books.Remove(user);
-
-                await _context.SaveChangesAsync();
-
-                return user;
-            }
+            _context = context;
+        }
+    
+        public async Task<Book> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
+        {
+            var user = await _context.Books.FirstOrDefaultAsync(x => x.Id == request.Id);
+    
+            _context.Books.Remove(user);
+    
+            await _context.SaveChangesAsync();
+    
+            return user;
         }
     }
 }
