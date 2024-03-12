@@ -3,15 +3,10 @@ using BookStore.Domain.Entities;
 using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Application.useCases.Books.Commands
 {
-    public class UpdateBookCommandHandler:IRequestHandler<UpdateBookCommand,Book>
+    public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand, Book>
     {
         private readonly IAppDbContext _appDbContext;
 
