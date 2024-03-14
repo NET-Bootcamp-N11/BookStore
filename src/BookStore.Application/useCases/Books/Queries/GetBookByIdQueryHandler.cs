@@ -1,3 +1,8 @@
+using BookStore.Application.Abstractions;
+using BookStore.Domain.Entities;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+
 namespace BookStore.Application.useCases.Books.Queries
 {
     public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, Book>
@@ -8,10 +13,10 @@ namespace BookStore.Application.useCases.Books.Queries
         {
             _appDb = appDb;
         }
-        
+
         public async Task<Book> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
         {
-            var user = await _appDb.Books.FirstOrDefaultAsync(x=> x.Id == request.Id);
+            var user = await _appDb.Books.FirstOrDefaultAsync(x => x.Id == request.Id);
             return user;
         }
     }
