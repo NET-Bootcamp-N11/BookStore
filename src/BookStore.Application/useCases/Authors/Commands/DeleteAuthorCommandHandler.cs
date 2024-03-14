@@ -15,9 +15,9 @@ namespace BookStore.Application.useCases.Authors.Commands
 
         public async Task Handle(DeleteAuthorCommand request, CancellationToken cancellationToken)
         {
-            var author = await _appDbContext.Author.FirstOrDefaultAsync(x => x.Id == request.Id);
+            var author = await _appDbContext.Authors.FirstOrDefaultAsync(x => x.Id == request.Id);
 
-            _appDbContext.Author.Remove(author);
+            _appDbContext.Authors.Remove(author);
 
             await _appDbContext.SaveChangesAsync();
         }
