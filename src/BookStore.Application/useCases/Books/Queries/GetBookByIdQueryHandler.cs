@@ -1,12 +1,10 @@
-﻿namespace BookStore.Application.useCases.Books.Queries
+namespace BookStore.Application.useCases.Books.Queries
 {
-    public class GetBookByIdQueryHandler
+    public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, Book>
     {
-        public long Id { get; set; }
-
         private readonly IAppDbContext _appDb;
 
-        public GetBookByIdQuery(IAppDbContext appDb)
+        public GetBookByIdQueryHandler(IAppDbContext appDb)
         {
             _appDb = appDb;
         }
