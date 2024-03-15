@@ -18,7 +18,7 @@ namespace BookStore.Infrastructure
             base.OnConfiguring(optionsBuilder);
             optionsBuilder
                 .UseLazyLoadingProxies()
-                .UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=BookStore.MVC.DB;");
+                .UseSqlite("Data source=BookStore.DB");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
