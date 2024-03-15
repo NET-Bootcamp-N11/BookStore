@@ -1,0 +1,29 @@
+﻿@using BookStore.Domain.Entities
+@model List<Author>
+
+
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Full name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(int i = 0; i < Model.Count; i++)
+        {          
+            <tr>
+                <th scope="row">@i</th>
+                <td>@Model[i].Name</td>
+                <td>@Model[i].Description</td>
+                <td>
+                    <button class="btn btn-outline-success">
+                        Nmidur qil
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
