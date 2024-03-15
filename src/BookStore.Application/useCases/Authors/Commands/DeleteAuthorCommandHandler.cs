@@ -1,25 +1,26 @@
 ﻿using BookStore.Application.Abstractions;
+using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.useCases.Authors.Commands
 {
-    public class DeleteAuthorCommandHandler : IRequestHandler<DeleteAuthorCommand>
+    public class DeleteAuthorCommandHandler : IRequestHandler<DeleteAuthorCommand, Author>
     {
         private readonly IAppDbContext _appDbContext;
 
         public DeleteAuthorCommandHandler(IAppDbContext appDbContext)
-        {
-            _appDbContext = appDbContext;
-        }
+            => _appDbContext = appDbContext;
 
-        public async Task Handle(DeleteAuthorCommand request, CancellationToken cancellationToken)
+        async Task<Author> IRequestHandler<DeleteAuthorCommand, Author>.Handle(DeleteAuthorCommand request, CancellationToken cancellationToken)
         {
-            var author = await _appDbContext.Author.FirstOrDefaultAsync(x => x.Id == request.Id);
+            var author = await _appDbContext.Authors.FirstOrDefaultAsync(x => x.Id == request.Id);
 
-            _appDbContext.Author.Remove(author);
+            _appDbContext.Authors.Remove(author);
 
             await _appDbContext.SaveChangesAsync();
+
+            return author;
         }
     }
 }

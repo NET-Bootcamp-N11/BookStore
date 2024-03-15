@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BookStore.Application.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,10 +8,7 @@ namespace BookStore.Infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppDBContext>(options =>
-                options
-                .UseLazyLoadingProxies()
-                .UseSqlite("Data source=BookStore.DB"));
+            services.AddDbContext<IAppDbContext, AppDBContext>();
 
             return services;
         }
