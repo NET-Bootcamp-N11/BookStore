@@ -19,7 +19,7 @@ namespace MVC.Controllers
         {
             var getAllBooks = new GetAllBooksQuery();
             var books = await _mediator.Send(getAllBooks);
-            return View();
+            return View(books);
         }
 
         public IActionResult Privacy()

@@ -1,8 +1,29 @@
-﻿@{
+﻿@using BookStore.Domain.Entities
+@model List<Book>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+    @for(var i = 1; i < Model.Count; i++)
+    {
+        <tr>
+            <th scope="row">@i</th>
+            <td>@Model[i - 1].Author</td>
+            <td>@Model[i - 1].Description</td>
+            <td>@Model[i - 1].Genres</td>
+            <td><button class="btn btn-danger">Delete</button></td>
+        </tr>
+    }
+    </tbody>
+</table>
