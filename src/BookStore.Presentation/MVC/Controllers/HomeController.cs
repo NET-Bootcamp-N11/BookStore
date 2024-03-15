@@ -1,3 +1,4 @@
+using BookStore.Application.useCases.Books.Commands;
 using BookStore.Application.useCases.Books.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,17 @@ namespace MVC.Controllers
             var getAllBooks = new GetAllBooksQuery();
             var books = await _mediator.Send(getAllBooks);
             return View(books);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deleteBookCommand = new DeleteBookCommand()
+            {
+                Id = id
+            };
+
+            var book = await _mediator.Send(deleteBookCommand);
+            return RedirectToAction(actionName: nameof(Index));
         }
 
         public IActionResult Privacy()
