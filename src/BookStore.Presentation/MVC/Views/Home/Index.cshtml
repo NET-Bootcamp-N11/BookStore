@@ -8,10 +8,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">T/R</th>
+            <th scope="col">Author</th>
+            <th scope="col">Description</th>
+            <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody class="table-group-divider">
@@ -19,9 +19,8 @@
     {
         <tr>
             <th scope="row">@i</th>
-            <td>@Model[i - 1].Author</td>
+            <td>@Model[i - 1].Title</td>
             <td>@Model[i - 1].Description</td>
-            <td>@Model[i - 1].Genres</td>
             <td><button class="btn btn-danger">Delete</button></td>
         </tr>
     }
