@@ -1,0 +1,25 @@
+﻿@using BookStore.Domain.Entities;
+@model List<Genre> 
+
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Genre_name</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            int list_cnt = i+1;
+            <tr>
+                <th scope="row">@list_cnt</th>
+                <td>@Model[i].Name</td>
+                <td>
+                    <button class="btn btn-outline-success">btn</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

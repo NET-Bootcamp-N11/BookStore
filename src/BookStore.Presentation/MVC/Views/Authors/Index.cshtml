@@ -19,9 +19,9 @@
                 <td>@Model[i].Name</td>
                 <td>@Model[i].Description</td>
                 <td>
-                    <button class="btn btn-outline-success">
-                        Nmidur qil
-                    </button>
+                    <a asp-controller="Auhtors" asp-action="DeleteAuthor" asp-route-id="@Model[i].Id" class="btn btn-danger">
+                        <i class='bx bxs-trash'></i>
+                    </a>
                 </td>
             </tr>
         }
