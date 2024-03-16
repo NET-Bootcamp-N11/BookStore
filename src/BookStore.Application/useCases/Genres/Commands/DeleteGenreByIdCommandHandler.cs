@@ -2,11 +2,6 @@
 using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Application.useCases.Genres.Commands
 {
@@ -27,6 +22,8 @@ namespace BookStore.Application.useCases.Genres.Commands
                 throw new Exception("Genre Not found");
             }
             var entry = _appDbContext.Genres.Remove(res);
+            await _appDbContext.SaveChangesAsync(cancellationToken);
+
             return entry.Entity;
         }
     }
