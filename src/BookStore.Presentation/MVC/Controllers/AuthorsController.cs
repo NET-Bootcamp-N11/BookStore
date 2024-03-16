@@ -1,4 +1,5 @@
-﻿using BookStore.Application.useCases.Authors.Queries;
+﻿using BookStore.Application.useCases.Authors.Commands;
+using BookStore.Application.useCases.Authors.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,16 @@ namespace MVC.Controllers
             var authors = await _mediator.Send(query);
 
             return View(authors);
+        }
+
+        public async Task<IActionResult> DeleteAuthor(int id)
+        {
+            var query = new DeleteAuthorCommand()
+            {
+                Id = id
+            };
+            var author = await _mediator.Send(query);
+            return RedirectToAction(actionName: nameof(Index));
         }
     }
 }
