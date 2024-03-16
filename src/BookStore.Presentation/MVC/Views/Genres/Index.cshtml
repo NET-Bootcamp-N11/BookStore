@@ -1,12 +1,11 @@
-﻿@using BookStore.Domain.Entities;
+@using BookStore.Domain.Entities;
 @model List<Genre> 
 
 <table class="table table-borderless">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Genre_name</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Name</th>
         </tr>
     </thead>
     <tbody>
@@ -14,10 +13,12 @@
         {
             int list_cnt = i+1;
             <tr>
-                <th scope="row">@list_cnt</th>
+                <th>@list_cnt</th>
                 <td>@Model[i].Name</td>
                 <td>
-                    <a asp-controller="Genres" asp-action="DeleteGenre" asp-route-id="@Model[i].Id" class="btn btn-danger"><i class='bx bxs-trash'></i></a>
+                    <a asp-controller="Genres" asp-action="DeleteGenre" asp-route-id="@Model[i].Id" class="btn btn-danger">
+                        <i class='bx bxs-trash'></i>
+                    </a>
                 </td>
             </tr>
         }
