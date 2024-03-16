@@ -1,4 +1,4 @@
-﻿@using BookStore.Domain.Entities;
+@using BookStore.Domain.Entities;
 @model List<Genre> 
 
 <table class="table table-borderless">
@@ -15,6 +15,11 @@
             <tr>
                 <th>@list_cnt</th>
                 <td>@Model[i].Name</td>
+                <td>
+                    <a asp-controller="Genres" asp-action="DeleteGenre" asp-route-id="@Model[i].Id" class="btn btn-danger">
+                        <i class='bx bxs-trash'></i>
+                    </a>
+                </td>
             </tr>
         }
     </tbody>
