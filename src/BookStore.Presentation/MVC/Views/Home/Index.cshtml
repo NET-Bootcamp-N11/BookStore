@@ -20,8 +20,14 @@
         <tr>
             <th scope="row">@i</th>
             <td>@Model[i - 1].Title</td>
-            <td>@Model[i - 1].Description</td>
-                <td><button class="btn btn-danger"><i class='bx bxs-trash'></i></button></td>
+        @*     <td>@Model[i - 1].Description</td> *@
+            <td>@Model[i - 1].Author.Name</td>
+
+            <td>
+                <a asp-controller="Home" asp-action="Delete" asp-route-id=@Model[i].Id class="btn btn-danger">
+                    <i class='bx bxs-trash'></i>
+                </a>
+            </td>
         </tr>
     }
     </tbody>
