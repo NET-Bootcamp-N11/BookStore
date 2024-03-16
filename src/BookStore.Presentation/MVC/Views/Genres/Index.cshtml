@@ -17,7 +17,7 @@
                 <th scope="row">@list_cnt</th>
                 <td>@Model[i].Name</td>
                 <td>
-                    <button class="btn btn-outline-success">btn</button>
+                    <a asp-controller="Genres" asp-action="DeleteGenre" asp-route-id="@Model[i].Id" class="btn btn-danger"><i class='bx bxs-trash'></i></a>
                 </td>
             </tr>
         }
