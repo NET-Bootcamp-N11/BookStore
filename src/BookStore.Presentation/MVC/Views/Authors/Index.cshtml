@@ -13,13 +13,14 @@
     </thead>
     <tbody>
         @for(int i = 0; i < Model.Count; i++)
-        {          
+        {
+            var rowNumber = i + 1;
             <tr>
-                <th scope="row">@i</th>
+                <th scope="row">@rowNumber</th>
                 <td>@Model[i].Name</td>
                 <td>@Model[i].Description</td>
                 <td>
-                    <a asp-controller="Auhtors" asp-action="DeleteAuthor" asp-route-id="@Model[i].Id" class="btn btn-danger">
+                    <a asp-controller="Authors" asp-action="DeleteAuthor" asp-route-id="@Model[i].Id" class="btn btn-danger">
                         <i class='bx bxs-trash'></i>
                     </a>
                 </td>

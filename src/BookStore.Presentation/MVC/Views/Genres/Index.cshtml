@@ -5,8 +5,7 @@
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Genre_name</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Name</th>
         </tr>
     </thead>
     <tbody>
@@ -14,11 +13,8 @@
         {
             int list_cnt = i+1;
             <tr>
-                <th scope="row">@list_cnt</th>
+                <th>@list_cnt</th>
                 <td>@Model[i].Name</td>
-                <td>
-                    <button class="btn btn-outline-success">btn</button>
-                </td>
             </tr>
         }
     </tbody>
