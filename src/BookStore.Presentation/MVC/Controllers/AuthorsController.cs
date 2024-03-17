@@ -1,8 +1,9 @@
-﻿using BookStore.Application.useCases.Authors.Commands;
+using BookStore.Application.useCases.Authors.Commands;
 using BookStore.Application.useCases.Authors.Queries;
 using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace MVC.Controllers
 {
@@ -11,7 +12,9 @@ namespace MVC.Controllers
         private readonly IMediator _mediator;
 
         public AuthorsController(IMediator mediator)
-            => _mediator = mediator;
+        {
+            _mediator = mediator;
+        }
 
         public async Task<IActionResult> Index()
         {
@@ -43,6 +46,13 @@ namespace MVC.Controllers
             return View("Details", updatedAuthor);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateAuthorCommand command)
+        {
+            var newAuthor = await _mediator.Send(command);
+            return RedirectToAction(nameof(Index));
+        }
+
         public async Task<IActionResult> DeleteAuthor(int id)
         {
             var query = new DeleteAuthorCommand()
@@ -51,6 +61,11 @@ namespace MVC.Controllers
             };
             var author = await _mediator.Send(query);
             return RedirectToAction(actionName: nameof(Index));
+        }
+
+        public IActionResult Create()
+        {
+            return View();
         }
     }
 }
