@@ -1,0 +1,22 @@
+﻿@using BookStore.Domain.Entities
+@model Book
+
+<form asp-controller="Books" asp-action="GetAuthors" method="post">
+    <div>
+        <input asp-for="Title" />
+    </div>
+    <div>
+        <input asp-for="Description" />
+    </div>
+    <div>
+        <select asp-for="AuthorId">
+            <option value="">Select an author</option>
+            @foreach (var author in (List<Author>)ViewData["Authors"])
+            {
+                <option value="@author.Id">@author.Id</option>
+            }
+        </select>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Update</button>
+</form>

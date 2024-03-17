@@ -1,4 +1,6 @@
-﻿using BookStore.Application.useCases.Books.Commands;
+﻿using BookStore.Application.useCases.Authors.Commands;
+using BookStore.Application.useCases.Authors.Queries;
+using BookStore.Application.useCases.Books.Commands;
 using BookStore.Application.useCases.Books.Queries;
 using BookStore.Domain.Entities;
 using MediatR;
@@ -22,7 +24,37 @@ namespace MVC.Controllers
 
             return View(books);
         }
+        public async Task<IActionResult> GetAuthors()
+        {
+            var getAllAuthorsQuery = new GetAllAuthorsQuery();
+            List<Author> authors = await _mediator.Send(getAllAuthorsQuery);
 
+            ViewData["Authors"] = authors;
+
+            return View();
+        }
+
+        public async Task<IActionResult> UpdateAsync(int id)
+        {
+            var author = await _mediator.Send(new GetBookByIdQuery { Id = id });
+
+            return View(author);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateAsync(Book newBook)
+        {
+            var updateBookCommand = new UpdateBookCommand()
+            {
+                Id = newBook.Id,
+                Title = newBook.Title,
+                Description = newBook.Description,
+                AuthorId = newBook.AuthorId,
+            };
+
+            var updatedBook = await _mediator.Send(updateBookCommand);
+
+            return View("Details", updatedBook);
+        }
         public async Task<IActionResult> Delete(int id)
         {
             var deleteBookCommand = new DeleteBookCommand()

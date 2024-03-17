@@ -27,6 +27,9 @@
                 <a asp-controller="Home" asp-action="Delete" asp-route-id=@Model[i].Id class="btn btn-danger">
                     <i class='bx bxs-trash'></i>
                 </a>
+                    <a asp-controller="Books" asp-action="Update" asp-route-id="@Model[i].Id" class="btn btn-warning">
+                        Update
+                    </a>
             </td>
         </tr>
     }
