@@ -1,21 +1,32 @@
-﻿@using BookStore.Domain.Entities
-@model Book
+﻿@model BooksUpdateBookViewModel
 
-<form asp-controller="Books" asp-action="GetAuthors" method="post">
-    <div>
-        <input asp-for="Title" />
+<form asp-controller="Books" asp-action="Update" asp-route-id="@Model.book.Id" method="post" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" asp-for="@Model.book.Title" required>
+        <div class="invalid-feedback">
+            Please provide a title.
+        </div>
     </div>
-    <div>
-        <input asp-for="Description" />
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control" id="description" asp-for="@Model.book.Description" required>
+        <div class="invalid-feedback">
+            Please provide a description.
+        </div>
     </div>
-    <div>
-        <select asp-for="AuthorId">
+    <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <select class="form-select" id="author" asp-for="@Model.book.AuthorId" required>
             <option value="">Select an author</option>
-            @foreach (var author in (List<Author>)ViewData["Authors"])
+            @foreach (var author in @Model.authors)
             {
-                <option value="@author.Id">@author.Id</option>
+                <option value="@author.Id">@author.Name</option>
             }
         </select>
+        <div class="invalid-feedback">
+            Please select an author.
+        </div>
     </div>
 
     <button class="btn btn-primary" type="submit">Update</button>

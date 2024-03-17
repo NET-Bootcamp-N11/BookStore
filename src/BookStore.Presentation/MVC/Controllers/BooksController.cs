@@ -5,6 +5,7 @@ using BookStore.Application.useCases.Books.Queries;
 using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using MVC.Models;
 
 namespace MVC.Controllers
 {
@@ -24,31 +25,30 @@ namespace MVC.Controllers
 
             return View(books);
         }
-        public async Task<IActionResult> GetAuthors()
-        {
-            var getAllAuthorsQuery = new GetAllAuthorsQuery();
-            List<Author> authors = await _mediator.Send(getAllAuthorsQuery);
-
-            ViewData["Authors"] = authors;
-
-            return View();
-        }
 
         public async Task<IActionResult> UpdateAsync(int id)
         {
-            var author = await _mediator.Send(new GetBookByIdQuery { Id = id });
+            var authorsquery = new GetAllAuthorsQuery();
+            List<Author> authors = await _mediator.Send(authorsquery);
+            var book = await _mediator.Send(new GetBookByIdQuery { Id = id });
 
-            return View(author);
+            var viewModel = new BooksUpdateBookViewModel
+            {
+                book = book,
+                authors = authors
+            };
+            return View(viewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateAsync(Book newBook)
+        public async Task<IActionResult> UpdateAsync(BooksUpdateBookViewModel newBook,int id)
         {
             var updateBookCommand = new UpdateBookCommand()
             {
-                Id = newBook.Id,
-                Title = newBook.Title,
-                Description = newBook.Description,
-                AuthorId = newBook.AuthorId,
+                Id = id,
+                Title = newBook.book.Title,
+                Description = newBook.book.Description,
+                AuthorId = newBook.book.AuthorId,
+
             };
 
             var updatedBook = await _mediator.Send(updateBookCommand);
