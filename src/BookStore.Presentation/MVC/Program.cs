@@ -1,6 +1,5 @@
 using BookStore.Application;
 using BookStore.Infrastructure;
-using MVC.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +19,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseMiddleware<GlobalExceptionHandler>();
 app.UseStaticFiles();
 
 app.UseRouting();
