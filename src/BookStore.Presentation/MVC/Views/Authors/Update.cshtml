@@ -1,0 +1,13 @@
+﻿@using BookStore.Domain.Entities
+@model Author
+
+<form>
+    <div>
+        <input asp-for="Name"/>
+    </div>
+    <div>
+        <input asp-for="Description" />
+    </div>
+
+    <button class="btn btn-primary" asp-controller="Authors" asp-action="Update" formmethod="post"></button>
+</form>
