@@ -16,17 +16,16 @@ namespace BookStore.Application.useCases.Authors.Commands
         {
             var author = await _context.Authors.FirstOrDefaultAsync(x => x.Id == request.Id);
 
-            if (author is not null)
-            {
-                author.Name = request.Name;
-                author.Description = request.Description;
-                var entry = _context.Authors.Update(author);
-                await _context.SaveChangesAsync();
+            if (author is null)
+                throw new Exception("Author not found");
 
-                return entry.Entity;
-            }
+            author.Name = request.Name;
+            author.Description = request.Description;
 
-            return null;
+            var entry = _context.Authors.Update(author);
+            await _context.SaveChangesAsync();
+
+            return entry.Entity;
         }
     }
 }

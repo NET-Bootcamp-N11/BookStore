@@ -2,11 +2,6 @@
 using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.Application.useCases.Authors.Queries
 {
@@ -26,6 +21,7 @@ namespace BookStore.Application.useCases.Authors.Queries
             {
                 throw new Exception("Author Not found");
             }
+
             return res;
         }
     }
