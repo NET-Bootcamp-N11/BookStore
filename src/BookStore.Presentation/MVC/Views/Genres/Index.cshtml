@@ -1,6 +1,10 @@
 @using BookStore.Domain.Entities;
 @model List<Genre> 
 
+<a asp-controller="Genres" asp-action="Create" class="btn btn-primary">
+    Add
+</a>
+
 <table class="table table-borderless">
     <thead>
         <tr>
@@ -18,6 +22,10 @@
                 <td>
                     <a asp-controller="Genres" asp-action="DeleteGenre" asp-route-id="@Model[i].Id" class="btn btn-danger">
                         <i class='bx bxs-trash'></i>
+                    </a>
+
+                    <a asp-controller="Genres" asp-action="UpdateGenre" asp-route-id="@Model[i].Id" class="btn btn-warning">
+                        Update
                     </a>
                 </td>
             </tr>

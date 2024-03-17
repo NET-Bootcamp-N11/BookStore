@@ -3,32 +3,22 @@ using BookStore.Application.useCases.Books.Queries;
 using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace MVC.Controllers
 {
     public class BooksController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly IMemoryCache _memoryCache;
 
-        public BooksController(IMediator mediator, IMemoryCache memoryCache)
+        public BooksController(IMediator mediator)
         {
             _mediator = mediator;
-            _memoryCache = memoryCache;
         }
 
         public async Task<IActionResult> Index()
         {
-            List<Book> books = _memoryCache.Get("books") as List<Book>;
-
-            if (books is null)
-            {
-                var getAllBooks = new GetAllBooksQuery();
-                books = await _mediator.Send(getAllBooks);
-
-                _memoryCache.Set("books", books);
-            }
+            var getAllBooks = new GetAllBooksQuery();
+            List<Book> books = await _mediator.Send(getAllBooks);
 
             return View(books);
         }
