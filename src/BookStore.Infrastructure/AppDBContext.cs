@@ -18,7 +18,7 @@ namespace BookStore.Infrastructure
             base.OnConfiguring(optionsBuilder);
             optionsBuilder
                 .UseLazyLoadingProxies()
-                .UseSqlite("Data source=BookStore.DB");
+                .UseSqlite("Data source=BookStoreMe.DB");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
