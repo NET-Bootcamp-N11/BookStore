@@ -1,0 +1,11 @@
+﻿@using BookStore.Application.useCases.Genres.Commands
+@model CreateGenreCommand;
+
+<form>
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Genre Name</label>
+        <input asp-for="Name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+
+    <button asp-controller="Genres" asp-action="Create" formmethod="post" type="submit" class="btn btn-primary">Submit</button>
+</form>

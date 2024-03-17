@@ -1,7 +1,7 @@
-﻿using BookStore.Application.useCases.Genres.Queries;
-using Microsoft.AspNetCore.Mvc;
+﻿using BookStore.Application.useCases.Genres.Commands;
+using BookStore.Application.useCases.Genres.Queries;
 using MediatR;
-using BookStore.Application.useCases.Genres.Commands;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MVC.Controllers
 {
@@ -21,6 +21,19 @@ namespace MVC.Controllers
             return View(genres);
         }
 
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateGenreCommand createGenreCommand)
+        {
+            var genre = await _mediator.Send(createGenreCommand);
+
+            return View("Details", genre);
+        }
+
         public async Task<IActionResult> DeleteGenre(int id)
         {
             var query = new DeleteGenreByIdCommand()
@@ -28,7 +41,7 @@ namespace MVC.Controllers
                 Id = id
             };
             var res = await _mediator.Send(query);
-            return RedirectToAction(actionName:nameof(Index));
+            return RedirectToAction(actionName: nameof(Index));
         }
     }
 }
