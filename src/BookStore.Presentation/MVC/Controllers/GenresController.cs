@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using BookStore.Application.useCases.Genres.Commands;
+using BookStore.Domain.Entities;
 
 namespace MVC.Controllers
 {
@@ -29,6 +30,13 @@ namespace MVC.Controllers
             };
             var res = await _mediator.Send(query);
             return RedirectToAction(actionName:nameof(Index));
+        }
+
+        public async Task<IActionResult> CreateGenre(Genre newGenre)
+        {
+            var query = new CreateGenreCommand() { Name = newGenre.Name };
+            var res = await _mediator.Send(query);
+            return View(res);
         }
     }
 }
