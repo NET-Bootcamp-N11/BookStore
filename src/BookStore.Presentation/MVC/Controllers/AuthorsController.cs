@@ -1,5 +1,6 @@
 ﻿using BookStore.Application.useCases.Authors.Commands;
 using BookStore.Application.useCases.Authors.Queries;
+using BookStore.Application.useCases.Genres.Commands;
 using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,19 @@ namespace MVC.Controllers
 
             return View(authors);
         }
+
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateAuthorCommand createAuthorCommand)
+        {
+            var author = await _mediator.Send(createAuthorCommand);
+
+            return View("Details", author);
+        }
+
 
         public async Task<IActionResult> UpdateAsync(int id)
         {

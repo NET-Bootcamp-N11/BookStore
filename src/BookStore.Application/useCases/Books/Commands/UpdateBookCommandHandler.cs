@@ -17,16 +17,18 @@ namespace BookStore.Application.useCases.Books.Commands
         {
             var book = await _appDbContext.Books.FirstOrDefaultAsync(x => x.Id == updateBookCommand.Id);
 
-            if (book != null)
+            if (book == null)
             {
-                book = updateBookCommand.Adapt<Book>();
-                var entry = _appDbContext.Books.Update(book);
-                await _appDbContext.SaveChangesAsync();
-
-                return entry.Entity;
+                throw new Exception("Book not found");
             }
 
-            return null;
+            book.Title = updateBookCommand.Title;
+            book.Description = updateBookCommand.Description;
+            book.AuthorId = updateBookCommand.AuthorId;
+            var entry = _appDbContext.Books.Update(book);
+            await _appDbContext.SaveChangesAsync();
+
+            return entry.Entity;
         }
     }
 }
