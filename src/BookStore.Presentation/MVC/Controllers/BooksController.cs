@@ -18,13 +18,22 @@ namespace MVC.Controllers
             _mediator = mediator;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             var getAllBooks = new GetAllBooksQuery();
             List<Book> books = await _mediator.Send(getAllBooks);
-
+        
+            // booksi search stringiga qarab filtering 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(b => b.Title.Contains(searchString)
+                                        || b.Description.Contains(searchString)
+                                        || b.Author.Name.Contains(searchString)).ToList();
+            }
+        
             return View(books);
         }
+
 
         public async Task<IActionResult> CreateAsync()
         {
