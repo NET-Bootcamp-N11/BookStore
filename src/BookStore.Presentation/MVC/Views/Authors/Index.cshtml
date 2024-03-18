@@ -1,9 +1,18 @@
 @using BookStore.Domain.Entities
 @model List<Author>
 
+@{
+    ViewData["Title"] = "Authors";
+}
+
 <a asp-controller="Authors" asp-action="Create" class="btn btn-primary">
     <i class='bx bx-plus'></i>
 </a>
+
+<form asp-controller="Authors" asp-action="Index" method="get" class="d-flex mt-3">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchString">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
 
 <table class="table table-borderless">
     <thead>
