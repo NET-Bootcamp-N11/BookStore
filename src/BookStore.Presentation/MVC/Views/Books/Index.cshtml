@@ -1,4 +1,4 @@
-﻿@using BookStore.Domain.Entities
+@using BookStore.Domain.Entities
 @model List<Book>
 
 @{
@@ -8,6 +8,11 @@
 <a asp-controller="Books" asp-action="Create" class="btn btn-primary">
     <i class='bx bx-plus'></i>
 </a>
+
+<form asp-action="Index" method="get" class="d-flex mt-3">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searchString">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
 
 <table class="table">
     <thead>
@@ -27,7 +32,7 @@
                 <td>@Model[i].Title</td>
                 <td>@Model[i].Author.Name</td>
                 <td>
-                    <a asp-controller="Books" asp-action="Delete" asp-route-id=@Model[i].Id class="btn btn-danger">
+                    <a asp-controller="Books" asp-action="Delete" asp-route-id="@Model[i].Id" class="btn btn-danger">
                         <i class='bx bxs-trash'></i>
                     </a>
                     <a asp-controller="Books" asp-action="Update" asp-route-id="@Model[i].Id" class="btn btn-warning">
