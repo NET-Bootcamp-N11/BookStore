@@ -2,38 +2,38 @@
 @using BookStore.Domain.Entities
 @model BooksCreateViewModel
 
-<form>
+<form method="post">
     <div class="mb-3">
-        <label asp-for="@Model.CreateBookCommand.Title" class="form-label">Title</label>
-        <input asp-for="@Model.CreateBookCommand.Title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter title ...">
+        <label asp-for="@Model.CreateBookCommand.Title" class="form-label">Название</label>
+        <input asp-for="@Model.CreateBookCommand.Title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Введите название ...">
     </div>
 
     <div class="mb-3">
-        <label asp-for="@Model.CreateBookCommand.Description" class="form-label">Description</label>
+        <label asp-for="@Model.CreateBookCommand.Description" class="form-label">Описание</label>
         <textarea asp-for="@Model.CreateBookCommand.Description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
 
     <div>
-        <select asp-for="@Model.CreateBookCommand.AuthorId" class="form-select" aria-label="Default select example">
-            <option selected hidden>Open this select menu</option>
-
-            @foreach(var author in Model.Authors)
+        <label class="form-label">Автор</label>
+        <select asp-for="@Model.CreateBookCommand.AuthorId" class="form-select" aria-label="Выберите автора">
+            <option selected disabled>Выберите автора</option>
+            @foreach (var author in Model.Authors)
             {
-                <option value="@author.Id">@author.Name</option>   
+                <option value="@author.Id">@author.Name</option>
             }
         </select>
     </div>
 
-     <table>
-        <tr>
-            @foreach (var item in Model.CheckedBoxes)
-            {
-                <td style="padding:5px;">
-                    <label><input type="checkbox" value="@item.Id" checked="@item.IsChecked" name="ids" id="@item.Id" /> @Html.Raw(@item.Name)</label>
-                </td>
-            }
-        </tr>
-    </table>
+    <div>
+        <label class="form-label">Жанры</label><br>
+        @foreach (var genre in Model.Genres)
+        {
+            <div>
+                <input type="checkbox" id="@($"genre_{genre.Id}")" name="genres" value="@genre.Id">
+                <label for="@($"genre_{genre.Id}")">@genre.Name</label><br>
+            </div>
+        }
+    </div>
 
-    <button class="btn btn-primary mt-1" asp-controller="Books" asp-action="Create" formmethod="post">Save</button>
+    <button type="submit" class="btn btn-primary mt-1">Сохранить</button>
 </form>

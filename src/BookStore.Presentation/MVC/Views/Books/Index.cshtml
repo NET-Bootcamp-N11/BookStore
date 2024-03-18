@@ -2,11 +2,11 @@
 @model List<Book>
 
 @{
-    ViewData["Title"] = "Book";
+    ViewData["Title"] = "Books";
 }
 
 <a asp-controller="Books" asp-action="Create" class="btn btn-primary">
-    <i class='bx bx-plus'></i>
+    <i class='bx bx-plus'></i> Create
 </a>
 
 <table class="table">
@@ -15,24 +15,10 @@
             <th scope="col">T/R</th>
             <th scope="col">Title</th>
             <th scope="col">Author</th>
-
             <th scope="col">Action</th>
         </tr>
     </thead>
-    <tbody class="table-group-divider">
-        @for (var i = 1; i < Model.Count; i++)
-        {
-            <tr>
-                <th scope="row">@i</th>
-                <td>@Model[i - 1].Title</td>
-                <td>@Model[i - 1].Author.Name</td>
-                <td>
-                    <a asp-controller="Home" asp-action="Delete" asp-route-id=@Model[i].Id class="btn btn-danger">
-
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody class="table-group-divider">
+    <tbody>
         @for (var i = 0; i < Model.Count; i++)
         {
             var rowNumber = i + 1;
@@ -41,12 +27,11 @@
                 <td>@Model[i].Title</td>
                 <td>@Model[i].Author.Name</td>
                 <td>
-                    <a asp-controller="Books" asp-action="Delete" asp-route-id=@Model[i].Id class="btn btn-danger">
-
-                        <i class='bx bxs-trash'></i>
+                    <a asp-controller="Books" asp-action="Delete" asp-route-id="@Model[i].Id" class="btn btn-danger">
+                        <i class='bx bxs-trash'></i> Delete
                     </a>
                     <a asp-controller="Books" asp-action="Update" asp-route-id="@Model[i].Id" class="btn btn-warning">
-                        <i class='bx bxs-pencil'></i>
+                        <i class='bx bxs-pencil'></i> Edit
                     </a>
                 </td>
             </tr>

@@ -9,5 +9,6 @@ namespace MVC.Models
         public List<Author> Authors { get; set; }
         public List<ViewModelCheckBox> CheckedBoxes { get; set; }
         public int[] ids { get; set; }
+        public List<Genre> Genres { get; set; }
     }
 }
