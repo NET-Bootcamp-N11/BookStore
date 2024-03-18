@@ -56,5 +56,12 @@ namespace MVC.Controllers
             Book? bookUpdated = await _mediator.Send(updateBookCommand);
             return View("Details", bookUpdated);
         }
+
+        public async Task<IActionResult> SearchAny()
+        {
+            var allBooks = await _mediator.Send(new GetAllBooksQuery());
+
+            return View(allBooks);
+        }
     }
 }

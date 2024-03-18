@@ -5,6 +5,11 @@
     ViewData["Title"] = "Book";
 }
 
+<form class="d-flex gap-2">
+    <input type="search" class="form-control" aria-describedby="search" name="searchString">
+    <button asp-controller="Books" asp-action="Create" formmethod="get" type="submit" class="btn btn-primary">Submit</button>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -35,7 +40,7 @@
     </tbody>
 </table>
 <!--
-<a asp-controller="Genres" asp-action="Create" class="btn btn-primary  d-block">
+<a asp-controller="Books" asp-action="Create" class="btn btn-primary  d-block">
     <i class='bx bx-plus'></i>
 </a>
 -->
