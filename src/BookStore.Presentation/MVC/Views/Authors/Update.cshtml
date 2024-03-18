@@ -1,13 +1,15 @@
-﻿@using BookStore.Domain.Entities
+@using BookStore.Domain.Entities
 @model Author
 
-<form>
-    <div>
-        <input asp-for="Name"/>
+<form asp-controller="Authors" asp-action="Update" method="post">
+    <div class="form-group">
+        <label for="Name">Name:</label>
+        <input type="text" id="Name" name="Name" class="form-control" asp-for="Name" />
     </div>
-    <div>
-        <input asp-for="Description" />
+    <div class="form-group">
+        <label for="Description">Description:</label>
+        <textarea id="Description" name="Description" class="form-control" asp-for="Description"></textarea>
     </div>
-
-    <button class="btn btn-primary" asp-controller="Authors" asp-action="Update" formmethod="post"></button>
+    <br />
+    <button type="submit" class="btn btn-primary">Update</button>
 </form>

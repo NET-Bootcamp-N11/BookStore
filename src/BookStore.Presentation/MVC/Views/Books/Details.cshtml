@@ -9,6 +9,9 @@
         <h1>Title</h1>
         <h1>Description</h1>
         <h1>AuthorID</h1>
+
+        <h2>Genres</h2>
+
     </div>
 
     <div class="col p-0">
@@ -20,3 +23,18 @@
         <h1>@Model.AuthorId</h1>
     </div>
 </div>
+
+        <h2>
+            @for(int i = 0; i< @Model.Genres.Count; i++)
+            {
+                if(i != 0)
+                {
+                    <span>,</span>
+                }
+
+                <a href="#">@Model.Genres[i].Name</a>
+            }
+        </h2>
+    </div>
+</div>
+
