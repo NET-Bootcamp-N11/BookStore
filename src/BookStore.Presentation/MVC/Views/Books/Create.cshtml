@@ -1,4 +1,5 @@
 ﻿@using BookStore.Application.useCases.Books.Commands
+@using BookStore.Domain.Entities
 @model BooksCreateViewModel
 
 <form>
@@ -23,14 +24,16 @@
         </select>
     </div>
 
-    <div>
-            @foreach(var genre in Model.Genres)
+     <table>
+        <tr>
+            @foreach (var item in Model.CheckedBoxes)
             {
-                <input type="checkbox" id="vehicle1" name="vehicle1" value="@genre.Id">
-                <label asp-for="@genre.Name">@genre.Name</label>
+                <td style="padding:5px;">
+                    <label><input type="checkbox" value="@item.Id" checked="@item.IsChecked" name="ids" id="@item.Id" /> @Html.Raw(@item.Name)</label>
+                </td>
             }
-    </div>
-
+        </tr>
+    </table>
 
     <button class="btn btn-primary mt-1" asp-controller="Books" asp-action="Create" formmethod="post">Save</button>
 </form>

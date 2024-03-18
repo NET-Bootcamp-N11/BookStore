@@ -34,16 +34,18 @@ namespace MVC.Controllers
             return View(new BooksCreateViewModel()
             {
                 Authors = authors,
-                Genres = genres
+                CheckedBoxes = genres.Select(x => new ViewModelCheckBox() { Id = x.Id, Name = x.Name }).ToList(),
             });
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateAsync(BooksCreateViewModel booksCreateViewModel)
         {
-            var book = await _mediator.Send(booksCreateViewModel.CreateBookCommand);
+            var createBookCommand = booksCreateViewModel.CreateBookCommand;
+            createBookCommand.Genres = booksCreateViewModel.ids;
+            var book = await _mediator.Send(createBookCommand);
 
-            return RedirectToAction(nameof(Index));
+            return View("Details", book);
         }
 
         public async Task<IActionResult> UpdateAsync(int id)
@@ -59,6 +61,7 @@ namespace MVC.Controllers
             };
             return View(viewModel);
         }
+
         [HttpPost]
         public async Task<IActionResult> UpdateAsync(BooksUpdateBookViewModel newBook, int id)
         {
