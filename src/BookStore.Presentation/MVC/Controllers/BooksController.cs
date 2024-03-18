@@ -1,7 +1,7 @@
-﻿using BookStore.Application.useCases.Authors.Commands;
-using BookStore.Application.useCases.Authors.Queries;
+﻿using BookStore.Application.useCases.Authors.Queries;
 using BookStore.Application.useCases.Books.Commands;
 using BookStore.Application.useCases.Books.Queries;
+using BookStore.Application.useCases.Genres.Queries;
 using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +26,26 @@ namespace MVC.Controllers
             return View(books);
         }
 
+        public async Task<IActionResult> CreateAsync()
+        {
+            var authors = await _mediator.Send(new GetAllAuthorsQuery());
+            var genres = await _mediator.Send(new GetAllGenreQuery());
+
+            return View(new BooksCreateViewModel()
+            {
+                Authors = authors,
+                Genres = genres
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAsync(BooksCreateViewModel booksCreateViewModel)
+        {
+            var book = await _mediator.Send(booksCreateViewModel.CreateBookCommand);
+
+            return RedirectToAction(nameof(Index));
+        }
+
         public async Task<IActionResult> UpdateAsync(int id)
         {
             var authorsquery = new GetAllAuthorsQuery();
@@ -40,7 +60,7 @@ namespace MVC.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> UpdateAsync(BooksUpdateBookViewModel newBook,int id)
+        public async Task<IActionResult> UpdateAsync(BooksUpdateBookViewModel newBook, int id)
         {
             var updateBookCommand = new UpdateBookCommand()
             {

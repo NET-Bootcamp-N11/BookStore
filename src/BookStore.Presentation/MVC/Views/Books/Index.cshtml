@@ -19,12 +19,13 @@
         </tr>
     </thead>
     <tbody class="table-group-divider">
-        @for (var i = 1; i < Model.Count; i++)
+        @for (var i = 0; i < Model.Count; i++)
         {
+            var rowNumber = i + 1;
             <tr>
-                <th scope="row">@i</th>
-                <td>@Model[i - 1].Title</td>
-                <td>@Model[i - 1].Author.Name</td>
+                <th scope="row">@rowNumber</th>
+                <td>@Model[i].Title</td>
+                <td>@Model[i].Author.Name</td>
                 <td>
                     <a asp-controller="Home" asp-action="Delete" asp-route-id=@Model[i].Id class="btn btn-danger">
                         <i class='bx bxs-trash'></i>

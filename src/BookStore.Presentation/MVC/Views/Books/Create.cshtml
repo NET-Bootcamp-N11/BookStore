@@ -1,0 +1,36 @@
+﻿@using BookStore.Application.useCases.Books.Commands
+@model BooksCreateViewModel
+
+<form>
+    <div class="mb-3">
+        <label asp-for="@Model.CreateBookCommand.Title" class="form-label">Title</label>
+        <input asp-for="@Model.CreateBookCommand.Title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter title ...">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="@Model.CreateBookCommand.Description" class="form-label">Description</label>
+        <textarea asp-for="@Model.CreateBookCommand.Description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+
+    <div>
+        <select asp-for="@Model.CreateBookCommand.AuthorId" class="form-select" aria-label="Default select example">
+            <option selected hidden>Open this select menu</option>
+
+            @foreach(var author in Model.Authors)
+            {
+                <option value="@author.Id">@author.Name</option>   
+            }
+        </select>
+    </div>
+
+    <div>
+            @foreach(var genre in Model.Genres)
+            {
+                <input type="checkbox" id="vehicle1" name="vehicle1" value="@genre.Id">
+                <label asp-for="@genre.Name">@genre.Name</label>
+            }
+    </div>
+
+
+    <button class="btn btn-primary mt-1" asp-controller="Books" asp-action="Create" formmethod="post">Save</button>
+</form>
