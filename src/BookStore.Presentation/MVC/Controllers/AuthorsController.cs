@@ -10,16 +10,24 @@ namespace MVC.Controllers
     public class AuthorsController : Controller
     {
         private readonly IMediator _mediator;
+        private const int pageSize = 10;
 
         public AuthorsController(IMediator mediator)
             => _mediator = mediator;
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
             var query = new GetAllAuthorsQuery();
-            var authors = await _mediator.Send(query);
+            var allAuthors = await _mediator.Send(query);
 
-            return View(authors);
+            page = Math.Max(1, Math.Min(page, TotalPages(allAuthors)));
+
+            var paginatedAuthors = PaginateAuthors(allAuthors, page);
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = TotalPages(allAuthors);
+
+            return View(paginatedAuthors);
         }
 
         public async Task<IActionResult> Create()
@@ -65,6 +73,18 @@ namespace MVC.Controllers
             };
             var author = await _mediator.Send(query);
             return RedirectToAction(actionName: nameof(Index));
+        }
+
+        private List<Author> PaginateAuthors(List<Author> authors, int page)
+        {
+            int startIndex = (page - 1) * pageSize;
+            int count = Math.Min(pageSize, authors.Count - startIndex);
+            return authors.GetRange(startIndex, count);
+        }
+
+        private int TotalPages(List<Author> authors)
+        {
+            return (int)Math.Ceiling((double)authors.Count / pageSize);
         }
     }
 }

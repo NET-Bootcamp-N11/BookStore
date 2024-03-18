@@ -1,6 +1,6 @@
 @using BookStore.Domain.Entities
 @model List<Author>
-
+ 
 <a asp-controller="Authors" asp-action="Create" class="btn btn-primary">
     <i class='bx bx-plus'></i>
 </a>
@@ -35,3 +35,24 @@
         }
     </tbody>
 </table>
+
+<!-- Pagination controls -->
+@if (ViewBag.TotalPages > 1)
+{
+    <div>
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })">Previous</a>
+        }
+
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <a href="@Url.Action("Index", new { page = i })" @(ViewBag.CurrentPage == i ? "class=current" : "")>@i</a>
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1 })">Next</a>
+        }
+    </div>
+}
