@@ -1,9 +1,11 @@
-﻿using BookStore.Application.useCases.Books.Commands;
+﻿using BookStore.Application.useCases.Authors.Queries;
+using BookStore.Application.useCases.Books.Commands;
 using BookStore.Application.useCases.Books.Queries;
 using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using MVC.Models;
 
 namespace MVC.Controllers
 {
@@ -44,10 +46,17 @@ namespace MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateBookCommand command)
         {
+            
             var res = await _mediator.Send(command);
-            var authors = await _mediator.Send(new GetAllBooksQuery());
-            ViewBag.AuthorList = new SelectList(authors, "Id", "Name");
-            return View("Details", res);
+            var authorlar = await _mediator.Send(new GetAllAuthorsQuery());
+
+            BooksCreateModel bk = new BooksCreateModel()
+            {
+                book = res,
+                authors = authorlar
+            };
+
+            return View("Details", bk);
         }
     }
 }

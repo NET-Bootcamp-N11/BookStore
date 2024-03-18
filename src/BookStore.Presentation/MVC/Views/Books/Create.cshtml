@@ -1,19 +1,33 @@
-﻿@using BookStore.Application.useCases.Books.Commands
-@model CreateBookCommand
+﻿@model BooksCreateModel
 
-<form method="post">
-    <div class="mb-2">
-        <label asp-for="Title" class="form-label">Book Title</label>
-        <input asp-for="Title" type="text" class="form-control" id="Title" aria-describedby="emailHelp">
-
-        <label asp-for="Description" class="form-label">Description</label>
-        <input asp-for="Description" type="text" class="form-control" id="Description" aria-describedby="emailHelp">
-
-        <label asp-for="AuthorId" class="form-label">Author</label>
-        <select asp-for="AuthorId" class="form-control" id="AuthorId" asp-items="@(new SelectList(ViewBag.AuthorList, "Value", "Text"))">
-            <option value="">-- Select Author --</option>
+<form asp-controller="Books" asp-action="Create" asp-route-id="@Model.book.Id" method="post" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" asp-for="@Model.book.Title" required>
+        <div class="invalid-feedback">
+            Please provide a title.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control" id="description" asp-for="@Model.book.Description" required>
+        <div class="invalid-feedback">
+            Please provide a description.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <select class="form-select" id="author" asp-for="@Model.book.AuthorId" required>
+            <option value="">Select an author</option>
+            @foreach (var author in @Model.authors)
+            {
+                <option value="@author.Id">@author.Name</option>
+            }
         </select>
+        <div class="invalid-feedback">
+            Please select an author.
+        </div>
     </div>
 
-    <button asp-controller="Books" asp-action="Create" formmethod="post" type="submit" class="btn btn-primary">Submit</button>
+    <button class="btn btn-primary" type="submit">Submit</button>
 </form>
