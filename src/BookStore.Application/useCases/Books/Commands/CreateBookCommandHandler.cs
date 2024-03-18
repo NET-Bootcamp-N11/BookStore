@@ -2,6 +2,7 @@
 using BookStore.Domain.Entities;
 using Mapster;
 using MediatR;
+using System.Linq;
 
 namespace BookStore.Application.useCases.Books.Commands
 {
