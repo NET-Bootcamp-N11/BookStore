@@ -1,7 +1,7 @@
 ﻿using BookStore.Application.Abstractions;
+using BookStore.Application.Extensions;
 using BookStore.Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.useCases.Genres.Queries
 {
@@ -17,9 +17,8 @@ namespace BookStore.Application.useCases.Genres.Queries
 
         public async Task<List<Genre>> Handle(GetAllGenreQuery request, CancellationToken cancellationToken)
         {
-            return await _appDbContext.Genres.ToListAsync(cancellationToken);
+            return _appDbContext.Genres.AsQueryable().ToPagedList();
         }
-
     }
 }
 

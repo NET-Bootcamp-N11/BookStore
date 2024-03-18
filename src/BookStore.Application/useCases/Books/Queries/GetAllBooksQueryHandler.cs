@@ -1,7 +1,7 @@
 ﻿using BookStore.Application.Abstractions;
+using BookStore.Application.Extensions;
 using BookStore.Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.useCases.Books.Queries
 {
@@ -16,7 +16,7 @@ namespace BookStore.Application.useCases.Books.Queries
 
         public async Task<List<Book>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
         {
-            return await _appDbContext.Books.ToListAsync(cancellationToken);
+            return _appDbContext.Books.AsQueryable().ToPagedList();
         }
     }
 }
