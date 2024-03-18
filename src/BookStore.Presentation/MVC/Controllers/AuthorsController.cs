@@ -1,5 +1,6 @@
 ﻿using BookStore.Application.useCases.Authors.Commands;
 using BookStore.Application.useCases.Authors.Queries;
+using BookStore.Application.useCases.Books.Queries;
 using BookStore.Application.useCases.Genres.Commands;
 using BookStore.Domain.Entities;
 using MediatR;
@@ -56,6 +57,20 @@ namespace MVC.Controllers
 
             return View("Details", updatedAuthor);
         }
+
+        public async Task<IActionResult> SearchAsync(string any)
+        {
+            Author aut;
+            if (int.TryParse(any, out int id))
+            {
+                aut = await _mediator.Send(new GetAuthorByIdQuery() { Id = id });
+                goto res;
+            }
+            aut = await _mediator.Send(new GetAuthorByNameQuery() { Name = any });
+        res:
+            return View("Details", aut);
+        }
+
 
         public async Task<IActionResult> DeleteAuthor(int id)
         {
