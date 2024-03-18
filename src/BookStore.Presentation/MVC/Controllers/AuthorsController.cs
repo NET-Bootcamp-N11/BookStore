@@ -37,9 +37,16 @@ namespace MVC.Controllers
 
         public async Task<IActionResult> UpdateAsync(int id)
         {
-            var author = await _mediator.Send(new GetAuthorByIdQuery { Id = id });
+            try
+            {
+                var author = await _mediator.Send(new GetAuthorByIdQuery { Id = id });
 
-            return View(author);
+                return View(author);
+            }
+            catch
+            {
+                return View("NotFoundException");
+            }
         }
 
         [HttpPost]
@@ -59,12 +66,19 @@ namespace MVC.Controllers
 
         public async Task<IActionResult> DeleteAuthor(int id)
         {
-            var query = new DeleteAuthorCommand()
+            try
             {
-                Id = id
-            };
-            var author = await _mediator.Send(query);
-            return RedirectToAction(actionName: nameof(Index));
+                var query = new DeleteAuthorCommand()
+                {
+                    Id = id
+                };
+                var author = await _mediator.Send(query);
+                return RedirectToAction(actionName: nameof(Index));
+            }
+            catch
+            {
+                return View("NotFoundException");
+            }
         }
     }
 }
