@@ -1,0 +1,24 @@
+﻿@using BookStore.Domain.Entities
+@model Book
+
+
+<div class="row">
+    <div class="col p-0">
+        <h1><b>Properties</b></h1>
+        <hr />
+        <h1>Id</h1>
+        <h1>Title</h1>
+        <h1>Description</h1>
+        <h1>Author</h1>
+    </div>
+
+    <div class="col p-0">
+        <h1><b>Values</b></h1>
+        <hr />
+        <h1>@Model.Id</h1>
+        <h1>@Model.Title</h1>
+        <h1>@Model.Description</h1>
+        <h1>@Model.Author.Name</h1>
+    </div>
+</div>
+

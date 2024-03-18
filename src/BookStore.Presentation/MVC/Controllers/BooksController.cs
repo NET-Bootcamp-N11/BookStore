@@ -3,6 +3,7 @@ using BookStore.Application.useCases.Books.Queries;
 using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MVC.Controllers
 {
@@ -33,6 +34,20 @@ namespace MVC.Controllers
             var book = await _mediator.Send(deleteBookCommand);
 
             return RedirectToAction(actionName: nameof(Index));
+        }
+
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateBookCommand command)
+        {
+            var res = await _mediator.Send(command);
+            var authors = await _mediator.Send(new GetAllBooksQuery());
+            ViewBag.AuthorList = new SelectList(authors, "Id", "Name");
+            return View("Details", res);
         }
     }
 }

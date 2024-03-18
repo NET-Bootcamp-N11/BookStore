@@ -1,0 +1,19 @@
+﻿@using BookStore.Application.useCases.Books.Commands
+@model CreateBookCommand
+
+<form method="post">
+    <div class="mb-2">
+        <label asp-for="Title" class="form-label">Book Title</label>
+        <input asp-for="Title" type="text" class="form-control" id="Title" aria-describedby="emailHelp">
+
+        <label asp-for="Description" class="form-label">Description</label>
+        <input asp-for="Description" type="text" class="form-control" id="Description" aria-describedby="emailHelp">
+
+        <label asp-for="AuthorId" class="form-label">Author</label>
+        <select asp-for="AuthorId" class="form-control" id="AuthorId" asp-items="@(new SelectList(ViewBag.AuthorList, "Value", "Text"))">
+            <option value="">-- Select Author --</option>
+        </select>
+    </div>
+
+    <button asp-controller="Books" asp-action="Create" formmethod="post" type="submit" class="btn btn-primary">Submit</button>
+</form>
