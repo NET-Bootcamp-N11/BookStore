@@ -9,8 +9,8 @@
     <thead>
         <tr>
             <th scope="col">T/R</th>
+            <th scope="col">Title</th>
             <th scope="col">Author</th>
-            <th scope="col">Description</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -18,17 +18,24 @@
     @for(var i = 1; i < Model.Count; i++)
     {
         <tr>
-            <th scope="row">@i</th>
+            <td scope="row">@i</td>
             <td>@Model[i - 1].Title</td>
-        @*     <td>@Model[i - 1].Description</td> *@
             <td>@Model[i - 1].Author.Name</td>
 
             <td>
                 <a asp-controller="Home" asp-action="Delete" asp-route-id=@Model[i].Id class="btn btn-danger">
                     <i class='bx bxs-trash'></i>
                 </a>
+                <a asp-controller="Books" asp-action="Update" asp-route-id="@Model[i].Id" class="btn btn-secondary">
+                    <i class='bx bxs-edit-alt'></i>
+                </a>
             </td>
         </tr>
     }
     </tbody>
 </table>
+<!--
+<a asp-controller="Genres" asp-action="Create" class="btn btn-primary  d-block">
+    <i class='bx bx-plus'></i>
+</a>
+-->

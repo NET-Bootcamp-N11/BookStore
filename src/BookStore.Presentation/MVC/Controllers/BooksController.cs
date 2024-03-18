@@ -34,5 +34,27 @@ namespace MVC.Controllers
 
             return RedirectToAction(actionName: nameof(Index));
         }
+
+        public async Task<IActionResult> UpdateAsync(int id)
+        {
+            var book = await _mediator.Send(new GetBookByIdQuery { Id = id });
+
+            return View(book);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateAsync(Book book)
+        {
+            UpdateBookCommand? updateBookCommand = new UpdateBookCommand()
+            {
+                Id = book.Id,
+                Title = book.Title,
+                Description = book.Description,
+                AuthorId = book.AuthorId,
+            };
+
+            Book? bookUpdated = await _mediator.Send(updateBookCommand);
+            return View("Details", bookUpdated);
+        }
     }
 }

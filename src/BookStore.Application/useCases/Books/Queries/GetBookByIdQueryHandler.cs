@@ -16,7 +16,10 @@ namespace BookStore.Application.useCases.Books.Queries
 
         public async Task<Book> Handle(GetBookByIdQuery request, CancellationToken cancellationToken)
         {
-            var user = await _appDb.Books.FirstOrDefaultAsync(x => x.Id == request.Id);
+            Book? user = await _appDb.Books.FirstOrDefaultAsync(x => x.Id == request.Id);
+            if (user is null)
+                throw new ArgumentException("User not found");
+
             return user;
         }
     }
