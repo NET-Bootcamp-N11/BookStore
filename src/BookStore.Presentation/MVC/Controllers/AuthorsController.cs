@@ -14,10 +14,16 @@ namespace MVC.Controllers
         public AuthorsController(IMediator mediator)
             => _mediator = mediator;
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString) 
         {
             var query = new GetAllAuthorsQuery();
             var authors = await _mediator.Send(query);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                authors = authors.Where(a => a.Name.Contains(searchString)
+                                        || a.Description.Contains(searchString)).ToList();
+            }
 
             return View(authors);
         }
