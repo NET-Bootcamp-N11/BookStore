@@ -38,3 +38,31 @@
         }
     </tbody>
 </table>
+
+<!-- Pagination controls -->
+@if (ViewBag.TotalPages > 1)
+{
+    <div>
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a class="btn btn-primary" href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })"><i class='bx bx-first-page'></i></a>
+        }
+
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            if (i == ViewBag.CurrentPage)
+            {
+                <div class="btn btn-primary">@i</div>
+            }
+            else
+            {
+                <a class="btn btn-primary" href="@Url.Action("Index", new { page = i })" )>@i</a>
+            }
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a class="btn btn-primary" href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1 })"><i class='bx bx-last-page'></i></a>
+        }
+    </div>
+}
