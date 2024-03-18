@@ -1,10 +1,6 @@
 @using BookStore.Domain.Entities;
 @model List<Genre> 
 
-<a asp-controller="Genres" asp-action="Create" class="btn btn-primary">
-    Add
-</a>
-
 <table class="table table-borderless">
     <thead>
         <tr>
@@ -28,3 +24,7 @@
         }
     </tbody>
 </table>
+
+<a asp-controller="Genres" asp-action="Create" class="btn btn-primary  d-block">
+    <i class='bx bx-plus'></i>
+</a>
