@@ -6,5 +6,7 @@ namespace MVC.Models
     {
         public Book book { get; set; }
         public List<Author> authors { get; set; }
+        public List<ViewModelCheckBox> CheckedBoxes { get; set; }
+        public int[] ids { get; set; }
     }
 }
