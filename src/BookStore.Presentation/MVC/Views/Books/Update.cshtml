@@ -1,0 +1,33 @@
+﻿@model BooksUpdateBookViewModel
+
+<form asp-controller="Books" asp-action="Update" asp-route-id="@Model.book.Id" method="post" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" asp-for="@Model.book.Title" required>
+        <div class="invalid-feedback">
+            Please provide a title.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control" id="description" asp-for="@Model.book.Description" required>
+        <div class="invalid-feedback">
+            Please provide a description.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <select class="form-select" id="author" asp-for="@Model.book.AuthorId" required>
+            <option value="">Select an author</option>
+            @foreach (var author in @Model.authors)
+            {
+                <option value="@author.Id">@author.Name</option>
+            }
+        </select>
+        <div class="invalid-feedback">
+            Please select an author.
+        </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Update</button>
+</form>

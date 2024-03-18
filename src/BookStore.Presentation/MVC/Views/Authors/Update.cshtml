@@ -1,8 +1,15 @@
-﻿@using BookStore.Domain.Entities
+@using BookStore.Domain.Entities
 @model Author
 
-<form class="d-flex gap-2">
-    <input class="form-control" asp-for="Name"/>
-    <input class="form-control" asp-for="Description" />
-    <button class="btn btn-primary" asp-controller="Authors" asp-action="Update" formmethod="post">Update</button>
+<form>
+    <div class="form-group">
+        <label for="Name">Name:</label>
+        <input type="text" id="Name" name="Name" class="form-control" asp-for="Name" />
+    </div>
+    <div class="form-group">
+        <label for="Description">Description:</label>
+        <textarea id="Description" name="Description" class="form-control" asp-for="Description"></textarea>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Update</button>
 </form>
