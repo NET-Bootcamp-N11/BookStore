@@ -25,7 +25,12 @@ namespace MVC.Controllers
 
             return View(books);
         }
-
+        
+        public async Task<IActionResult> MoreInfo(int id)
+        {
+            var book = await _mediator.Send(new GetBookByIdQuery() { Id = id});
+            return View("MoreInfo",book);
+        }
         public async Task<IActionResult> CreateAsync()
         {
             var authors = await _mediator.Send(new GetAllAuthorsQuery());
