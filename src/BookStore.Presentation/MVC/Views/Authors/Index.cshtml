@@ -1,6 +1,9 @@
 @using BookStore.Domain.Entities
 @model List<Author>
-
+<form class="d-flex gap-2 mb-5" asp-controller="Authors" asp-action="Search" method="get">
+    <input type="search" class="form-control" aria-describedby="search" name="any" placeholder="Enter author name or id...">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 <a asp-controller="Authors" asp-action="Create" class="btn btn-primary">
     <i class='bx bx-plus'></i>
 </a>
