@@ -11,5 +11,7 @@ namespace BookStore.Application.useCases.Authors.Queries
     public class GetAuthorByNameQuery : IRequest<Author>
     {
         public string Name { get; set; }
+        public string Description { get; set; }
+
     }
 }

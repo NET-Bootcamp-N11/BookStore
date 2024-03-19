@@ -61,7 +61,7 @@ namespace MVC.Controllers
         public async Task<IActionResult> SearchAsync(string any)
         {
             Author aut;
-            aut = await _mediator.Send(new GetAuthorByNameQuery() { Name = any });
+            aut = await _mediator.Send(new GetAuthorByNameQuery() { Name = any, Description = any });
             return View("Details", aut);
         }
 

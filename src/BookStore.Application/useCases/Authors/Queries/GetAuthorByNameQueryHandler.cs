@@ -20,7 +20,7 @@ namespace BookStore.Application.useCases.Authors.Queries
         }
         public async Task<Author> Handle(GetAuthorByNameQuery request, CancellationToken cancellationToken)
         {
-            var res = await _appDbContext.Authors.FirstOrDefaultAsync(x => x.Name.Contains(request.Name));
+            var res = await _appDbContext.Authors.FirstOrDefaultAsync(x => x.Name.Contains(request.Name) || x.Description.Contains(request.Name));
             if (res == null)
             {
                 throw new Exception("Author Not found");
