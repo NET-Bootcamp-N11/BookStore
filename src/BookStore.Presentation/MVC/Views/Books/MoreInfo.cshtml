@@ -1,61 +1,50 @@
 ﻿@using BookStore.Domain.Entities
 @model Book
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@Model.Title - Book Details</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            padding-top: 20px;
-        }
+<style>
+    body {
+        background-color: #f8f9fa;
+        padding-top: 20px;
+    }
 
-        .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
+    .container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
 
-        .genre {
-            margin-right: 5px;
-            margin-bottom: 5px;
-            display: inline-block;
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 20px;
-        }
+    .genre {
+        margin-right: 5px;
+        margin-bottom: 5px;
+        display: inline-block;
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 20px;
+    }
 
-        .description {
-            font-size: 16px;
-            line-height: 1.6;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <h1>@Model.Title</h1>
-                <p class="description">@Model.Description</p>
-                <p><strong>Author:</strong> @Model.Author.Name</p>
-                <p>
-                    <strong>Genres:</strong> @foreach (var genre in Model.Genres)
-                    {
-                        <span class="badge badge-primary">@genre.Name</span>
-                    }
-                </p>
-            </div>
-            <div class="col-md-4 text-center">
-                <img src="https://via.placeholder.com/200" alt="Book Cover" class="img-fluid rounded">
-            </div>
+    .description {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>@Model.Title</h1>
+            <p class="description">@Model.Description</p>
+            <p><strong>Author:</strong> @Model.Author.Name</p>
+            <p>
+                <strong>Genres:</strong> @foreach (var genre in Model.Genres)
+                {
+                    <span class="badge bg-primary">@genre.Name</span>
+                }
+            </p>
+        </div>
+        <div class="col-md-4 text-center">
+            <img src="https://via.placeholder.com/200" alt="Book Cover" class="img-fluid rounded">
         </div>
     </div>
-</body>
-</html>
+</div>
