@@ -1,5 +1,7 @@
-﻿using BookStore.Application.useCases.Genres.Commands;
+﻿using BookStore.Application.useCases.Authors.Commands;
+using BookStore.Application.useCases.Genres.Commands;
 using BookStore.Application.useCases.Genres.Queries;
+using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,6 +44,26 @@ namespace MVC.Controllers
             };
             var res = await _mediator.Send(query);
             return RedirectToAction(actionName: nameof(Index));
+        }
+        public async Task<IActionResult> Update(int id)
+        {
+            var author = await _mediator.Send(new GetGenreByIdQuery() { Id = id });
+
+            return View(author);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(Genre genre)
+        {
+            var updateGenreCommand = new UpdateGenreCommand()
+            {
+                Id = genre.Id,
+                Name = genre.Name,
+            };
+
+            var updatedGenre = await _mediator.Send(updateGenreCommand);
+
+            return View("Details", updatedGenre);
         }
     }
 }
