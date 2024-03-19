@@ -25,11 +25,11 @@ namespace MVC.Controllers
 
             return View(books);
         }
-        
+
         public async Task<IActionResult> MoreInfo(int id)
         {
-            var book = await _mediator.Send(new GetBookByIdQuery() { Id = id});
-            return View("MoreInfo",book);
+            var book = await _mediator.Send(new GetBookByIdQuery() { Id = id });
+            return View("MoreInfo", book);
         }
         public async Task<IActionResult> CreateAsync()
         {
@@ -60,11 +60,13 @@ namespace MVC.Controllers
 
             var book = await _mediator.Send(new GetBookByIdQuery { Id = id });
 
+            var genreIds = book.Genres.Select(x => x.Id).ToList();
+
             var viewModel = new BooksUpdateBookViewModel
             {
                 book = book,
                 authors = authors,
-                CheckedBoxes = genres.Select(x => new ViewModelCheckBox() { Id = x.Id, Name = x.Name }).ToList(),
+                CheckedBoxes = genres.Select(x => new ViewModelCheckBox() { Id = x.Id, Name = x.Name, IsChecked = genreIds.Contains(x.Id) }).ToList(),
 
             };
             return View(viewModel);
@@ -79,14 +81,12 @@ namespace MVC.Controllers
                 Title = newBook.book.Title,
                 Description = newBook.book.Description,
                 AuthorId = newBook.book.AuthorId,
-                // Manashu joyini to'girlasa albatta ishlidi
-               //  Genres = newBook.book.Genres,
-                
+                Genres = newBook.ids
             };
 
             var updatedBook = await _mediator.Send(updateBookCommand);
 
-            return View("Details", updatedBook);
+            return RedirectToAction(nameof(MoreInfo), new { id = id });
         }
         public async Task<IActionResult> Delete(int id)
         {
