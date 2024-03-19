@@ -3,14 +3,14 @@
 <form asp-controller="Books" asp-action="Update" asp-route-id="@Model.book.Id" method="post" class="needs-validation" novalidate>
     <div class="mb-3">
         <label for="title" class="form-label">Title</label>
-        <input type="text" class="form-control" id="title" asp-for="@Model.book.Title" required>
+        <input type="text" required class="form-control" id="title" asp-for="@Model.book.Title">
         <div class="invalid-feedback">
             Please provide a title.
         </div>
     </div>
     <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <input type="text" class="form-control" id="description" asp-for="@Model.book.Description" required>
+        <input type="text" required class="form-control" id="description" asp-for="@Model.book.Description" >
         <div class="invalid-feedback">
             Please provide a description.
         </div>
