@@ -4,6 +4,7 @@ using BookStore.Application.useCases.Genres.Commands;
 using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using MVC.Models;
 
 namespace MVC.Controllers
 {
@@ -20,14 +21,18 @@ namespace MVC.Controllers
             var query = new GetAllAuthorsQuery();
             var allAuthors = await _mediator.Send(query);
 
-            page = Math.Max(1, Math.Min(page, TotalPages(allAuthors)));
-
             var paginatedAuthors = PaginateAuthors(allAuthors, page);
 
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = TotalPages(allAuthors);
+            var viewModel = new AuthorListViewModel
+            {
+                Authors = paginatedAuthors,
+                StartIndex = (page - 1) * pageSize,
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling(allAuthors.Count / (double)pageSize),
+                PageSize = pageSize
+            };
 
-            return View(paginatedAuthors);
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Create()
@@ -80,11 +85,6 @@ namespace MVC.Controllers
             int startIndex = (page - 1) * pageSize;
             int count = Math.Min(pageSize, authors.Count - startIndex);
             return authors.GetRange(startIndex, count);
-        }
-
-        private int TotalPages(List<Author> authors)
-        {
-            return (int)Math.Ceiling((double)authors.Count / pageSize);
         }
     }
 }

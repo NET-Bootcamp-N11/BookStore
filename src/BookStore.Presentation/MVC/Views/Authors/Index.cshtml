@@ -1,5 +1,5 @@
 @using BookStore.Domain.Entities
-@model List<Author>
+@model AuthorListViewModel
  
 <a asp-controller="Authors" asp-action="Create" class="btn btn-primary">
     <i class='bx bx-plus'></i>
@@ -15,19 +15,19 @@
         </tr>
     </thead>
     <tbody>
-        @for(int i = 0; i < Model.Count; i++)
+        
+        @for(int i = 0, rowNumber = Model.StartIndex + 1; i < Model.Authors.Count(); i++, rowNumber++)
         {
-            var rowNumber = i + 1;
             <tr>
                 <th scope="row">@rowNumber</th>
-                <td>@Model[i].Name</td>
-                <td>@Model[i].Description</td>
+                <td>@Model.Authors[i].Name</td>
+                <td>@Model.Authors[i].Description</td>
                 <td>
-                    <a asp-controller="Authors" asp-action="DeleteAuthor" asp-route-id="@Model[i].Id" class="btn btn-danger">
+                    <a asp-controller="Authors" asp-action="DeleteAuthor" asp-route-id="@Model.Authors[i].Id" class="btn btn-danger">
                         <i class='bx bxs-trash'></i>
                     </a>
 
-                    <a asp-controller="Authors" asp-action="Update" asp-route-id="@Model[i].Id" class="btn btn-secondary">
+                    <a asp-controller="Authors" asp-action="Update" asp-route-id="@Model.Authors[i].Id" class="btn btn-secondary">
                         <i class='bx bxs-edit-alt'></i>
                     </a>
                 </td>
@@ -37,29 +37,52 @@
 </table>
 
 <!-- Pagination controls -->
-@if (ViewBag.TotalPages > 1)
+@if (Model.TotalPages > 1)
 {
     <div>
-        @if (ViewBag.CurrentPage > 1)
+        @if (Model.CurrentPage > 1)
         {
-            <a class="btn btn-primary" href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })"><i class='bx bx-first-page'></i></a>
+            <a class="btn btn-primary" href="@Url.Action("Index", new { page = Model.CurrentPage - 1 })"><i class='bx bx-chevron-left'></i> Previous</a>
         }
 
-        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        @if (Model.CurrentPage != 1)
         {
-            if (i == ViewBag.CurrentPage)
+            <a class="btn btn-primary" href="@Url.Action("Index", new { page = 1 })">1</a>
+        }
+
+        @if (Model.CurrentPage > 2)
+        {
+            <span>...</span>
+        }
+
+        @for (int i = Model.CurrentPage - 1; i <= Model.CurrentPage + 1 && i <= Model.TotalPages; i++)
+        {
+            if (i > 1 && i < Model.TotalPages)
             {
-                <div class="btn btn-primary">@i</div>
-            }
-            else
-            {
-                <a class="btn btn-primary" href="@Url.Action("Index", new { page = i })" )>@i</a>
+                if (i == Model.CurrentPage)
+                {
+                    <div class="btn btn-primary">@i</div>
+                }
+                else
+                {
+                    <a class="btn btn-primary" href="@Url.Action("Index", new { page = i })">@i</a>
+                }
             }
         }
 
-        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        @if (Model.CurrentPage < Model.TotalPages - 1)
         {
-            <a class="btn btn-primary" href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1 })"><i class='bx bx-last-page'></i></a>
+            <span>...</span>
+        }
+
+        @if (Model.TotalPages != Model.CurrentPage && Model.TotalPages > 1)
+        {
+            <a class="btn btn-primary" href="@Url.Action("Index", new { page = Model.TotalPages })">@Model.TotalPages</a>
+        }
+
+        @if (Model.CurrentPage < Model.TotalPages)
+        {
+            <a class="btn btn-primary" href="@Url.Action("Index", new { page = Model.CurrentPage + 1 })">Next <i class='bx bx-chevron-right'></i></a>
         }
     </div>
 }
