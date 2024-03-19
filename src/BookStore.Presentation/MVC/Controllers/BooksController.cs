@@ -55,14 +55,17 @@ namespace MVC.Controllers
 
         public async Task<IActionResult> UpdateAsync(int id)
         {
-            var authorsquery = new GetAllAuthorsQuery();
-            List<Author> authors = await _mediator.Send(authorsquery);
+            var authors = await _mediator.Send(new GetAllAuthorsQuery());
+            var genres = await _mediator.Send(new GetAllGenreQuery());
+
             var book = await _mediator.Send(new GetBookByIdQuery { Id = id });
 
             var viewModel = new BooksUpdateBookViewModel
             {
                 book = book,
-                authors = authors
+                authors = authors,
+                CheckedBoxes = genres.Select(x => new ViewModelCheckBox() { Id = x.Id, Name = x.Name }).ToList(),
+
             };
             return View(viewModel);
         }
@@ -76,7 +79,9 @@ namespace MVC.Controllers
                 Title = newBook.book.Title,
                 Description = newBook.book.Description,
                 AuthorId = newBook.book.AuthorId,
-
+                // Manashu joyini to'girlasa albatta ishlidi
+               //  Genres = newBook.book.Genres,
+                
             };
 
             var updatedBook = await _mediator.Send(updateBookCommand);

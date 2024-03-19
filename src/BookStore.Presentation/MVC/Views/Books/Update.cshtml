@@ -18,16 +18,26 @@
     <div class="mb-3">
         <label for="author" class="form-label">Author</label>
         <select class="form-select" id="author" asp-for="@Model.book.AuthorId" required>
-            <option value="">Select an author</option>
+            <option value=""hidden>Select an author</option>
             @foreach (var author in @Model.authors)
             {
                 <option value="@author.Id">@author.Name</option>
             }
         </select>
-        <div class="invalid-feedback">
+        <div class="invalid-feedback" >
             Please select an author.
         </div>
     </div>
+    <table>
+        <tr>
+            @foreach (var item in Model.CheckedBoxes)
+            {
+                <td style="padding:5px;">
+                    <label><input type="checkbox" value="@item.Id" checked="@item.IsChecked" name="ids" id="@item.Id" /> @Html.Raw(@item.Name)</label>
+                </td>
+            }
+        </tr>
+    </table>
 
     <button class="btn btn-primary" type="submit">Update</button>
 </form>
