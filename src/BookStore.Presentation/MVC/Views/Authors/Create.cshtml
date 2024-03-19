@@ -4,11 +4,11 @@
 <form asp-controller="Authors" asp-action="Create" method="post">
     <div class="mb-3">
         <label for="Name" class="form-label">Author FullName</label>
-        <input asp-for="Name" type="text" class="form-control" id="Name" aria-describedby="nameHelp">
+        <input asp-for="Name" type="text" class="form-control" id="Name" aria-describedby="nameHelp" required>
     </div>
     <div class="mb-3">
         <label for="Description" class="form-label">Description</label>
-        <input asp-for="Description" type="text" class="form-control" id="Description" aria-describedby="descriptionHelp">
+        <input asp-for="Description" type="text" class="form-control" id="Description" required aria-describedby="descriptionHelp">
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
