@@ -51,7 +51,7 @@ namespace MVC.Controllers
 
             return View(author);
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> Update(Genre genre)
         {
