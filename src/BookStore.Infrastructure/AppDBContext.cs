@@ -1,11 +1,26 @@
 ﻿using BookStore.Application.Abstractions;
 using BookStore.Domain.Entities;
+using BookStore.Domain.Entities.Auth;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace BookStore.Infrastructure
 {
-    public class AppDBContext : DbContext, IAppDbContext
+    public class AppDBContext : IdentityDbContext<User, Role, Guid>, IAppDbContext
     {
+        private readonly IConfiguration _configuration;
+
+        public AppDBContext()
+        {
+
+        }
+
+        public AppDBContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public DbSet<Book> Books { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Author> Authors { get; set; }
@@ -18,7 +33,7 @@ namespace BookStore.Infrastructure
             base.OnConfiguring(optionsBuilder);
             optionsBuilder
                 .UseLazyLoadingProxies()
-                .UseSqlite("Data source=BookStoreMe.DB");
+                .UseNpgsql("Host=localhost;Port=5432;Username=postgres;Password=sardor0618!;Database=BookStore.DB;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

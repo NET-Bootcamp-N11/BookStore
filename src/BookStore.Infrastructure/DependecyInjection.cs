@@ -9,6 +9,11 @@ namespace BookStore.Infrastructure
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<IAppDbContext, AppDBContext>();
+
+            //services.AddIdentity<User, IdentityRole>()
+            //    .AddEntityFrameworkStores<AppDBContext>()
+            //    .AddDefaultTokenProviders();
+
             return services;
         }
     }
