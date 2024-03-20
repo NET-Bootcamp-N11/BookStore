@@ -1,7 +1,31 @@
 @using BookStore.Domain.Entities;
 @model List<Genre> 
 
-<a asp-controller="Genres" asp-action="Create" class="btn btn-primary">
+<form id="searchForm" class="d-flex gap-2 mb-5" asp-controller="Genres" asp-action="SearchByGenreName" method="get">
+    <input type="search" id="searchInput" class="form-control" aria-describedby="search" name="name" placeholder="Enter Genre name...">
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const savedQuery = localStorage.getItem('searchQuery');
+        if (savedQuery) {
+            document.getElementById('searchInput').value = savedQuery;
+        }
+        document.getElementById('searchInput').focus();
+        document.getElementById('searchInput').addEventListener('input', function () {
+            const inputValue = this.value.trim();
+            if (inputValue !== '') {
+                localStorage.setItem('searchQuery', inputValue);
+                document.getElementById('searchForm').submit();
+            }
+        });
+    });
+</script>
+
+
+
+<br />
+<a asp-controller="Genres" asp-action="Create" class="btn btn-primary" >
     <i class='bx bx-plus'></i>
 </a>
 

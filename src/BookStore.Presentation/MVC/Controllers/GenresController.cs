@@ -52,6 +52,18 @@ namespace MVC.Controllers
             return View(author);
         }
 
+
+        public async Task<IActionResult> SearchByGenreName(string name)
+        {
+            var getGenreBynameCommand = new GetGenreByNameQuery()
+            {
+                Name = name
+            };
+            var res = await _mediator.Send(getGenreBynameCommand);
+            return View("Index", res);
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> Update(Genre genre)
         {
