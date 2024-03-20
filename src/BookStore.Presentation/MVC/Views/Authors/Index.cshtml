@@ -1,14 +1,11 @@
 @using BookStore.Domain.Entities
 @model List<Author>
 
-<form method="get" action="@Url.Action("Index", "Authors")">
-    <div class="input-group mb-3">
-        <input type="text" name="searchString" class="form-control" placeholder="Search authors..." aria-label="Search authors">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="submit">Search</button>
-        </div>
-    </div>
+<form class="d-flex gap-2 mb-5" asp-controller="Authors" asp-action="SearchByName" method="get" >
+    <input type="search" class="form-control" aria-describedby="search" name="name" placeholder="Enter author name...">
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
 <br />
 <a asp-controller="Authors" asp-action="Create" class="btn btn-primary" >
     <i class='bx bx-plus'></i>
