@@ -72,6 +72,16 @@ namespace MVC.Controllers
             return View(viewModel);
         }
 
+        public async Task<IActionResult> SearchBookByTitle(string title)
+        {
+            var getBookBynameCommand = new GetBookByTitleQuery()
+            {
+                Title = title
+            };
+            var res = await _mediator.Send(getBookBynameCommand);
+            return View("Index", res);
+        }
+
         [HttpPost]
         public async Task<IActionResult> UpdateAsync(BooksUpdateBookViewModel newBook, int id)
         {
