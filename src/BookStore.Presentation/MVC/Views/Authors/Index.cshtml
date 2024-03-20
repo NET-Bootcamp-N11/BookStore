@@ -1,10 +1,30 @@
 @using BookStore.Domain.Entities
 @model List<Author>
 
-<form class="d-flex gap-2 mb-5" asp-controller="Authors" asp-action="SearchByName" method="get" >
-    <input type="search" class="form-control" aria-describedby="search" name="name" placeholder="Enter author name...">
-    <button type="submit" class="btn btn-primary">Submit</button>
+<form id="searchForm" class="d-flex gap-2 mb-5" asp-controller="Authors" asp-action="SearchByName" method="get">
+    <input type="search" id="searchInput" class="form-control" aria-describedby="search" name="name" placeholder="Enter author name...">
 </form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const savedQuery = localStorage.getItem('searchQuery');
+        if (savedQuery) {
+            document.getElementById('searchInput').value = savedQuery;
+        }
+
+        document.getElementById('searchInput').focus();
+
+        document.getElementById('searchInput').addEventListener('input', function () {
+            const inputValue = this.value.trim();
+            if (inputValue !== '') {
+                localStorage.setItem('searchQuery', inputValue);
+                document.getElementById('searchForm').submit();
+            }
+        });
+    });
+</script>
+
+
 
 <br />
 <a asp-controller="Authors" asp-action="Create" class="btn btn-primary" >
