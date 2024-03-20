@@ -57,6 +57,18 @@ namespace MVC.Controllers
             return View("Details", updatedAuthor);
         }
 
+
+        public async Task<IActionResult> SearchByName(string name)
+        {
+            var getAuthorByNameCommand = new GetAuthorByNameQuery()
+            {
+                Name = name
+            };
+            var res = await _mediator.Send(getAuthorByNameCommand);
+            return View("Index",res);
+        }
+
+       
         public async Task<IActionResult> DeleteAuthor(int id)
         {
             var query = new DeleteAuthorCommand()
