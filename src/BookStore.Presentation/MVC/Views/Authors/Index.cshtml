@@ -6,7 +6,8 @@
 </form>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', 
+    function () {
         const savedQuery = localStorage.getItem('searchQuery');
         if (savedQuery) {
             document.getElementById('searchInput').value = savedQuery;
@@ -16,10 +17,8 @@
 
         document.getElementById('searchInput').addEventListener('input', function () {
             const inputValue = this.value.trim();
-            if (inputValue !== '') {
-                localStorage.setItem('searchQuery', inputValue);
-                document.getElementById('searchForm').submit();
-            }
+            localStorage.setItem('searchQuery', inputValue);
+            document.getElementById('searchForm').submit();
         });
     });
 </script>
