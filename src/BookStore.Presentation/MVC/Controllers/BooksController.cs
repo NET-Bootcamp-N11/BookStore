@@ -72,13 +72,14 @@ namespace MVC.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> SearchBookByTitle(string title)
+        public async Task<IActionResult> SearchBooks(string title)
         {
-            var getBookBynameCommand = new GetBookByTitleQuery()
+            var getBooksCommand = new GetBooksQuery()
             {
-                Title = title
+                Title = title,
+                Description = title
             };
-            var res = await _mediator.Send(getBookBynameCommand);
+            var res = await _mediator.Send(getBooksCommand);
             return View("Index", res);
         }
 

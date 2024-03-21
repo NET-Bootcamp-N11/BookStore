@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace BookStore.Application.useCases.Genres.Queries
 {
-    public class GetBookByTitleQuery:IRequest<List<Book>>
+    public class GetBooksQuery:IRequest<List<Book>>
     {
         public string Title { get; set; }
+        public string Description { get; set; }
     }
 }

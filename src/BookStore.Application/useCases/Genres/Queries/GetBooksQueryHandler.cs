@@ -10,20 +10,21 @@ using System.Threading.Tasks;
 
 namespace BookStore.Application.useCases.Genres.Queries
 {
-    public class GetBookByTitleQueryHandler : IRequestHandler<GetBookByTitleQuery, List<Book>>
+    public class GetBooksQueryHandler : IRequestHandler<GetBooksQuery, List<Book>>
     {
 
         private readonly IAppDbContext _appDbContext;
 
-        public GetBookByTitleQueryHandler(IAppDbContext appDbContext)
+        public GetBooksQueryHandler(IAppDbContext appDbContext)
         {
             _appDbContext = appDbContext ?? throw new ArgumentNullException(nameof(appDbContext));
         }
-        public async Task<List<Book>> Handle(GetBookByTitleQuery request, CancellationToken cancellationToken)
+        public async Task<List<Book>> Handle(GetBooksQuery request, CancellationToken cancellationToken)
         {
             var books = await _appDbContext.Books
-                .Where(x => x.Title != null && x.Title.ToLower().StartsWith(request.Title.ToLower()))
+                .Where(x => (x.Title != null && x.Title.ToLower().StartsWith(request.Title.ToLower())) || (x.Description != null && x.Description.ToLower().Contains(request.Description.ToLower())))
                 .ToListAsync(cancellationToken);
+
 
             if (books != null)
             {
