@@ -1,0 +1,24 @@
+﻿@using BookStore.Application.useCases.Auth
+@model RegisterCommand
+
+<form>
+    <div class="mb-3">
+        <label asp-for="@Model.FullName" for="exampleInputEmail1" class="form-label">Full Name</label>
+        <input asp-for="@Model.FullName" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label asp-for="@Model.UserName" for="exampleInputEmail1" class="form-label">User Name</label>
+        <input asp-for="@Model.UserName" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label asp-for="@Model.Email" for="exampleInputEmail1" class="form-label">Email address</label>
+        <input asp-for="@Model.Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="@Model.Password" for="exampleInputPassword1" class="form-label">Password</label>
+        <input asp-for="@Model.Password" type="password" class="form-control" id="exampleInputPassword1">
+    </div>
+
+    <button asp-controller="Auth" asp-action="Register" formmethod="post" type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -33,10 +33,18 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Genres" asp-action="Index">Genres</a>
                         </li>
                     </ul>
+                    @if (!User.Identity.IsAuthenticated)
+                    {   
                     <div class="d-flex">
-                        <a class="nav-link text-dark btn btn-primary" asp-area="" asp-controller="Auth" asp-action="Login">Authors</a>
+                        <a class="nav-link text-dark btn btn-primary" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
                         <a class="nav-link text-dark btn btn-primary" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
                     </div>
+                    }else{
+                        <div class="d-flex">
+                            <div class="nav-link text-dark btn btn-primary">@User.Identity.Name</div>
+                            <a class="nav-link text-dark btn btn-primary" asp-area="" asp-controller="Auth" asp-action="LogOut">Log out -></a>
+                        </div>
+                    }
                 </div>
             </div>
         </nav>

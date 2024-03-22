@@ -1,5 +1,7 @@
 using BookStore.Application;
+using BookStore.Domain.Entities.Auth;
 using BookStore.Infrastructure;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,10 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
+
+builder.Services.AddIdentity<User, Role>()
+    .AddEntityFrameworkStores<AppDBContext>()
+                .AddDefaultTokenProviders();
 
 var app = builder.Build();
 

@@ -16,7 +16,10 @@
             <th scope="col">Title</th>
             <th scope="col">Author</th>
             <th scope="col">More Info</th>
-            <th scope="col">Actions</th>
+            @if (!User.Identity.IsAuthenticated)
+            {   
+                <th scope="col">Actions</th>
+            }
         </tr>
     </thead>
     <tbody class="table-group-divider">
@@ -32,14 +35,18 @@
                         <i class='bx bx-show'></i>
                     </a>
                 </td>
-                <td>
-                    <a asp-controller="Books" asp-action="Delete" asp-route-id="@Model[i].Id" class="btn btn-danger">
-                        <i class='bx bxs-trash'></i>
-                    </a>
-                    <a asp-controller="Books" asp-action="Update" asp-route-id="@Model[i].Id" class="btn btn-secondary">
-                        <i class='bx bx-edit-alt'></i>
-                    </a>
-                </td>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        <a asp-controller="Books" asp-action="Delete" asp-route-id="@Model[i].Id" class="btn btn-danger">
+                            <i class='bx bxs-trash'></i>
+                        </a>
+                        <a asp-controller="Books" asp-action="Update" asp-route-id="@Model[i].Id" class="btn btn-secondary">
+                            <i class='bx bx-edit-alt'></i>
+                        </a>
+                    </td>
+                }
             </tr>
         }
     </tbody>
