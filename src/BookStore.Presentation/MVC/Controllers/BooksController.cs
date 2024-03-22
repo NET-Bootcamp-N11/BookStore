@@ -31,6 +31,7 @@ namespace MVC.Controllers
             var book = await _mediator.Send(new GetBookByIdQuery() { Id = id });
             return View("MoreInfo", book);
         }
+
         public async Task<IActionResult> CreateAsync()
         {
             var authors = await _mediator.Send(new GetAllAuthorsQuery());
@@ -88,6 +89,7 @@ namespace MVC.Controllers
 
             return RedirectToAction(nameof(MoreInfo), new { id = id });
         }
+
         public async Task<IActionResult> Delete(int id)
         {
             var deleteBookCommand = new DeleteBookCommand()
@@ -98,6 +100,18 @@ namespace MVC.Controllers
             var book = await _mediator.Send(deleteBookCommand);
 
             return RedirectToAction(actionName: nameof(Index));
+        }
+
+        public async Task<IActionResult> Search(string text)
+        {
+            var searchBookCommand = new SearchBookQuery()
+            {
+                Text = text
+            };
+
+            var books = await _mediator.Send(searchBookCommand);
+
+            return View("Index", books);
         }
     }
 }

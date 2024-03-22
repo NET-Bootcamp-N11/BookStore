@@ -60,9 +60,9 @@ namespace MVC.Controllers
 
         public async Task<IActionResult> SearchByName(string name)
         {
-            var getAuthorByNameCommand = new GetAuthorByNameQuery()
+            var getAuthorByNameCommand = new SearchAuthorQuery()
             {
-                Name = name
+                Text = name
             };
             var res = await _mediator.Send(getAuthorByNameCommand);
             return View("Index",res);
