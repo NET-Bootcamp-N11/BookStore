@@ -1,10 +1,12 @@
 ﻿using BookStore.Application.Abstractions;
 using BookStore.Domain.Entities;
+using BookStore.Domain.Entities.Auth;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Infrastructure
 {
-    public class AppDBContext : DbContext, IAppDbContext
+    public class AppDBContext : IdentityDbContext<User, Role, Guid>, IAppDbContext
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Genre> Genres { get; set; }

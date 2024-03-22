@@ -4,6 +4,7 @@ using BookStore.Application.useCases.Books.Queries;
 using BookStore.Application.useCases.Genres.Queries;
 using BookStore.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Models;
 
@@ -32,6 +33,7 @@ namespace MVC.Controllers
             return View("MoreInfo", book);
         }
 
+        [Authorize]
         public async Task<IActionResult> CreateAsync()
         {
             var authors = await _mediator.Send(new GetAllAuthorsQuery());
@@ -44,6 +46,7 @@ namespace MVC.Controllers
             });
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateAsync(BooksCreateViewModel booksCreateViewModel)
         {
@@ -54,6 +57,7 @@ namespace MVC.Controllers
             return View("Details", book);
         }
 
+        [Authorize]
         public async Task<IActionResult> UpdateAsync(int id)
         {
             var authors = await _mediator.Send(new GetAllAuthorsQuery());
@@ -73,6 +77,7 @@ namespace MVC.Controllers
             return View(viewModel);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> UpdateAsync(BooksUpdateBookViewModel newBook, int id)
         {
@@ -90,6 +95,7 @@ namespace MVC.Controllers
             return RedirectToAction(nameof(MoreInfo), new { id = id });
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var deleteBookCommand = new DeleteBookCommand()

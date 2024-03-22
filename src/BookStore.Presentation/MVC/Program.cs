@@ -1,4 +1,5 @@
 using BookStore.Application;
+using BookStore.Domain.Entities.Auth;
 using BookStore.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,9 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
+
+builder.Services.AddIdentity<User, Role>()
+    .AddEntityFrameworkStores<AppDBContext>();
 
 var app = builder.Build();
 
@@ -23,6 +27,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
