@@ -3,6 +3,7 @@ using BookStore.Application.useCases.Genres.Commands;
 using BookStore.Application.useCases.Genres.Queries;
 using BookStore.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MVC.Controllers
@@ -23,11 +24,13 @@ namespace MVC.Controllers
             return View(genres);
         }
 
+        [Authorize]
         public async Task<IActionResult> Create()
         {
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(CreateGenreCommand createGenreCommand)
         {
@@ -36,6 +39,7 @@ namespace MVC.Controllers
             return View("Details", genre);
         }
 
+        [Authorize]
         public async Task<IActionResult> DeleteGenre(int id)
         {
             var query = new DeleteGenreByIdCommand()
@@ -45,13 +49,16 @@ namespace MVC.Controllers
             var res = await _mediator.Send(query);
             return RedirectToAction(actionName: nameof(Index));
         }
+
+        [Authorize]
         public async Task<IActionResult> Update(int id)
         {
             var author = await _mediator.Send(new GetGenreByIdQuery() { Id = id });
 
             return View(author);
         }
-        
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Update(Genre genre)
         {
