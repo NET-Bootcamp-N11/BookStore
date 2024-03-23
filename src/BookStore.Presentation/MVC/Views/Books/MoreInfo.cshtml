@@ -1,45 +1,24 @@
 ﻿@using BookStore.Domain.Entities
 @model Book
 
-<style>
-    body {
-        background-color: #f8f9fa;
-        padding-top: 20px;
-    }
-
-    .container {
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin-top: 20px;
-    }
-
-    .genre {
-        margin-right: 5px;
-        margin-bottom: 5px;
-        display: inline-block;
-        padding: 5px 10px;
-        background-color: #007bff;
-        color: #fff;
-        border-radius: 20px;
-    }
-
-    .description {
-        font-size: 16px;
-        line-height: 1.6;
-    }
-</style>
-<div class="container">
+<div class="container mt-5">
     <div class="row">
         <div class="col-md-8">
             <h1>@Model.Title</h1>
             <p class="description">@Model.Description</p>
             <p><strong>Author:</strong> @Model.Author.Name</p>
             <p>
-                <strong>Genres:</strong> @foreach (var genre in Model.Genres)
-                {
-                    <span class="badge bg-primary">@genre.Name</span>
+                @{
+                    <strong>Genres:</strong>
+                    if(Model.Genres.Count != 0)
+                    {@foreach (var genre in Model.Genres)
+                        {
+                            <span class="badge bg-primary">@genre.Name</span>
+                        }
+                    } else
+                    {
+                        <span>Hozircha ganr mavjud emas!</span>
+                    }
                 }
             </p>
         </div>
@@ -48,3 +27,7 @@
         </div>
     </div>
 </div>
+
+<script>
+    console.log("salom")
+</script>

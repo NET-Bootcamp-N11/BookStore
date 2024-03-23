@@ -366,3 +366,7 @@ FodyWeavers.xsd
 /src/BookStore.Presentation/MVC/BookStore.DB-wal
 /src/BookStore.Presentation/MVC/BookStoreMe.DB
 /src/BookStore.Presentation/MVC/BookStoreMe.DB-shm
+<<<<<<< HEAD
+=======
+/src/BookStore.Presentation/MVC/BookStoreMe.DB-wal
+>>>>>>> e95e710f329811e446bf92b822336b70c5d791e9

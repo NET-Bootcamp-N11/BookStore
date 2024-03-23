@@ -5,8 +5,8 @@
     ViewData["Title"] = "Book";
 }
 
-<form id="searchForm" class="d-flex gap-2 mb-5" asp-controller="Books" asp-action="SearchByTitle" method="get">
-    <input type="search" id="searchInput" class="form-control" aria-describedby="search" name="title" placeholder="Enter book name...">
+<form id="searchForm" class="d-flex gap-2 mb-5" asp-controller="Books" asp-action="Search" method="get">
+    <input type="search" id="searchInput" class="form-control" aria-describedby="search" name="text" placeholder="Enter book name...">
 </form>
 
 <script>
