@@ -1,5 +1,4 @@
-﻿using BookStore.Application.useCases.Authors.Commands;
-using BookStore.Application.useCases.Genres.Commands;
+﻿using BookStore.Application.useCases.Genres.Commands;
 using BookStore.Application.useCases.Genres.Queries;
 using BookStore.Domain.Entities;
 using MediatR;
@@ -8,29 +7,28 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MVC.Controllers
 {
+    [Authorize]
     public class GenresController : Controller
     {
         private readonly IMediator _mediator;
 
         public GenresController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+            => _mediator = mediator;
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             GetAllGenreQuery? query = new GetAllGenreQuery();
             var genres = await _mediator.Send(query);
+
             return View(genres);
         }
 
-        [Authorize]
         public async Task<IActionResult> Create()
         {
             return View();
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(CreateGenreCommand createGenreCommand)
         {
@@ -39,7 +37,6 @@ namespace MVC.Controllers
             return View("Details", genre);
         }
 
-        [Authorize]
         public async Task<IActionResult> DeleteGenre(int id)
         {
             var query = new DeleteGenreByIdCommand()
@@ -47,10 +44,10 @@ namespace MVC.Controllers
                 Id = id
             };
             var res = await _mediator.Send(query);
+
             return RedirectToAction(actionName: nameof(Index));
         }
 
-        [Authorize]
         public async Task<IActionResult> Update(int id)
         {
             var author = await _mediator.Send(new GetGenreByIdQuery() { Id = id });
@@ -58,7 +55,6 @@ namespace MVC.Controllers
             return View(author);
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Update(Genre genre)
         {

@@ -10,6 +10,7 @@ using MVC.Models;
 
 namespace MVC.Controllers
 {
+    [Authorize]
     public class BooksController : Controller
     {
         private readonly IMediator _mediator;
@@ -19,6 +20,7 @@ namespace MVC.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var getAllBooks = new GetAllBooksQuery();
@@ -27,13 +29,13 @@ namespace MVC.Controllers
             return View(books);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> MoreInfo(int id)
         {
             var book = await _mediator.Send(new GetBookByIdQuery() { Id = id });
             return View("MoreInfo", book);
         }
 
-        [Authorize]
         public async Task<IActionResult> CreateAsync()
         {
             var authors = await _mediator.Send(new GetAllAuthorsQuery());
@@ -46,7 +48,6 @@ namespace MVC.Controllers
             });
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateAsync(BooksCreateViewModel booksCreateViewModel)
         {
@@ -57,7 +58,6 @@ namespace MVC.Controllers
             return View("Details", book);
         }
 
-        [Authorize]
         public async Task<IActionResult> UpdateAsync(int id)
         {
             var authors = await _mediator.Send(new GetAllAuthorsQuery());
@@ -77,7 +77,6 @@ namespace MVC.Controllers
             return View(viewModel);
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> UpdateAsync(BooksUpdateBookViewModel newBook, int id)
         {
@@ -95,7 +94,6 @@ namespace MVC.Controllers
             return RedirectToAction(nameof(MoreInfo), new { id = id });
         }
 
-        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var deleteBookCommand = new DeleteBookCommand()
@@ -108,6 +106,7 @@ namespace MVC.Controllers
             return RedirectToAction(actionName: nameof(Index));
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Search(string text)
         {
             var searchBookCommand = new SearchBookQuery()

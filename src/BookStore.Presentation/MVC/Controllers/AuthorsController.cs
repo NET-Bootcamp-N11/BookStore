@@ -1,6 +1,5 @@
 ﻿using BookStore.Application.useCases.Authors.Commands;
 using BookStore.Application.useCases.Authors.Queries;
-using BookStore.Application.useCases.Genres.Commands;
 using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -8,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MVC.Controllers
 {
+    [Authorize]
     public class AuthorsController : Controller
     {
         private readonly IMediator _mediator;
@@ -15,6 +15,7 @@ namespace MVC.Controllers
         public AuthorsController(IMediator mediator)
             => _mediator = mediator;
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var query = new GetAllAuthorsQuery();
@@ -23,13 +24,11 @@ namespace MVC.Controllers
             return View(authors);
         }
 
-        [Authorize]
         public async Task<IActionResult> Create()
         {
             return View();
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(CreateAuthorCommand createAuthorCommand)
         {
@@ -38,7 +37,6 @@ namespace MVC.Controllers
             return View("Details", author);
         }
 
-        [Authorize]
         public async Task<IActionResult> UpdateAsync(int id)
         {
             var author = await _mediator.Send(new GetAuthorByIdQuery { Id = id });
@@ -46,7 +44,6 @@ namespace MVC.Controllers
             return View(author);
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> UpdateAsync(Author author)
         {
@@ -62,6 +59,7 @@ namespace MVC.Controllers
             return View("Details", updatedAuthor);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> SearchByName(string name)
         {
             var getAuthorByNameCommand = new SearchAuthorQuery()
@@ -69,10 +67,9 @@ namespace MVC.Controllers
                 Text = name
             };
             var res = await _mediator.Send(getAuthorByNameCommand);
-            return View("Index",res);
+            return View("Index", res);
         }
 
-        [Authorize]
         public async Task<IActionResult> DeleteAuthor(int id)
         {
             var query = new DeleteAuthorCommand()

@@ -1,5 +1,5 @@
 ﻿using BookStore.Domain.Entities.Auth;
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Models.Auth;
@@ -38,11 +38,10 @@ namespace MVC.Controllers
         {
             await _signInManager.SignOutAsync();
 
-            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
-
             return RedirectToAction("Login");
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
