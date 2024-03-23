@@ -24,11 +24,13 @@
 </script>
 
 
-
-<br />
-<a asp-controller="Authors" asp-action="Create" class="btn btn-primary" >
-    <i class='bx bx-plus'></i>
-</a>
+@if (User.Identity.IsAuthenticated)
+{
+    <br />
+    <a asp-controller="Authors" asp-action="Create" class="btn btn-primary" >
+        <i class='bx bx-plus'></i>
+    </a>
+}
 
 <table class="table">
     <thead>
@@ -36,7 +38,10 @@
             <th scope="col">T/R</th>
             <th scope="col">Full name</th>
             <th scope="col">Description</th>
-            <th scope="col">Actions</th>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <th scope="col">Actions</th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -47,15 +52,18 @@
                 <th scope="row">@rowNumber</th>
                 <td>@Model[i].Name</td>
                 <td>@Model[i].Description</td>
-                <td>
-                    <a asp-controller="Authors" asp-action="DeleteAuthor" asp-route-id="@Model[i].Id" class="btn btn-danger">
-                        <i class='bx bxs-trash'></i>
-                    </a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        <a asp-controller="Authors" asp-action="DeleteAuthor" asp-route-id="@Model[i].Id" class="btn btn-danger">
+                            <i class='bx bxs-trash'></i>
+                        </a>
 
-                    <a asp-controller="Authors" asp-action="Update" asp-route-id="@Model[i].Id" class="btn btn-secondary">
-                        <i class='bx bxs-edit-alt'></i>
-                    </a>
-                </td>
+                        <a asp-controller="Authors" asp-action="Update" asp-route-id="@Model[i].Id" class="btn btn-secondary">
+                            <i class='bx bxs-edit-alt'></i>
+                        </a>
+                    </td>
+                }
             </tr>
         }
     </tbody>
