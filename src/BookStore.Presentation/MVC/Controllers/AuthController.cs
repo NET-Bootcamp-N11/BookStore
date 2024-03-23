@@ -1,4 +1,5 @@
 ﻿using BookStore.Domain.Entities.Auth;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Models.Auth;
@@ -33,6 +34,15 @@ namespace MVC.Controllers
             return View();
         }
 
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+
+            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+
+            return RedirectToAction("Login");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
@@ -52,6 +62,9 @@ namespace MVC.Controllers
         public async Task<IActionResult> Register(RegisterDTO registerDTO)
         {
             var user = await _userManager.FindByEmailAsync(registerDTO.Email);
+
+            if (registerDTO.Password != registerDTO.ConfirmPassword)
+                throw new Exception("Passwords do not match!");
 
             if (user is not null)
                 throw new Exception("You are already registred");
