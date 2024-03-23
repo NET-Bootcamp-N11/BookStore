@@ -109,12 +109,12 @@ namespace MVC.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Search(string text)
         {
-            var searchBookCommand = new SearchBookQuery()
+            var getBookCommand = new SearchBookQuery()
             {
                 Text = text
             };
 
-            var books = await _mediator.Send(searchBookCommand);
+            var books = await _mediator.Send(getBookCommand);
 
             return View("Index", books);
         }
