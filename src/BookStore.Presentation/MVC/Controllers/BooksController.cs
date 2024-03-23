@@ -108,14 +108,14 @@ namespace MVC.Controllers
             return RedirectToAction(actionName: nameof(Index));
         }
 
-        public async Task<IActionResult> SearchByTitle(string title)
+        public async Task<IActionResult> Search(string text)
         {
-            var getBookByTitleCommand = new SearchBookQuery()
+            var getBookCommand = new SearchBookQuery()
             {
-                Text = title
+                Text = text
             };
 
-            var books = await _mediator.Send(getBookByTitleCommand);
+            var books = await _mediator.Send(getBookCommand);
 
             return View("Index", books);
         }
