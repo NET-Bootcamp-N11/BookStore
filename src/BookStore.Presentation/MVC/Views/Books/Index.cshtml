@@ -5,10 +5,27 @@
     ViewData["Title"] = "Book";
 }
 
-<form class="d-flex mb-5" role="search" asp-controller="Books" asp-action="Search">
-    <input class="form-control me-2" name="text" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success" type="submit">Search</button>
+<form id="searchForm" class="d-flex gap-2 mb-5" asp-controller="Books" asp-action="SearchByTitle" method="get">
+    <input type="search" id="searchInput" class="form-control" aria-describedby="search" name="title" placeholder="Enter book name...">
 </form>
+
+<script>
+    document.addEventListener('DOMContentLoaded',
+        function () {
+            const savedQuery = localStorage.getItem('searchQuery');
+            if (savedQuery) {
+                document.getElementById('searchInput').value = savedQuery;
+            }
+
+            document.getElementById('searchInput').focus();
+
+            document.getElementById('searchInput').addEventListener('input', function () {
+                const inputValue = this.value.trim();
+                localStorage.setItem('searchQuery', inputValue);
+                document.getElementById('searchForm').submit();
+            });
+        });
+</script>
 
 <a asp-controller="Books" asp-action="Create" class="btn btn-primary">
     <i class='bx bx-plus'></i>
