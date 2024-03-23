@@ -1,4 +1,5 @@
 ﻿using BookStore.Domain.Entities.Auth;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +11,16 @@ namespace MVC.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IMediator _mediator;
 
         public AuthController(
             SignInManager<User> signInManager,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            IMediator mediator)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _mediator = mediator;
         }
 
         public IActionResult Index()
@@ -89,88 +93,35 @@ namespace MVC.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Profile()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            return View(user);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Update(User user)
+        {
+            var currentuser = await _userManager.GetUserAsync(User);
+            var emailChanging = await _userManager.SetEmailAsync(currentuser, "qales@gmail.com");
+
+            //if (string.IsNullOrEmpty(user.SecurityStamp))
+            //    user.SecurityStamp = Guid.NewGuid().ToString();
+            user.UserName = currentuser.UserName;
+
+            //var identityResult = await _userManager.UpdateAsync(user);
+
+            //if (!identityResult.Succeeded)
+            //    throw new Exception("Something went wrong");
+
+            return View("Profile", user);
+        }
     }
 }
 
 
-
-
-
-// Pull Request jo'natomadim shunchun shetga yozib qo'yyapman - copy/paste
-
-
-// User controller:
-
-
-
-// using Microsoft.AspNetCore.Mvc;
-// using MVC.Models;
-// using System.Threading.Tasks;
-// using Microsoft.AspNetCore.Identity;
-// using BookStore.Domain.Entities.Auth;
-
-// namespace MVC.Controllers
-// {
-//     public class ProfileController : Controller
-//     {
-//         private readonly UserManager<User> _userManager;
-
-//         public ProfileController(UserManager<User> userManager)
-//         {
-//             _userManager = userManager;
-//         }
-
-//         public async Task<IActionResult> Index()
-//         {
-//             var user = await _userManager.GetUserAsync(User);
-
-//             if (user == null)
-//             {
-//                 // If not authenticated, redirect to login
-//                 return RedirectToAction("Login", "Auth");
-//             }
-            
-//             return View(user);
-//         }
-//     }
-// }
-
-
-
-
-// Views (Profile):
-
-
-// @{
-//     ViewData["Title"] = "Profile";
-// }
-
-// <h1>Welcome to your Profile</h1>
-
-//     <p>Here you can manage your profile details:</p>
-
-//     <!--  profile details -->
-//     <div>
-//     <h2>User Information</h2>
-//     <p><strong>Full Name:</strong> @User.Identity.Name</p>
-//     <p><strong>Email:</strong> @Model.Email</p>
-//     <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
-//     </div>
-
-//     <!-- Form to update profile -->
-//     <form asp-controller="Profile" asp-action="Update" method="post">
-//     <div class="mb-3">
-//     <label asp-for="FullName" class="form-label">Full Name</label>
-//     <input asp-for="FullName" type="text" class="form-control" required>
-//     </div>
-//     <div class="mb-3">
-//     <label asp-for="Email" class="form-label">Email</label>
-//     <input asp-for="Email" type="email" class="form-control" readonly>
-// </div>
-//     <div class="mb-3">
-//     <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
-//     <input asp-for="PhoneNumber" type="text" class="form-control">
-//     </div>
-
-//     <button type="submit" class="btn btn-primary">Update Profile</button>
-//     </form>
