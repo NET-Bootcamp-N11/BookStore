@@ -107,19 +107,25 @@ namespace MVC.Controllers
         public async Task<IActionResult> Update(User user)
         {
             var currentuser = await _userManager.GetUserAsync(User);
-            var emailChanging = await _userManager.SetEmailAsync(currentuser, "qales@gmail.com");
 
-            //if (string.IsNullOrEmpty(user.SecurityStamp))
-            //    user.SecurityStamp = Guid.NewGuid().ToString();
-            user.UserName = currentuser.UserName;
+            await _userManager.SetEmailAsync(currentuser, user.Email);
+            await _userManager.SetPhoneNumberAsync(currentuser, user.PhoneNumber);
 
-            //var identityResult = await _userManager.UpdateAsync(user);
+            // Update FullName
+            currentuser.FullName = user.FullName;
 
-            //if (!identityResult.Succeeded)
-            //    throw new Exception("Something went wrong");
+            var result = await _userManager.UpdateAsync(currentuser);
 
-            return View("Profile", user);
+            if (result.Succeeded)
+            {
+                return View("Profile", currentuser);
+            }
+            else
+            {
+                throw new Exception("Something went wrong");
+            }
         }
+
     }
 }
 
