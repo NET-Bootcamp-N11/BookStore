@@ -22,10 +22,7 @@ namespace BookStore.Infrastructure.Configurations
                  .HasData(
                      new List<Book>
                      {
-                        new Book{ Id = 1, AuthorId = 1, Title = "Dunyoning ishlari", Description = "Zo'r kitob"},
-                        new Book{ Id = 2, AuthorId = 2, Title = "O'tgan kunlar", Description = "Zo'r kitob"},
-                        new Book{ Id = 3, AuthorId = 3, Title = "Besh bolali yigitcha", Description = "Zo'r kitob"},
-                        new Book{ Id = 4, AuthorId = 4, Title = "Chinor", Description = "Zo'r kitob"},
+                        new Book{ Id = 1, AuthorId = 5, Title = "Mening Yulduzlarim", Description = "Zo'r kitob", PDFFilePath = "Books/Erkin Vohidov Mening Yulduzim.pdf", Price = 20000},
                      }
                  );
         }
