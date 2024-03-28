@@ -33,7 +33,14 @@ namespace MVC.Controllers
         public async Task<IActionResult> MoreInfo(int id)
         {
             var book = await _mediator.Send(new GetBookByIdQuery() { Id = id });
-            return View("MoreInfo", book);
+
+            var viewModel = new BooksMoreInfoViewModel()
+            {
+                Book = book,
+                Host = HttpContext.Request.Host.ToString(),
+            };
+
+            return View("MoreInfo", viewModel);
         }
 
         public async Task<IActionResult> CreateAsync()

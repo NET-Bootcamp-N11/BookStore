@@ -45,7 +45,6 @@ namespace MVC.Controllers
             return RedirectToAction("Login");
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
