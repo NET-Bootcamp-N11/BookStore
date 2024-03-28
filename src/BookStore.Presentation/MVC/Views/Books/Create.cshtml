@@ -2,15 +2,25 @@
 @using BookStore.Domain.Entities
 @model BooksCreateViewModel
 
-<form>
+<form enctype="multipart/form-data">
     <div class="mb-3">
         <label asp-for="@Model.CreateBookCommand.Title" class="form-label">Title</label>
         <input asp-for="@Model.CreateBookCommand.Title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter title ..." required>
+    </div>
+ 
+    <div class="mb-3">
+        <label asp-for="@Model.CreateBookCommand.Price" class="form-label">Price</label>
+        <input asp-for="@Model.CreateBookCommand.Price" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter price ..." required>
     </div>
 
     <div class="mb-3">
         <label asp-for="@Model.CreateBookCommand.Description" class="form-label">Description</label>
         <textarea asp-for="@Model.CreateBookCommand.Description" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="@Model.CreateBookCommand.PDFFile" class="form-label">Pdf file</label>
+        <input asp-for="@Model.CreateBookCommand.PDFFile" class="form-control" type="file" id="formFileMultiple" multiple>
     </div>
 
     <div>
