@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BookStore.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20240323121732_Init")]
+    [Migration("20240328014147_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -21,6 +21,9 @@ namespace BookStore.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -146,11 +149,13 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
 
@@ -180,6 +185,12 @@ namespace BookStore.Infrastructure.Migrations
                             Id = 4,
                             Description = "Zo'r inson",
                             Name = "Asqad Maxtor"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Zo'r inson",
+                            Name = "Erkin Vohidov"
                         });
                 });
 
@@ -196,11 +207,20 @@ namespace BookStore.Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasMaxLength(280)
+                        .HasColumnType("character varying(280)");
+
+                    b.Property<string>("PDFFilePath")
+                        .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
 
@@ -212,30 +232,11 @@ namespace BookStore.Infrastructure.Migrations
                         new
                         {
                             Id = 1L,
-                            AuthorId = 1,
+                            AuthorId = 5,
                             Description = "Zo'r kitob",
-                            Title = "Dunyoning ishlari"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            AuthorId = 2,
-                            Description = "Zo'r kitob",
-                            Title = "O'tgan kunlar"
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            AuthorId = 3,
-                            Description = "Zo'r kitob",
-                            Title = "Besh bolali yigitcha"
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            AuthorId = 4,
-                            Description = "Zo'r kitob",
-                            Title = "Chinor"
+                            PDFFilePath = "Books/Erkin Vohidov Mening Yulduzim.pdf",
+                            Price = 20000m,
+                            Title = "Mening Yulduzlarim"
                         });
                 });
 
@@ -264,16 +265,6 @@ namespace BookStore.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            Name = "Romantic"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Melodrama"
-                        },
-                        new
-                        {
-                            Id = 4,
                             Name = "Fantastic"
                         });
                 });
