@@ -57,7 +57,7 @@ namespace MVC.Controllers
             if (!result.Succeeded)
                 throw new Exception("There is an issue with signing in process");
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Books");
         }
 
         [HttpPost]
@@ -90,7 +90,7 @@ namespace MVC.Controllers
             if (!result.Succeeded)
                 throw new Exception("There is an issue with signing in process");
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Books");
         }
 
         [Authorize]
