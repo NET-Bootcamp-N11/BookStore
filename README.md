@@ -12,4 +12,12 @@
 - [ ] Rolelar(User,Admin,SuperAdmin) qo'shish kerak
 - [ ] Demak Admin page qo'shish kerak
 - [ ] Keyin UI ni chiroyli qilishimiz kerak
+- [ ] Savat qo'shish kerak
+- [ ] ...
+
+#Uzoq muddatli
+
+- [ ] Costumer role qo'shish kerak
+- [ ] Sotuvchi va Oluvchi o'rtasida aloqa uchun messaging
+- [ ] Kitoblarni baxolashni qo'shishimiz kerak yulduzchali
 - [ ] ...
