@@ -3,6 +3,7 @@
 - [x] Book,Author,Role - CRUD amallari
 - [x] Authorization(Asp.Net.Identity bilan)
 - [x] PDF file uploading va PDF viwer
+- [x] ...
 
 #Endi nima qilishimiz kerak.
 
