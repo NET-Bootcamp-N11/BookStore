@@ -24,6 +24,7 @@
 #Uzoq muddatli
 
 - [ ] Caching va logging qo'shish kerak
+- [ ] Dark mode (tun/kun)
 - [ ] Costumer role qo'shish kerak
 - [ ] Sotuvchi va Oluvchi o'rtasida aloqa uchun messaging
 - [ ] Kitoblarni baxolashni qo'shishimiz kerak yulduzchali
