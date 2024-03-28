@@ -7,7 +7,8 @@
 
 #Endi nima qilishimiz kerak.
 
-- [ ] Profile update qilishdagi exceptionlarni fix qilishimiz kerak
+- [ ] Profile update qilishdagi exceptionlarni fix qilishimiz 
+- [ ] Profile photo qo'shish kerak
 - [ ] Pagination qo'shish kerak
 - [ ] Global Exception Handling va Exception page
 - [ ] Book pdf file update qilishimiz kerak
@@ -25,4 +26,5 @@
 - [ ] Costumer role qo'shish kerak
 - [ ] Sotuvchi va Oluvchi o'rtasida aloqa uchun messaging
 - [ ] Kitoblarni baxolashni qo'shishimiz kerak yulduzchali
+- [ ] Recomendation qo'shishimiz kerak
 - [ ] ...
