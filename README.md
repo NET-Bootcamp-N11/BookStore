@@ -27,5 +27,6 @@
 - [ ] Costumer role qo'shish kerak
 - [ ] Sotuvchi va Oluvchi o'rtasida aloqa uchun messaging
 - [ ] Kitoblarni baxolashni qo'shishimiz kerak yulduzchali
+- [ ] Kitoblarni yoqtirish (like bosing)
 - [ ] Recomendation qo'shishimiz kerak
 - [ ] ...
