@@ -2,7 +2,7 @@
 @model BooksMoreInfoViewModel
 
 <div class="container mt-5">
-    <div class="row">
+    <div class="row mb-2">
         <div class="col-md-8">
             <h1>@Model.Book.Title</h1>
             <p class="description">@Model.Book.Description</p>
@@ -28,7 +28,6 @@
         </div>
     </div>
 
-    <h1>PDF Example by Object Tag</h1>
     @{
         string url = "https://" + Model.Host + "/" + Model.Book.PDFFilePath;
     }
