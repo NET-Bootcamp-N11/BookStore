@@ -60,8 +60,8 @@ namespace BookStore.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -193,8 +193,10 @@ namespace BookStore.Infrastructure.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Title = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
+                    Title = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "character varying(280)", maxLength: 280, nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    PDFFilePath = table.Column<string>(type: "text", nullable: false),
                     AuthorId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -240,7 +242,8 @@ namespace BookStore.Infrastructure.Migrations
                     { 1, "Zo'r inson", "O'tkir Hoshimov" },
                     { 2, "Zo'r inson", "Abdulla Qodiriy" },
                     { 3, "Zo'r inson", "Xudoyberdi To'xtaboyev" },
-                    { 4, "Zo'r inson", "Asqad Maxtor" }
+                    { 4, "Zo'r inson", "Asqad Maxtor" },
+                    { 5, "Zo'r inson", "Erkin Vohidov" }
                 });
 
             migrationBuilder.InsertData(
@@ -249,21 +252,13 @@ namespace BookStore.Infrastructure.Migrations
                 values: new object[,]
                 {
                     { 1, "Tarixiy" },
-                    { 2, "Romantic" },
-                    { 3, "Melodrama" },
-                    { 4, "Fantastic" }
+                    { 2, "Fantastic" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Books",
-                columns: new[] { "Id", "AuthorId", "Description", "Title" },
-                values: new object[,]
-                {
-                    { 1L, 1, "Zo'r kitob", "Dunyoning ishlari" },
-                    { 2L, 2, "Zo'r kitob", "O'tgan kunlar" },
-                    { 3L, 3, "Zo'r kitob", "Besh bolali yigitcha" },
-                    { 4L, 4, "Zo'r kitob", "Chinor" }
-                });
+                columns: new[] { "Id", "AuthorId", "Description", "PDFFilePath", "Price", "Title" },
+                values: new object[] { 1L, 5, "Zo'r kitob", "Books/Erkin Vohidov Mening Yulduzim.pdf", 20000m, "Mening Yulduzlarim" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

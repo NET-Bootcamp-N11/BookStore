@@ -182,6 +182,12 @@ namespace BookStore.Infrastructure.Migrations
                             Id = 4,
                             Description = "Zo'r inson",
                             Name = "Asqad Maxtor"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Zo'r inson",
+                            Name = "Erkin Vohidov"
                         });
                 });
 
@@ -201,6 +207,13 @@ namespace BookStore.Infrastructure.Migrations
                         .HasMaxLength(280)
                         .HasColumnType("character varying(280)");
 
+                    b.Property<string>("PDFFilePath")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -216,30 +229,11 @@ namespace BookStore.Infrastructure.Migrations
                         new
                         {
                             Id = 1L,
-                            AuthorId = 1,
+                            AuthorId = 5,
                             Description = "Zo'r kitob",
-                            Title = "Dunyoning ishlari"
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            AuthorId = 2,
-                            Description = "Zo'r kitob",
-                            Title = "O'tgan kunlar"
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            AuthorId = 3,
-                            Description = "Zo'r kitob",
-                            Title = "Besh bolali yigitcha"
-                        },
-                        new
-                        {
-                            Id = 4L,
-                            AuthorId = 4,
-                            Description = "Zo'r kitob",
-                            Title = "Chinor"
+                            PDFFilePath = "Books/Erkin Vohidov Mening Yulduzim.pdf",
+                            Price = 20000m,
+                            Title = "Mening Yulduzlarim"
                         });
                 });
 

@@ -1,17 +1,18 @@
 ﻿@using BookStore.Domain.Entities
-@model Book
+@model BooksMoreInfoViewModel
 
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-8">
-            <h1>@Model.Title</h1>
-            <p class="description">@Model.Description</p>
-            <p><strong>Author:</strong> @Model.Author.Name</p>
+            <h1>@Model.Book.Title</h1>
+            <p class="description">@Model.Book.Description</p>
+            <p><strong>Price:</strong> @Model.Book.Price</p>
+            <p><strong>Author:</strong> @Model.Book.Author.Name</p>
             <p>
                 @{
                     <strong>Genres:</strong>
-                    if(Model.Genres.Count != 0)
-                    {@foreach (var genre in Model.Genres)
+                    if(Model.Book.Genres.Count != 0)
+                    {@foreach (var genre in Model.Book.Genres)
                         {
                             <span class="badge bg-primary">@genre.Name</span>
                         }
@@ -26,6 +27,15 @@
             <img src="https://via.placeholder.com/200" alt="Book Cover" class="img-fluid rounded">
         </div>
     </div>
+
+    <h1>PDF Example by Object Tag</h1>
+    @{
+        string url = "https://" + Model.Host + "/" + Model.Book.PDFFilePath;
+    }
+    <object data="@url" type="application/pdf" width="100%" height="600px">
+        <p>Unable to display PDF file. <a href="@url">Download</a> instead.</p>
+        <a target="_blank" href="http://get.adobe.com/reader/">Adobe PDF Reader</a> to view the file.
+    </object>
 </div>
 
 <script>
