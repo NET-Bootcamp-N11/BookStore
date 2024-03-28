@@ -1,41 +1,53 @@
 ﻿@using BookStore.Domain.Entities.Auth
 @model User
 
-
 @{
     ViewData["Title"] = "Profile";
 }
 
 <h1>Welcome to your Profile</h1>
 
-    <p>Here you can manage your profile details:</p>
-
-    <!--  profile details -->
-    <div>
+<div>
     <h2>User Information</h2>
     <p><strong>UserName:</strong> @User.Identity.Name</p>
     <p><strong>Email:</strong> @Model.Email</p>
+    <p><strong>Full Name:</strong> @Model.FullName</p>
     <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
-    </div>
 
-    <!-- Form to update profile -->
-<form asp-controller="Auth" asp-action="Update" method="post">
-    <div class="mb-3">
-        <label asp-for="FullName" class="form-label">Full Name</label>
-        <input asp-for="FullName" type="text" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label">Email</label>
-        <input asp-for="Email" type="email" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label asp-for="UserName" class="form-label">Username</label>
-        <input asp-for="UserName" type="email" class="form-control" readonly>
-    </div>
-    <div class="mb-3">
-        <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
-        <input asp-for="PhoneNumber" type="text" class="form-control">
-    </div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Update
+    </button>
 
-    <button type="submit" class="btn btn-primary">Update Profile</button>
-</form>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">@User.Identity.Name's personal information</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form asp-controller="Auth" asp-action="Update" method="post">
+                        <div class="mb-3">
+                            <label asp-for="FullName" class="form-label">Full Name</label>
+                            <input asp-for="FullName" type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Email</label>
+                            <input asp-for="Email" type="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="UserName" class="form-label">Username</label>
+                            <input asp-for="UserName" type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                            <input asp-for="PhoneNumber" type="text" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary float-end">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
