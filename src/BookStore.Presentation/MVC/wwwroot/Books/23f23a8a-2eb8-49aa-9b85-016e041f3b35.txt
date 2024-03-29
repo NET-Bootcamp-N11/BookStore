@@ -1,0 +1,134 @@
+=> 9 => bular ERP bo'yicha tartib raqami o'quvchilarniki
+
+
+
+https://www.figma.com/file/rVwDjyJWOOx5B7xUA6HgO4/Untitled?type=design&mode=design
+
+
+=> 16
+
+https://www.figma.com/file/NGqRr5lXqnoAa41eTY4RSC/Untitled?type=design&mode=design
+
+=> 3
+
+https://www.figma.com/file/znXa9LAwdtWaMtRJb7mS5G/Untitled?type=design&mode=design
+
+
+
+=> 20
+
+https://www.figma.com/file/ph5HelCiamEC5EY5FXMmUk/Shopping-Website-(Community)-(Copy)?type=design&node-id=2-643&mode=design
+
+
+=> 6
+
+https://www.figma.com/file/WLwK8WdYXBlmdD8gLJk8zR/Templates-%2324.-More-on-d-e-n.info-(Copy)?type=design&node-id=0-1&mode=design
+
+
+=> 11
+
+https://www.figma.com/file/mCVloM8iOCREzB85LbsfTD/Templates-%2330.-More-on-d-e-n.info-(Copy)?type=design&node-id=0-1&mode=design
+
+
+=> 2
+
+https://www.figma.com/file/RI1sHoQ1o1EYX7i8ZkM8O8/Templates-%2329.-More-on-d-e-n.info-(Copy)?type=design&mode=design
+
+
+=> 17
+
+https://www.figma.com/file/3Fnfv5nxUTsmNhoy5Ov2PV/Templates-%2323.-More-on-d-e-n.info-(Copy)?type=design&mode=design
+
+
+=> 10
+
+https://www.figma.com/file/Xe85Ez9CuLBSJjUiWpXbOC/Untitled?type=design&mode=design
+
+
+=> 5
+
+https://www.figma.com/file/m2H6pwx2c6dT3UBO8VDDIY/Furniture?type=design&node-id=0-1&mode=design
+
+
+=> 12
+
+https://www.figma.com/file/V9IDUVLru3fESGoHiDaWIj/Untitled?type=design&mode=design
+
+=> 14
+
+https://www.figma.com/file/1PgbKqg3EU1gok4HqWCgnv/NFT?type=design&mode=design
+
+=> 21
+
+https://www.figma.com/file/B9pZeOYDa0QijRi6ygT22K/Mailchimp?type=design&mode=design
+
+
+=> 15
+
+https://www.figma.com/file/yv6kkXIzPuWwmKn0dkhB1p/pai?type=design&node-id=0-1&mode=design
+
+
+=> 18
+
+https://www.figma.com/file/vLVvxqbxPjhbqJ1D6UMGSE/googlestore?type=design&node-id=1-1712&mode=design
+
+
+=> 23
+
+https://www.figma.com/file/oVxRcV8M2sLcNqd5epk16k/ojjo-%2B?type=design&node-id=0-1&mode=design
+
+
+
+=> 7
+
+https://www.figma.com/file/HbQE7KDbfSfqOEowcKz5O1/Untitled?type=design&mode=design
+
+
+=> 8
+
+https://www.figma.com/file/lmEJR4mm1zXFD4hG994w4B/Untitled?type=design&node-id=0-1&mode=design
+
+
+=> 19
+
+https://www.figma.com/file/0oFUaslgWdEDHhDCjIW99z/zoe?type=design&node-id=0-1&mode=design
+
+=> 22
+
+https://www.figma.com/file/Gjy5qkf7OSuHYoQhXZjLsz/Camera-Math-%2B?type=design&node-id=0-1&mode=design
+
+
+=> 1
+
+https://www.figma.com/file/aPiFvooq8hQ6gXf15tOFBS/Find-out-talented-freelancer?type=design&node-id=0-1&mode=design
+'
+=> 13
+
+https://www.figma.com/file/murC8L0nhTTqgb7XjkTJJm/CrypAppy?type=design&node-id=0-1&mode=design
+
+=> 4
+
+https://www.figma.com/file/CDiHtyHEBuwtt75K9McHnM/Landguru-%2B?type=design&node-id=1-2&mode=design
+
+
+Requirements: Responsive qilish shartmas, 
+IFrameni ichiga solib qo'yilmasin, 
+screen shot qilib shundoq rasm yuklab qo'yilmasin
+HTML, CSS, JavaScript, Bootstrap, Tailwind ... shulardan foydalanib qilsangiz bo'laveradi. 
+
+
+Baholash tartibiga: umumiy 40 ball => 100% lik uchun
+
+
+
+
+
+
+
+
+
+
+
+
+
+
