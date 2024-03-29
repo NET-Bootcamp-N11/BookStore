@@ -37,7 +37,7 @@ namespace BookStore.Application.useCases.Authors.Commands
                 await Console.Out.WriteLineAsync($"Error: {ex.Message}");
             }
             var author = command.Adapt<Author>();
-            author.PhotoPath = filePath;
+            author.PhotoPath = "Authors/" + fileName;
             var res = await _context.Authors.AddAsync(author);
             await _context.SaveChangesAsync();
 
