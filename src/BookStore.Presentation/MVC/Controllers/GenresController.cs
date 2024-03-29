@@ -1,9 +1,12 @@
-﻿using BookStore.Application.useCases.Genres.Commands;
+﻿using BookStore.Application.useCases.Books.Queries;
+using BookStore.Application.useCases.Extensions.PaginationExtensions;
+using BookStore.Application.useCases.Genres.Commands;
 using BookStore.Application.useCases.Genres.Queries;
 using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MVC.Models;
 
 namespace MVC.Controllers
 {
@@ -11,17 +14,23 @@ namespace MVC.Controllers
     public class GenresController : Controller
     {
         private readonly IMediator _mediator;
+        private const int pageSize = 10;
 
         public GenresController(IMediator mediator)
             => _mediator = mediator;
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            GetAllGenreQuery? query = new GetAllGenreQuery();
-            var genres = await _mediator.Send(query);
+            var query = new GetAllGenreQuery();
+            var allGenres = await _mediator.Send(query);
 
-            return View(genres);
+            var paginate = new PaginateObjects<Genre>(allGenres, page, pageSize);
+            var paginatedGenres = paginate.paginatedObjects;
+
+            var viewModel = new PaginationViewModel<Genre>(allGenres, paginatedGenres, page, pageSize);
+
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Create()
