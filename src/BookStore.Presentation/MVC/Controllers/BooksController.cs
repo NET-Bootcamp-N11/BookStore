@@ -1,6 +1,7 @@
 ﻿using BookStore.Application.useCases.Authors.Queries;
 using BookStore.Application.useCases.Books.Commands;
 using BookStore.Application.useCases.Books.Queries;
+using BookStore.Application.useCases.Extensions.PaginationExtensions;
 using BookStore.Application.useCases.Genres.Queries;
 using BookStore.Domain.Entities;
 using MediatR;
@@ -14,19 +15,24 @@ namespace MVC.Controllers
     public class BooksController : Controller
     {
         private readonly IMediator _mediator;
-
+        private const int pageSize = 10;
         public BooksController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            var getAllBooks = new GetAllBooksQuery();
-            List<Book> books = await _mediator.Send(getAllBooks);
+            var query = new GetAllBooksQuery();
+            var allBooks = await _mediator.Send(query);
 
-            return View(books);
+            var paginate = new PaginateObjects<Book>(allBooks, page, pageSize);
+            var paginatedBooks = paginate.paginatedObjects;
+
+            var viewModel = new PaginationViewModel<Book>(allBooks, paginatedBooks, page, pageSize);
+
+            return View(viewModel);
         }
 
         [AllowAnonymous]
@@ -114,7 +120,7 @@ namespace MVC.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Search(string text)
+        public async Task<IActionResult> Search(string text, int page = 1)
         {
             var getBookCommand = new SearchBookQuery()
             {
@@ -123,7 +129,12 @@ namespace MVC.Controllers
 
             var books = await _mediator.Send(getBookCommand);
 
-            return View("Index", books);
+            var paginate = new PaginateObjects<Book>(books, page, pageSize);
+            var paginatedBooks = paginate.paginatedObjects;
+
+            var viewModel = new PaginationViewModel<Book>(books, paginatedBooks, page, pageSize, getBookCommand.Text);
+
+            return View("Index", viewModel);
         }
     }
 }

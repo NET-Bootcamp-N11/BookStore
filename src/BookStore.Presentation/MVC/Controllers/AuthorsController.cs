@@ -1,5 +1,7 @@
 ﻿using BookStore.Application.useCases.Authors.Commands;
 using BookStore.Application.useCases.Authors.Queries;
+using BookStore.Application.useCases.Books.Queries;
+using BookStore.Application.useCases.Extensions.PaginationExtensions;
 using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -12,17 +14,23 @@ namespace MVC.Controllers
     public class AuthorsController : Controller
     {
         private readonly IMediator _mediator;
+        private const int pageSize = 10;
 
         public AuthorsController(IMediator mediator)
             => _mediator = mediator;
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
             var query = new GetAllAuthorsQuery();
-            var authors = await _mediator.Send(query);
+            var allAuthors = await _mediator.Send(query);
 
-            return View(authors);
+            var paginate = new PaginateObjects<Author>(allAuthors, page, pageSize);
+            var paginatedAuthors = paginate.paginatedObjects;
+
+            var viewModel = new PaginationViewModel<Author>(allAuthors, paginatedAuthors, page, pageSize);
+
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Create()
@@ -67,14 +75,20 @@ namespace MVC.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> SearchByName(string name)
+        public async Task<IActionResult> SearchByName(string name, int page = 1)
         {
             var getAuthorByNameCommand = new SearchAuthorQuery()
             {
                 Text = name
             };
             var res = await _mediator.Send(getAuthorByNameCommand);
-            return View("Index", res);
+
+            var paginate = new PaginateObjects<Author>(res, page, pageSize);
+            var paginatedAuthors = paginate.paginatedObjects;
+
+            var viewModel = new PaginationViewModel<Author>(res, paginatedAuthors, page, pageSize, getAuthorByNameCommand.Text);
+
+            return View("Index", viewModel);
         }
 
         public async Task<IActionResult> DeleteAuthor(int id)
