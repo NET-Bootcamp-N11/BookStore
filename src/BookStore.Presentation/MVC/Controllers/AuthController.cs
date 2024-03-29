@@ -108,24 +108,26 @@ namespace MVC.Controllers
         {
             var currentuser = await _userManager.GetUserAsync(User);
 
-            await _userManager.SetEmailAsync(currentuser, user.Email);
-            await _userManager.SetPhoneNumberAsync(currentuser, user.PhoneNumber);
+            var result = await _userManager.SetEmailAsync(currentuser, user.Email);
+            if (!result.Succeeded) throw new Exception("Something went wrong");
 
-            // Update FullName
+            result = await _userManager.SetPhoneNumberAsync(currentuser, user.PhoneNumber);
+            if (!result.Succeeded) throw new Exception("Something went wrong");
+
+            result = await _userManager.SetUserNameAsync(currentuser, user.UserName);
+            if (!result.Succeeded) throw new Exception("Something went wrong");
+
             currentuser.FullName = user.FullName;
 
-            var result = await _userManager.UpdateAsync(currentuser);
-
+            result = await _userManager.UpdateAsync(currentuser);
             if (result.Succeeded)
             {
+                await _signInManager.RefreshSignInAsync(currentuser);
                 return View("Profile", currentuser);
             }
             else
-            {
                 throw new Exception("Something went wrong");
-            }
         }
-
     }
 }
 
