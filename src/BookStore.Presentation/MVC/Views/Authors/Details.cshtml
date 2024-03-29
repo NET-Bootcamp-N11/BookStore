@@ -1,5 +1,5 @@
 ﻿@using BookStore.Domain.Entities
-@model Author
+@model AuthorDetailsViewModel
 
 <div class="row">
     <div class="col p-0">
@@ -8,13 +8,20 @@
         <h1>Id</h1>
         <h1>Name</h1>
         <h1>Description</h1>
+        <h1>Photo</h1>
     </div>
 
     <div class="col p-0">
         <h1><b>Values</b></h1>
         <hr />
-        <h1>@Model.Id</h1>
-        <h1>@Model.Name</h1>
-        <h1>@Model.Description</h1>
+        <h1>@Model.Author.Id</h1>
+        <h1>@Model.Author.Name</h1>
+        <h1>@Model.Author.Description</h1>
+
+        @{
+            string url = "https://" + Model.Host + Model.Author.PhotoPath;
+        }
+
+        <img src="@url" style="width:200px"/>
     </div>
 </div>

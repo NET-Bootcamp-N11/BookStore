@@ -8,7 +8,7 @@ namespace BookStore.Application.useCases.Authors.Commands
 {
     public class CreateAuthorCommandHandler : IRequestHandler<CreateAuthorCommand, Author>
     {
-        public IAppDbContext _context;
+        public readonly IAppDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         public CreateAuthorCommandHandler(IAppDbContext context, IWebHostEnvironment webHostEnvironment)
@@ -25,7 +25,7 @@ namespace BookStore.Application.useCases.Authors.Commands
             try
             {
                 fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                filePath = Path.Combine(_webHostEnvironment.WebRootPath, "Authors", fileName);
+                filePath = Path.Combine(_webHostEnvironment.WebRootPath, "AuthorsProfileImage", fileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
@@ -37,7 +37,7 @@ namespace BookStore.Application.useCases.Authors.Commands
                 await Console.Out.WriteLineAsync($"Error: {ex.Message}");
             }
             var author = command.Adapt<Author>();
-            author.PhotoPath = "Authors/" + fileName;
+            author.PhotoPath = "/AuthorsProfileImage/" + fileName;
             var res = await _context.Authors.AddAsync(author);
             await _context.SaveChangesAsync();
 

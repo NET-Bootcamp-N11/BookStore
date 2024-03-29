@@ -4,6 +4,7 @@ using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MVC.Models;
 
 namespace MVC.Controllers
 {
@@ -34,7 +35,13 @@ namespace MVC.Controllers
         {
             var author = await _mediator.Send(createAuthorCommand);
 
-            return View("Details", author);
+            var viewModel = new AuthorDetailsViewModel()
+            {
+                Author = author,
+                Host = HttpContext.Request.Host.ToString(),
+            };
+
+            return View("Details", viewModel);
         }
 
         public async Task<IActionResult> UpdateAsync(int id)
