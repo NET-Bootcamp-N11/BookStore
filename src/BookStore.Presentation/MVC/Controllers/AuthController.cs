@@ -57,7 +57,7 @@ namespace MVC.Controllers
             if (!result.Succeeded)
                 throw new Exception("There is an issue with signing in process");
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Books");
         }
 
         [HttpPost]
@@ -90,7 +90,7 @@ namespace MVC.Controllers
             if (!result.Succeeded)
                 throw new Exception("There is an issue with signing in process");
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Books");
         }
 
         [Authorize]
@@ -107,18 +107,26 @@ namespace MVC.Controllers
         public async Task<IActionResult> Update(User user)
         {
             var currentuser = await _userManager.GetUserAsync(User);
-            var emailChanging = await _userManager.SetEmailAsync(currentuser, "qales@gmail.com");
 
-            //if (string.IsNullOrEmpty(user.SecurityStamp))
-            //    user.SecurityStamp = Guid.NewGuid().ToString();
-            user.UserName = currentuser.UserName;
+            var result = await _userManager.SetEmailAsync(currentuser, user.Email);
+            if (!result.Succeeded) throw new Exception("Something went wrong");
 
-            //var identityResult = await _userManager.UpdateAsync(user);
+            result = await _userManager.SetPhoneNumberAsync(currentuser, user.PhoneNumber);
+            if (!result.Succeeded) throw new Exception("Something went wrong");
 
-            //if (!identityResult.Succeeded)
-            //    throw new Exception("Something went wrong");
+            result = await _userManager.SetUserNameAsync(currentuser, user.UserName);
+            if (!result.Succeeded) throw new Exception("Something went wrong");
 
-            return View("Profile", user);
+            currentuser.FullName = user.FullName;
+
+            result = await _userManager.UpdateAsync(currentuser);
+            if (result.Succeeded)
+            {
+                await _signInManager.RefreshSignInAsync(currentuser);
+                return View("Profile", currentuser);
+            }
+            else
+                throw new Exception("Something went wrong");
         }
     }
 }
