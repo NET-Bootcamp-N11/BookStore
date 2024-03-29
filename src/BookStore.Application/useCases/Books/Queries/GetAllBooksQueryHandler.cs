@@ -16,7 +16,18 @@ namespace BookStore.Application.useCases.Books.Queries
 
         public async Task<List<Book>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
         {
-            return await _appDbContext.Books.ToListAsync(cancellationToken);
+            if (request.Text is null)
+                return await _appDbContext.Books.ToListAsync(cancellationToken);
+            else
+            {
+                var lowerText = request.Text.ToLower();
+
+                return await _appDbContext.Books
+                       .Where(x => x.Title.ToLower().Contains(lowerText)
+                        || x.Description.ToLower().Contains(lowerText)
+                        || x.Author.Name.ToLower().Contains(lowerText))
+                    .ToListAsync(cancellationToken);
+            }
         }
     }
 }

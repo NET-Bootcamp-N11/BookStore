@@ -3,6 +3,7 @@ using BookStore.Domain.Entities;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.useCases.Books.Commands
 {
@@ -45,8 +46,10 @@ namespace BookStore.Application.useCases.Books.Commands
 
             var res = await _appDbContext.Books.AddAsync(book);
             await _appDbContext.SaveChangesAsync();
+            var storageBook = res.Entity;
+            storageBook.Author = await _appDbContext.Authors.FirstOrDefaultAsync(x => x.Id == request.AuthorId);
 
-            return res.Entity;
+            return storageBook;
         }
     }
 }

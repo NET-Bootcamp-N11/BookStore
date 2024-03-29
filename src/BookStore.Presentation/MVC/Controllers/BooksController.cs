@@ -22,15 +22,18 @@ namespace MVC.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index(string text, int page = 1)
         {
-            var query = new GetAllBooksQuery();
+            var query = new GetAllBooksQuery()
+            {
+                Text = text
+            };
             var allBooks = await _mediator.Send(query);
 
             var paginate = new PaginateObjects<Book>(allBooks, page, pageSize);
             var paginatedBooks = paginate.paginatedObjects;
 
-            var viewModel = new PaginationViewModel<Book>(allBooks, paginatedBooks, page, pageSize);
+            var viewModel = new PaginationViewModel<Book>(allBooks, paginatedBooks, page, pageSize, text);
 
             return View(viewModel);
         }
@@ -68,7 +71,15 @@ namespace MVC.Controllers
             createBookCommand.Genres = booksCreateViewModel.ids;
             var book = await _mediator.Send(createBookCommand);
 
-            return View("Details", book);
+            //HttpContext.Request.Protocol
+
+            var viewModel = new BooksMoreInfoViewModel()
+            {
+                Book = book,
+                Host = HttpContext.Request.Host.ToString(),
+            };
+
+            return View("MoreInfo", viewModel);
         }
 
         public async Task<IActionResult> UpdateAsync(int id)
@@ -117,24 +128,6 @@ namespace MVC.Controllers
             var book = await _mediator.Send(deleteBookCommand);
 
             return RedirectToAction(actionName: nameof(Index));
-        }
-
-        [AllowAnonymous]
-        public async Task<IActionResult> Search(string text, int page = 1)
-        {
-            var getBookCommand = new SearchBookQuery()
-            {
-                Text = text
-            };
-
-            var books = await _mediator.Send(getBookCommand);
-
-            var paginate = new PaginateObjects<Book>(books, page, pageSize);
-            var paginatedBooks = paginate.paginatedObjects;
-
-            var viewModel = new PaginationViewModel<Book>(books, paginatedBooks, page, pageSize, getBookCommand.Text);
-
-            return View("Index", viewModel);
         }
     }
 }
