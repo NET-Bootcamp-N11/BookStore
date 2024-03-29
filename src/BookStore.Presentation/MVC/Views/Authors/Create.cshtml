@@ -1,7 +1,7 @@
 ﻿@using BookStore.Application.useCases.Authors.Commands
 @model CreateAuthorCommand
 
-<form asp-controller="Authors" asp-action="Create" method="post">
+<form asp-controller="Authors" asp-action="Create" method="post" enctype="multipart/form-data">
     <div class="mb-3">
         <label for="Name" class="form-label">Author FullName</label>
         <input asp-for="Name" type="text" class="form-control" id="Name" aria-describedby="nameHelp" required>
@@ -9,6 +9,10 @@
     <div class="mb-3">
         <label for="Description" class="form-label">Description</label>
         <input asp-for="Description" type="text" class="form-control" id="Description" required aria-describedby="descriptionHelp">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Photo" class="form-label">Photo</label>
+        <input asp-for="Photo" class="form-control" type="file" id="Photo" accept="image/*" required>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

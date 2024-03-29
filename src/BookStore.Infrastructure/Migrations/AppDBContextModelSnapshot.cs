@@ -154,41 +154,13 @@ namespace BookStore.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
+                    b.Property<string>("PhotoPath")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.ToTable("Authors");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Zo'r inson",
-                            Name = "O'tkir Hoshimov"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Zo'r inson",
-                            Name = "Abdulla Qodiriy"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Zo'r inson",
-                            Name = "Xudoyberdi To'xtaboyev"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Zo'r inson",
-                            Name = "Asqad Maxtor"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "Zo'r inson",
-                            Name = "Erkin Vohidov"
-                        });
                 });
 
             modelBuilder.Entity("BookStore.Domain.Entities.Book", b =>

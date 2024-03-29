@@ -18,7 +18,7 @@ namespace BookStore.Infrastructure.Configurations
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder
+           /* builder
                 .HasData(
                     new List<Author>
                     {
@@ -28,7 +28,7 @@ namespace BookStore.Infrastructure.Configurations
                         new Author{ Id = 4, Name = "Asqad Maxtor", Description = "Zo'r inson"},
                         new Author{ Id = 5, Name = "Erkin Vohidov", Description = "Zo'r inson"},
                     }
-                );
+                );*/
         }
     }
 }
