@@ -8,7 +8,7 @@ namespace BookStore.Domain.Entities
         public string Name { get; set; }
         [MinLength(20)]
         public string Description { get; set; }
-
+        public string PhotoPath { get; set; }
         public virtual List<Book> Books { get; set; }
     }
 }
