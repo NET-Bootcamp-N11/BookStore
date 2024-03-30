@@ -1,6 +1,7 @@
 ﻿using BookStore.Application.Abstractions;
 using BookStore.Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.useCases.Authors.Queries
 {
@@ -13,7 +14,17 @@ namespace BookStore.Application.useCases.Authors.Queries
 
         public async Task<List<Author>> Handle(GetAllAuthorsQuery request, CancellationToken cancellationToken)
         {
-            return _appDbContext.Authors.ToList();
+            if (request.Text is null)
+                return await _appDbContext.Authors.ToListAsync(cancellationToken);
+            else
+            {
+                var lowerText = request.Text.ToLower();
+
+                return await _appDbContext.Authors
+                    .Where(x => x.Name.ToLower().Contains(lowerText)
+                    || x.Description.ToLower().Contains(lowerText))
+                    .ToListAsync(cancellationToken);
+            }
         }
     }
 }

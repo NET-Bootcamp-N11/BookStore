@@ -20,15 +20,18 @@ namespace MVC.Controllers
             => _mediator = mediator;
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index(string text, int page = 1)
         {
-            var query = new GetAllAuthorsQuery();
+            var query = new GetAllAuthorsQuery()
+            {
+                Text = text,
+            };
             var allAuthors = await _mediator.Send(query);
 
             var paginate = new PaginateObjects<Author>(allAuthors, page, pageSize);
             var paginatedAuthors = paginate.paginatedObjects;
 
-            var viewModel = new PaginationViewModel<Author>(allAuthors, paginatedAuthors, page, pageSize);
+            var viewModel = new PaginationViewModel<Author>(allAuthors, paginatedAuthors, page, pageSize, text);
 
             return View(viewModel);
         }
@@ -72,23 +75,6 @@ namespace MVC.Controllers
             var updatedAuthor = await _mediator.Send(updateAuthorCommand);
 
             return View("Details", updatedAuthor);
-        }
-
-        [AllowAnonymous]
-        public async Task<IActionResult> SearchByName(string name, int page = 1)
-        {
-            var getAuthorByNameCommand = new SearchAuthorQuery()
-            {
-                Text = name
-            };
-            var res = await _mediator.Send(getAuthorByNameCommand);
-
-            var paginate = new PaginateObjects<Author>(res, page, pageSize);
-            var paginatedAuthors = paginate.paginatedObjects;
-
-            var viewModel = new PaginationViewModel<Author>(res, paginatedAuthors, page, pageSize, getAuthorByNameCommand.Text);
-
-            return View("Index", viewModel);
         }
 
         public async Task<IActionResult> DeleteAuthor(int id)
