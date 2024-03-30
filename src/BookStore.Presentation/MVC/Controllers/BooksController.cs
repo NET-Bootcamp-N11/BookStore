@@ -129,5 +129,25 @@ namespace MVC.Controllers
 
             return RedirectToAction(actionName: nameof(Index));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteFile(int id)
+        {
+            try
+            {
+                var book = await _mediator.Send(new GetBookByIdQuery() { Id = id });
+                if (book != null && !string.IsNullOrEmpty(book.PDFFilePath))
+                {
+                    book.PDFFilePath = null;
+                }
+                return RedirectToAction("MoreInfo", new { id });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to delete the file.");
+                ModelState.AddModelError("", "Failed to delete  file.");
+                return RedirectToAction("MoreInfo", new { id });
+            }
+        }
     }
 }
