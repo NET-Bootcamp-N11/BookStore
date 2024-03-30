@@ -18,13 +18,7 @@ namespace BookStore.Infrastructure.Configurations
                 .HasMaxLength(280)
                 .IsRequired();
 
-            builder
-                 .HasData(
-                     new List<Book>
-                     {
-                        new Book{ Id = 1, AuthorId = 5, Title = "Mening Yulduzlarim", Description = "Zo'r kitob", PDFFilePath = "Books/Erkin Vohidov Mening Yulduzim.pdf", Price = 20000},
-                     }
-                 );
+            
         }
     }
 }
