@@ -1,5 +1,6 @@
 ﻿using BookStore.Application.Abstractions;
 using BookStore.Domain.Entities;
+using BookStore.Domain.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,15 +18,14 @@ namespace BookStore.Application.useCases.Books.Commands
         {
             var user = await _context.Books.FirstOrDefaultAsync(x => x.Id == request.Id);
 
-            if (user is not null)
-            {
-                var entry = _context.Books.Remove(user);
+            if (user is null)
+                throw new NotFoundException("User not found");
 
-                await _context.SaveChangesAsync();
+            var entry = _context.Books.Remove(user);
 
-                return entry.Entity;
-            }
-            return null;
+            await _context.SaveChangesAsync();
+
+            return entry.Entity;
         }
     }
 }
