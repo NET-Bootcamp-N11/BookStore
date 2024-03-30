@@ -38,11 +38,9 @@
 <div class="row row-cols-1 row-cols-md-3 g-4">
     @foreach (var book in Model.Objects)
     {
-        <div class="col" style="max-width: 300px;">
-            <!-- Adjust max-width as needed -->
-            <div class="card" style="height: 300px;">
-                <!-- Adjust height as needed -->
-                <img src="@book.PhotoPath" class="card-img-top" alt="Book Image" style="max-height: 100px; object-fit: contain;">
+        <div class="col" style="max-width: 300px; padding-top:20px;">
+            <div class="card" style="height: 300px; ">
+                <img src="@book.PhotoPath" class="card-img-left" alt="Book Image" style="max-height: 150px; object-fit: contain;">
                 <div class="card-body">
                     <h5 class="card-title"><a href="@Url.Action("MoreInfo", new { id = book.Id })">@book.Title</a></h5>
                     <p class="card-text">Author: <a href="@Url.Action("AuthorDetails", "Authors", new { id = book.Author.Id })">@book.Author.Name</a></p>
