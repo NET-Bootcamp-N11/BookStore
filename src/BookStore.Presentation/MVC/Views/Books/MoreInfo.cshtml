@@ -35,6 +35,15 @@
         <p>Unable to display PDF file. <a href="@url">Download</a> instead.</p>
         <a target="_blank" href="http://get.adobe.com/reader/">Adobe PDF Reader</a> to view the file.
     </object>
+
+<!-- Deletefile button -->
+    @if (!string.IsNullOrEmpty(Model.Book.PDFFilePath))
+    {
+        <form method="post" asp-controller="Books" asp-action="DeleteFile" class="mt-3">
+            <input type="hidden" name="id" value="@Model.Book.Id" />
+            <button type="submit" class="btn btn-danger">Delete PDF File</button>
+        </form>
+    }
 </div>
 
 <script>
