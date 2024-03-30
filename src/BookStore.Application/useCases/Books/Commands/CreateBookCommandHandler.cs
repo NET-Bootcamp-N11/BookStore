@@ -50,7 +50,7 @@ namespace BookStore.Application.useCases.Books.Commands
             }
             catch (Exception ex)
             {
-                await Console.Out.WriteLineAsync($"Error: {ex.Message}");
+                throw new Exception();
             }
 
             var book = request.Adapt<Book>();
