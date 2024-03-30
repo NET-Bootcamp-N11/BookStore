@@ -23,6 +23,11 @@
         <input asp-for="@Model.CreateBookCommand.PDFFile" class="form-control" type="file" id="formFileMultiple" multiple>
     </div>
 
+    <div class="mb-3">
+        <label asp-for="@Model.CreateBookCommand.Photo" class="form-label">Photo</label>
+        <input asp-for="@Model.CreateBookCommand.Photo" class="form-control" type="file" id="Photo" accept="image/*" required>
+    </div>
+
     <div>
         <select required="required" asp-for="@Model.CreateBookCommand.AuthorId" class="form-select" aria-label="Default select example">
             <option selected value="" hidden>Open this select menu</option>
@@ -44,6 +49,8 @@
             }
         </tr>
     </table>
+
+
 
     <button class="btn btn-primary mt-1" asp-controller="Books" asp-action="Create" formmethod="post">Save</button>
 </form>

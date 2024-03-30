@@ -8,6 +8,7 @@ namespace BookStore.Application.useCases.Books.Commands
     {
         public string Title { get; set; }
         public string Description { get; set; }
+        public IFormFile Photo { get; set; }
         public decimal Price { get; set; }
         public IFormFile PDFFile { get; set; }
         public int AuthorId { get; set; }

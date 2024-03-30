@@ -33,42 +33,34 @@
         <i class='bx bx-plus'></i>
     </a>
 }
-
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">T/R</th>
-            <th scope="col">Title</th>
-            <th scope="col">Author</th>
-
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody class="table-group-divider">
-        @for (int i = 0, rowNumber = Model.StartIndex + 1; i < Model.Objects.Count(); i++, rowNumber++)
-        {
-            <tr>
-                <th scope="row">@rowNumber</th>
-                <td>@Model.Objects[i].Title</td>
-                <td>@Model.Objects[i].Author.Name</td>
-                <td>
-                    <a asp-controller="Books" asp-action="MoreInfo" asp-route-id="@Model.Objects[i].Id" class="btn btn-success">
-                        <i class='bx bx-show'></i>
-                    </a>
+<br />
+<hr />
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var book in Model.Objects)
+    {
+        <div class="col" style="max-width: 300px;">
+            <!-- Adjust max-width as needed -->
+            <div class="card" style="height: 300px;">
+                <!-- Adjust height as needed -->
+                <img src="@book.PhotoPath" class="card-img-top" alt="Book Image" style="max-height: 100px; object-fit: contain;">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="@Url.Action("MoreInfo", new { id = book.Id })">@book.Title</a></h5>
+                    <p class="card-text">Author: <a href="@Url.Action("AuthorDetails", "Authors", new { id = book.Author.Id })">@book.Author.Name</a></p>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a asp-controller="Books" asp-action="Delete" asp-route-id="@Model.Objects[i].Id" class="btn btn-danger">
-                            <i class='bx bxs-trash'></i>
-                        </a>
-                        <a asp-controller="Books" asp-action="Update" asp-route-id="@Model.Objects[i].Id" class="btn btn-secondary">
-                            <i class='bx bx-edit-alt'></i>
-                        </a>
-                    }   
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                        <a href="@Url.Action("Delete", new { id = book.Id })" class="btn btn-danger">Delete</a>
+                        <a href="@Url.Action("Update", new { id = book.Id })" class="btn btn-secondary">Update</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+
 
 
 
