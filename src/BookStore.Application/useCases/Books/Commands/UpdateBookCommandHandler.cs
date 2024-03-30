@@ -1,5 +1,6 @@
 ﻿using BookStore.Application.Abstractions;
 using BookStore.Domain.Entities;
+using BookStore.Domain.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,7 @@ namespace BookStore.Application.useCases.Books.Commands
             var book = await _appDbContext.Books.FirstOrDefaultAsync(x => x.Id == updateBookCommand.Id);
 
             if (book == null)
-                throw new Exception("Book not found");
+                throw new NotFoundException("Book not found");
 
             var genres = _appDbContext.Genres.Where(x => updateBookCommand.Genres.Contains(x.Id)).ToList();
 

@@ -1,10 +1,10 @@
 ﻿using BookStore.Application.Abstractions;
 using BookStore.Domain.Entities;
+using BookStore.Domain.Exceptions;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace BookStore.Application.useCases.Books.Commands
 {
@@ -23,8 +23,15 @@ namespace BookStore.Application.useCases.Books.Commands
             var genres = _appDbContext.Genres.Where(x => request.Genres.Contains(x.Id)).ToList();
 
             var file = request.PDFFile;
+
+            if (".pdf" != System.IO.Path.GetExtension(file.FileName))
+            {
+                throw new ValidationException("Faqat .pdf bo'loladi");
+            }
+
             string filePath = "";
             string fileName = "";
+
             var PhotoFile = request.Photo;
             string PhotofilePath = "";
             string PhotofileName = "";

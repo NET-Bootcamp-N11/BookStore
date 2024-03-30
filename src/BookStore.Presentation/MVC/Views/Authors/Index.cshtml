@@ -1,7 +1,7 @@
 @using BookStore.Domain.Entities
 @model PaginationViewModel<Author>
 
-<form id="searchForm" class="d-flex gap-2 mb-5" asp-controller="Authors" asp-action="Index" method="get">
+<form id="searchForm" class="d-flex gap-2 mb-1" asp-controller="Authors" asp-action="Index" method="get">
     <input type="search" id="searchInput" class="form-control" aria-describedby="search" name="text" placeholder="Enter book name...">
 </form>
 
@@ -32,10 +32,22 @@
     </a>
 }
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
+<hr />
+
+<div class="mt-3 row row-cols-1 row-cols-md-3 g-4 justify-content-center">
     @foreach (var author in Model.Objects)
     {
-        <div class="col">
+        <div class="card" style="width: 18rem;">
+            <img src="@author.PhotoPath" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@author.Name</h5>
+            </div>
+            <div class="card-body">
+                <a href="#" class="btn btn-warning">Update</a>
+                <a href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+       @*  <div class="col">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">@author.Name</h5>
@@ -55,7 +67,7 @@
                     }
                 </div>
             </div>
-        </div>
+        </div> *@
     }
 </div>
 
