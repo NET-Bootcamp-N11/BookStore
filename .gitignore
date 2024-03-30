@@ -365,3 +365,6 @@ FodyWeavers.xsd
 /src/BookStore.Presentation/MVC/BookStore.DB-shm
 /src/BookStore.Presentation/MVC/BookStore.DB-wal
 /src/BookStore.Presentation/MVC/BookStoreMe.DB
+/src/BookStore.Presentation/MVC/wwwroot/AuthorsProfileImage
+/src/BookStore.Presentation/MVC/wwwroot/BookPhoto
+/src/BookStore.Presentation/MVC/wwwroot/Books
