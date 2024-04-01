@@ -33,10 +33,51 @@ namespace MVC.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Register()
-        {
-            return View();
-        }
+        // Changes here. Yana PR qibo'madi to'ridan to'ri:
+
+        // public async Task<IActionResult> Register(RegisterDTO registerDTO)
+        // {
+        //     var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        //     var confirmationLink = Url.Action("VerifyEmail", "Auth", new { userId = user.Id, token }, Request.Scheme);
+        //     
+        //     return RedirectToAction("EmailVerificationInstructions");
+        // }
+        //
+        // public async Task<IActionResult> VerifyEmail(string userId, string token)
+        // {
+        //     var user = await _userManager.FindByIdAsync(userId);
+        //     if (user == null)
+        //     {
+        //         return RedirectToAction("EmailVerificationFailed");
+        //     }
+        //
+        //     var result = await _userManager.ConfirmEmailAsync(user, token);
+        //     if (!result.Succeeded)
+        //     {
+        //         return RedirectToAction("EmailVerificationFailed");
+        //     }
+        //     return RedirectToAction("EmailVerified");
+        // }
+
+        // EmailVerificationInstructions.cshtml
+        @* <h1>Email Verification</h1> *@
+        @* <p>Thank you for registering! Please check your email for verification instructions.</p> *@
+        @* <p>If you haven't received the email, you can <a href="@Url.Action("ResendVerificationEmail", "Auth")">resend it</a>.</p> *@
+
+        // EmailVerifiedConfirmation.cshtml
+        @* <h1>Email Verified</h1> *@
+        @* <p>Your email address has been successfully verified. You can now access all features of the site.</p> *@
+
+
+
+        // Profile.cshtml:
+                        
+        @* @if (!Model.IsEmailVerified) *@
+        @* { *@
+        @*     <div class="alert alert-warning" role="alert"> *@
+        @*         Your email address is not verified. Please verify your email to access all features. *@
+        @*     </div> *@
+        @* } *@
 
         public async Task<IActionResult> LogOut()
         {
