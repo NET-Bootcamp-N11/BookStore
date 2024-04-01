@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MVC.Models.Auth;
+using System.ComponentModel;
+using System.Security.Policy;
+using System.Text.RegularExpressions;
 
 namespace MVC.Controllers
 {
@@ -64,9 +67,20 @@ namespace MVC.Controllers
         public async Task<IActionResult> Register(RegisterDTO registerDTO)
         {
             var user = await _userManager.FindByEmailAsync(registerDTO.Email);
+            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
 
             if (registerDTO.Password != registerDTO.ConfirmPassword)
                 throw new Exception("Passwords do not match!");
+
+            if (!Regex.IsMatch(registerDTO.Password, pattern))
+            {
+                throw new Exception("Oops! Your password doesn't meet the criteria. Please try again.");
+                //Contains at least one lowercase letter.
+                //Contains at least one uppercase letter.
+                //Contains at least one digit.
+                //Contains at least one special character from the set @$!%*?&.
+                //Has a minimum length of 8 characters.
+            }
 
             if (user is not null)
                 throw new Exception("You are already registred");
