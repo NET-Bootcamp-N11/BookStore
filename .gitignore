@@ -368,3 +368,4 @@ FodyWeavers.xsd
 /src/BookStore.Presentation/MVC/wwwroot/AuthorsProfileImage
 /src/BookStore.Presentation/MVC/wwwroot/BookPhoto
 /src/BookStore.Presentation/MVC/wwwroot/Books
+/src/BookStore.Presentation/MVC/wwwroot/UserProfileImage
