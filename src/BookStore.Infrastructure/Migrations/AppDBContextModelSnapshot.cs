@@ -265,12 +265,12 @@ namespace BookStore.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Tarixiy"
+                            Name = "Diniy"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Fantastic"
+                            Name = "Badiiy"
                         });
                 });
 
