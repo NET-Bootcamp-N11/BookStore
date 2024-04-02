@@ -3,6 +3,7 @@ using System;
 using BookStore.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BookStore.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240402173730_User-Super-Admin-Seeding-4")]
+    partial class UserSuperAdminSeeding4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,7 +72,7 @@ namespace BookStore.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c2597d72-c975-48af-8c1e-a2fb033a22dd"),
+                            Id = new Guid("814a9fe9-4f17-4fb0-a10f-0cdda6d837c1"),
                             Name = "User",
                             NormalizedName = "USER"
                         },
@@ -81,7 +84,7 @@ namespace BookStore.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("814a9fe9-4f17-4fb0-a10f-0cdda6d837c1"),
+                            Id = new Guid("c2597d72-c975-48af-8c1e-a2fb033a22dd"),
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         });
@@ -161,7 +164,7 @@ namespace BookStore.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ca9d3855-2c7d-427a-9364-d37dac608b55"),
+                            Id = new Guid("de78ed68-8bfa-4ece-8e58-39df3b821a7e"),
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "fa95c310-1ae7-454d-a589-af70ed8c0bce",
                             Email = "adminaka0618@gmail.com",
@@ -356,13 +359,6 @@ namespace BookStore.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = new Guid("ca9d3855-2c7d-427a-9364-d37dac608b55"),
-                            RoleId = new Guid("814a9fe9-4f17-4fb0-a10f-0cdda6d837c1")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
