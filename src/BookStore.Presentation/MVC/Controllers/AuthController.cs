@@ -22,7 +22,8 @@ namespace MVC.Controllers
             UserManager<User> userManager,
             IMediator mediator,
             IWebHostEnvironment webHostEnvironment,
-            IJSRuntime jsruntime)
+            IJSRuntime jsruntime,
+            RoleManager<Role> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -65,7 +66,7 @@ namespace MVC.Controllers
             if (!result.Succeeded)
                 throw new Exception("There is an issue with signing in process");
 
-            await _jsruntime.InvokeVoidAsync("window.setToStorage", "ProfileImage", user.PhotoPath);
+            //await _jsruntime.InvokeVoidAsync("window.setToStorage", "ProfileImage", user.PhotoPath);
 
             return RedirectToAction("Index", "Books");
         }
@@ -93,6 +94,11 @@ namespace MVC.Controllers
 
             if (!identityResult.Succeeded)
                 throw new Exception("There is an issue with signing in process");
+
+            identityResult = await _userManager.AddToRoleAsync(user, "User");
+
+            if (!identityResult.Succeeded)
+                throw new Exception("There is an issue with adding role");
 
             var result =
                 await _signInManager.PasswordSignInAsync(user, registerDTO.Password, false, false);
