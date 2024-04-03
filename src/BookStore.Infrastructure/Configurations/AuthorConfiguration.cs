@@ -17,18 +17,6 @@ namespace BookStore.Infrastructure.Configurations
                 .Property(x => x.Description)
                 .HasMaxLength(100)
                 .IsRequired();
-
-           /* builder
-                .HasData(
-                    new List<Author>
-                    {
-                        new Author{ Id = 1, Name = "O'tkir Hoshimov", Description = "Zo'r inson"},
-                        new Author{ Id = 2, Name = "Abdulla Qodiriy", Description = "Zo'r inson"},
-                        new Author{ Id = 3, Name = "Xudoyberdi To'xtaboyev", Description = "Zo'r inson"},
-                        new Author{ Id = 4, Name = "Asqad Maxtor", Description = "Zo'r inson"},
-                        new Author{ Id = 5, Name = "Erkin Vohidov", Description = "Zo'r inson"},
-                    }
-                );*/
         }
     }
 }

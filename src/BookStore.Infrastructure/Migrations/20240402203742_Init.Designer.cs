@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BookStore.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20240329040927_test_pagination")]
-    partial class test_pagination
+    [Migration("20240402203742_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,6 +68,26 @@ namespace BookStore.Infrastructure.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c2597d72-c975-48af-8c1e-a2fb033a22dd"),
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = new Guid("0849371e-339c-4e99-9db7-69d2e88ce5e4"),
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = new Guid("814a9fe9-4f17-4fb0-a10f-0cdda6d837c1"),
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN"
+                        });
                 });
 
             modelBuilder.Entity("BookStore.Domain.Entities.Auth.User", b =>
@@ -117,6 +137,9 @@ namespace BookStore.Infrastructure.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("PhotoPath")
+                        .HasColumnType("text");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
@@ -137,6 +160,26 @@ namespace BookStore.Infrastructure.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ca9d3855-2c7d-427a-9364-d37dac608b55"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "fa95c310-1ae7-454d-a589-af70ed8c0bce",
+                            Email = "adminaka0618@gmail.com",
+                            EmailConfirmed = false,
+                            FullName = "Admin aka",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMINAKA0618@GMAIL.COM",
+                            NormalizedUserName = "ADMINAKA",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL5dGfxjT0/cQfyvMMMQ+b+ancTXrKrIV/xliyQbGTpwoIO2zJNi/DYKFHKMs05POg==",
+                            PhoneNumber = "123456789",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "EQL6PMQHTWTUEC7XXDY6ZS5M3YS6UAZJ",
+                            TwoFactorEnabled = false,
+                            UserName = "adminaka"
+                        });
                 });
 
             modelBuilder.Entity("BookStore.Domain.Entities.Author", b =>
@@ -157,41 +200,13 @@ namespace BookStore.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
+                    b.Property<string>("PhotoPath")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.ToTable("Authors");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Zo'r inson",
-                            Name = "O'tkir Hoshimov"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Zo'r inson",
-                            Name = "Abdulla Qodiriy"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Zo'r inson",
-                            Name = "Xudoyberdi To'xtaboyev"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "Zo'r inson",
-                            Name = "Asqad Maxtor"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "Zo'r inson",
-                            Name = "Erkin Vohidov"
-                        });
                 });
 
             modelBuilder.Entity("BookStore.Domain.Entities.Book", b =>
@@ -214,6 +229,10 @@ namespace BookStore.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("PhotoPath")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
@@ -227,17 +246,6 @@ namespace BookStore.Infrastructure.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("Books");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            AuthorId = 5,
-                            Description = "Zo'r kitob",
-                            PDFFilePath = "Books/Erkin Vohidov Mening Yulduzim.pdf",
-                            Price = 20000m,
-                            Title = "Mening Yulduzlarim"
-                        });
                 });
 
             modelBuilder.Entity("BookStore.Domain.Entities.Genre", b =>
@@ -260,12 +268,12 @@ namespace BookStore.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Tarixiy"
+                            Name = "Diniy"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Fantastic"
+                            Name = "Badiiy"
                         });
                 });
 
@@ -351,6 +359,13 @@ namespace BookStore.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("ca9d3855-2c7d-427a-9364-d37dac608b55"),
+                            RoleId = new Guid("814a9fe9-4f17-4fb0-a10f-0cdda6d837c1")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
