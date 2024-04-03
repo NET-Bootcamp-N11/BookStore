@@ -102,10 +102,8 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateAsync(int id, [FromForm]BooksUpdateBookViewModel newBook)
+        public async Task<IActionResult> UpdateAsync(BooksUpdateBookViewModel newBook, int id)
         {
-            var oldBook = await _mediator.Send(new GetBookByIdQuery { Id = id });
-        
             var updateBookCommand = new UpdateBookCommand()
             {
                 Id = id,
@@ -114,39 +112,11 @@ namespace MVC.Controllers
                 AuthorId = newBook.book.AuthorId,
                 Genres = newBook.ids
             };
-        
-            // if a new PDF uploaded
-            if (newBook.newPdfFile != null && newBook.newPdfFile.Length > 0)
-            {
-                // Delete the old PDF
-                if (!string.IsNullOrEmpty(oldBook.PDFFilePath))
-                {
-                    var oldPdfFilePath = Path.Combine(_environment.WebRootPath, oldBook.PDFFilePath);
-                    if (System.IO.File.Exists(oldPdfFilePath))
-                    {
-                        System.IO.File.Delete(oldPdfFilePath);
-                    }
-                }
-        
-                // new PDF file
-                var uploadsFolderPath = Path.Combine(_environment.WebRootPath, "uploads");
-                var uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(newBook.newPdfFile.FileName);
-                var filePath = Path.Combine(uploadsFolderPath, uniqueFileName);
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    await newBook.newPdfFile.CopyToAsync(fileStream);
-                }
-        
-                updateBookCommand.PDFFilePath = "uploads/" + uniqueFileName;
-            }
-        
-            // Update it with price and possibly new PDF file path
-            updateBookCommand.Price = newBook.newPrice;
+
             var updatedBook = await _mediator.Send(updateBookCommand);
-        
+
             return RedirectToAction(nameof(MoreInfo), new { id = id });
         }
-
 
         public async Task<IActionResult> Delete(int id)
         {
