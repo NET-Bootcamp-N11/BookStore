@@ -1,33 +1,37 @@
-﻿@model BooksUpdateBookViewModel
+@model MVC.Models.BooksUpdateBookViewModel
 
-<form asp-controller="Books" asp-action="Update" asp-route-id="@Model.book.Id" method="post" class="needs-validation" novalidate>
+<form enctype="multipart/form-data" asp-controller="Books" asp-action="Update" method="post">
     <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
-        <input type="text" required class="form-control" id="title" asp-for="@Model.book.Title">
-        <div class="invalid-feedback">
-            Please provide a title.
-        </div>
+        <label asp-for="@Model.book.Title" class="form-label">Title</label>
+        <input asp-for="@Model.book.Title" type="text" class="form-control" placeholder="Enter title ..." required>
     </div>
+
     <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <input type="text" required class="form-control" id="description" asp-for="@Model.book.Description" >
-        <div class="invalid-feedback">
-            Please provide a description.
-        </div>
+        <label asp-for="@Model.book.Price" class="form-label">Price</label>
+        <input asp-for="@Model.book.Price" type="text" class="form-control" placeholder="Enter price ..." required>
     </div>
+
     <div class="mb-3">
-        <label for="author" class="form-label">Author</label>
-        <select class="form-select" id="author" asp-for="@Model.book.AuthorId" required>
-            <option value=""hidden>Select an author</option>
-            @foreach (var author in @Model.authors)
+        <label asp-for="@Model.book.Description" class="form-label">Description</label>
+        <textarea asp-for="@Model.book.Description" class="form-control" rows="3" required></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="@Model.newPdfFile" class="form-label">New PDF File</label>
+        <input asp-for="@Model.newPdfFile" class="form-control" type="file" id="newPdfFile" name="newPdfFile">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="@Model.book.AuthorId" class="form-label">Author</label>
+        <select asp-for="@Model.book.AuthorId" class="form-select" required>
+            <option value="" disabled selected>Select an author</option>
+            @foreach (var author in Model.authors)
             {
                 <option value="@author.Id">@author.Name</option>
             }
         </select>
-        <div class="invalid-feedback" >
-            Please select an author.
-        </div>
     </div>
+
     <table>
         <tr>
             @foreach (var item in Model.CheckedBoxes)
@@ -39,5 +43,5 @@
         </tr>
     </table>
 
-    <button class="btn btn-primary" type="submit">Update</button>
+    <button class="btn btn-primary mt-1" type="submit">Save Changes</button>
 </form>
