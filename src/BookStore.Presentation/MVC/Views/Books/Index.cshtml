@@ -47,8 +47,13 @@
             @if(User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
             {
                 <div class="card-body">
-                    <a href="@Url.Action("Delete", new { id = book.Id })" class="btn btn-danger">Delete</a>
-                    <a href="@Url.Action("Update", new { id = book.Id })" class="btn btn-secondary">Update</a>
+                    <h5 class="card-title"><a href="@Url.Action("MoreInfo", new { id = book.Id })">@book.Title</a></h5>
+                    <p class="card-text">Author: <a href="@Url.Action("MoreInfo", "Authors", new { id = book.Author.Id })">@book.Author.Name</a></p>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="@Url.Action("Delete", new { id = book.Id })" class="btn btn-danger">Delete</a>
+                        <a href="@Url.Action("Update", new { id = book.Id })" class="btn btn-secondary">Update</a>
+                    }
                 </div>
             }
         </div>

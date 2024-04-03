@@ -1,0 +1,37 @@
+﻿@using BookStore.Domain.Entities
+@model AuthorsMoreInfoViewModel
+
+<div class="container mt-5">
+    <div class="row mb-2">
+        <div class="col-md-8">
+            <h1>@Model.Author.Name</h1>
+            <p class="name">@Model.Author.Name</p>
+            <p class="description">@Model.Author.Description</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <img src="@Model.Author.PhotoPath" alt="Author Photo" class="img-fluid rounded">
+        </div>
+        <br />
+        <hr />
+        <h3 class="d-block">Muallif Kitoblari</h3>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var book in Model.Books)
+            {
+                <div class="col" style="max-width: 300px; padding-top:20px;">
+                    <div class="card" style="height: 300px; ">
+                        <img src="@book.PhotoPath" class="card-img-left" alt="Book Image" style="max-height: 150px; object-fit: contain;">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="@Url.Action("MoreInfo", "Books", new { id = book.Id })">@book.Title</a></h5>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a href="@Url.Action("Delete", new { id = book.Id })" class="btn btn-danger">Delete</a>
+                                <a href="@Url.Action("Update", new { id = book.Id })" class="btn btn-secondary">Update</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+<script>
+    console.log("salom")
+</script>

@@ -36,6 +36,22 @@ namespace MVC.Controllers
             return View(viewModel);
         }
 
+        [AllowAnonymous]
+        public async Task<IActionResult> MoreInfo(int id)
+        {
+            var author = await _mediator.Send(new GetAuthorByIdQuery() { Id = id });
+            var books = await _mediator.Send(new GetAllBooksQuery() { Text = author.Name });
+
+            var viewModel = new AuthorsMoreInfoViewModel()
+            {
+                Author = author,
+                Books = books,
+                Host = HttpContext.Request.Host.ToString(),
+            };
+
+            return View("MoreInfo", viewModel);
+        }
+
         public async Task<IActionResult> Create()
         {
             return View();
