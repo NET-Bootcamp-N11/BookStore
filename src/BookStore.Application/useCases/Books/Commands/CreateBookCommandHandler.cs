@@ -62,7 +62,7 @@ namespace BookStore.Application.useCases.Books.Commands
 
             var book = request.Adapt<Book>();
             book.Genres = genres;
-            book.PDFFilePath = "Books/" + fileName;
+            book.PDFFilePath = "/Books/" + fileName;
             book.PhotoPath = "/BookPhoto/" + PhotofileName;
 
             var res = await _appDbContext.Books.AddAsync(book);

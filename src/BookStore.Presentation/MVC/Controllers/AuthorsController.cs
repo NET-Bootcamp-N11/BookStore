@@ -62,13 +62,13 @@ namespace MVC.Controllers
         {
             var author = await _mediator.Send(createAuthorCommand);
 
-            var viewModel = new AuthorDetailsViewModel()
+            var viewModel = new AuthorsMoreInfoViewModel()
             {
                 Author = author,
                 Host = HttpContext.Request.Host.ToString(),
             };
 
-            return View("Details", viewModel);
+            return View("MoreInfo", viewModel);
         }
 
         public async Task<IActionResult> UpdateAsync(int id)
