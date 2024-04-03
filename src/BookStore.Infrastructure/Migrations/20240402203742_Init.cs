@@ -34,6 +34,7 @@ namespace BookStore.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     FullName = table.Column<string>(type: "text", nullable: false),
+                    PhotoPath = table.Column<string>(type: "text", nullable: true),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -61,7 +62,8 @@ namespace BookStore.Infrastructure.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                    Description = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    PhotoPath = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -195,6 +197,7 @@ namespace BookStore.Infrastructure.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "character varying(280)", maxLength: 280, nullable: false),
+                    PhotoPath = table.Column<string>(type: "text", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     PDFFilePath = table.Column<string>(type: "text", nullable: false),
                     AuthorId = table.Column<int>(type: "integer", nullable: false)
@@ -235,30 +238,33 @@ namespace BookStore.Infrastructure.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Authors",
-                columns: new[] { "Id", "Description", "Name" },
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "Zo'r inson", "O'tkir Hoshimov" },
-                    { 2, "Zo'r inson", "Abdulla Qodiriy" },
-                    { 3, "Zo'r inson", "Xudoyberdi To'xtaboyev" },
-                    { 4, "Zo'r inson", "Asqad Maxtor" },
-                    { 5, "Zo'r inson", "Erkin Vohidov" }
+                    { new Guid("0849371e-339c-4e99-9db7-69d2e88ce5e4"), null, "Admin", "ADMIN" },
+                    { new Guid("814a9fe9-4f17-4fb0-a10f-0cdda6d837c1"), null, "SuperAdmin", "SUPERADMIN" },
+                    { new Guid("c2597d72-c975-48af-8c1e-a2fb033a22dd"), null, "User", "USER" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PhotoPath", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("ca9d3855-2c7d-427a-9364-d37dac608b55"), 0, "fa95c310-1ae7-454d-a589-af70ed8c0bce", "adminaka0618@gmail.com", false, "Admin aka", false, null, "ADMINAKA0618@GMAIL.COM", "ADMINAKA", "AQAAAAIAAYagAAAAEL5dGfxjT0/cQfyvMMMQ+b+ancTXrKrIV/xliyQbGTpwoIO2zJNi/DYKFHKMs05POg==", "123456789", false, null, "EQL6PMQHTWTUEC7XXDY6ZS5M3YS6UAZJ", false, "adminaka" });
 
             migrationBuilder.InsertData(
                 table: "Genres",
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Tarixiy" },
-                    { 2, "Fantastic" }
+                    { 1, "Diniy" },
+                    { 2, "Badiiy" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Books",
-                columns: new[] { "Id", "AuthorId", "Description", "PDFFilePath", "Price", "Title" },
-                values: new object[] { 1L, 5, "Zo'r kitob", "Books/Erkin Vohidov Mening Yulduzim.pdf", 20000m, "Mening Yulduzlarim" });
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { new Guid("814a9fe9-4f17-4fb0-a10f-0cdda6d837c1"), new Guid("ca9d3855-2c7d-427a-9364-d37dac608b55") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

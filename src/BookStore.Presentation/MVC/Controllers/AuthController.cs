@@ -3,6 +3,8 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.JSInterop;
+using MVC.Models;
 using MVC.Models.Auth;
 
 namespace MVC.Controllers
@@ -11,16 +13,23 @@ namespace MVC.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IJSRuntime _jsruntime;
         private readonly IMediator _mediator;
 
         public AuthController(
             SignInManager<User> signInManager,
             UserManager<User> userManager,
-            IMediator mediator)
+            IMediator mediator,
+            IWebHostEnvironment webHostEnvironment,
+            IJSRuntime jsruntime,
+            RoleManager<Role> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _mediator = mediator;
+            _webHostEnvironment = webHostEnvironment;
+            _jsruntime = jsruntime;
         }
 
         public IActionResult Index()
@@ -57,6 +66,8 @@ namespace MVC.Controllers
             if (!result.Succeeded)
                 throw new Exception("There is an issue with signing in process");
 
+            //await _jsruntime.InvokeVoidAsync("window.setToStorage", "ProfileImage", user.PhotoPath);
+
             return RedirectToAction("Index", "Books");
         }
 
@@ -84,6 +95,11 @@ namespace MVC.Controllers
             if (!identityResult.Succeeded)
                 throw new Exception("There is an issue with signing in process");
 
+            identityResult = await _userManager.AddToRoleAsync(user, "User");
+
+            if (!identityResult.Succeeded)
+                throw new Exception("There is an issue with adding role");
+
             var result =
                 await _signInManager.PasswordSignInAsync(user, registerDTO.Password, false, false);
 
@@ -99,7 +115,51 @@ namespace MVC.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
 
-            return View(user);
+            var viewModel = new UserProfileViewModel()
+            {
+                User = user
+            };
+
+            return View(viewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfilePhoto(UserProfileViewModel profileViewModel)
+        {
+            var currentuser = await _userManager.GetUserAsync(User);
+
+            var file = profileViewModel.Photo;
+            string filePath = "";
+            string fileName = "";
+            try
+            {
+                fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                filePath = Path.Combine(_webHostEnvironment.WebRootPath, "UserProfileImage", fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+            }
+            catch (Exception ex)
+            {
+                await Console.Out.WriteLineAsync($"Error: {ex.Message}");
+            }
+
+            currentuser.PhotoPath = "/UserProfileImage/" + fileName;
+
+            var result = await _userManager.UpdateAsync(currentuser);
+            if (result.Succeeded)
+            {
+                await _signInManager.RefreshSignInAsync(currentuser);
+                return View("Profile", new UserProfileViewModel()
+                {
+                    User = currentuser
+                });
+            }
+            else
+                throw new Exception("Something went wrong");
         }
 
         [Authorize]
