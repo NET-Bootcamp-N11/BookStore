@@ -17,8 +17,6 @@ namespace BookStore.Infrastructure.Configurations
                 .Property(x => x.Description)
                 .HasMaxLength(280)
                 .IsRequired();
-
-            
         }
     }
 }

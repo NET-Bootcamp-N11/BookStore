@@ -24,26 +24,17 @@ namespace BookStore.Infrastructure
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
-            modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new AuthorConfiguration());
             modelBuilder.ApplyConfiguration(new BookConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
 
+            //Genre seeding
             modelBuilder.Entity<Genre>()
-                .HasData(
-                    new List<Genre>
-                    {
-                        new Genre
-                        {
-                            Id = 1,
-                            Name = "Tarixiy"
-                        },
-                        new Genre
-                        {
-                            Id = 2,
-                            Name = "Fantastic"
-                        }
+                .HasData(new Genre[]
+                    {   new Genre{  Id = 1, Name = "Diniy"  },
+                        new Genre{  Id = 2, Name = "Badiiy" }
                     }
                 );
         }
