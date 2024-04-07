@@ -3,9 +3,11 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using Microsoft.JSInterop;
 using MVC.Models;
 using MVC.Models.Auth;
+using System.Text.RegularExpressions;
 
 namespace MVC.Controllers
 {
@@ -74,10 +76,22 @@ namespace MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterDTO registerDTO)
         {
-            var user = await _userManager.FindByEmailAsync(registerDTO.Email);
-
             if (registerDTO.Password != registerDTO.ConfirmPassword)
                 throw new Exception("Passwords do not match!");
+
+            string pattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$";
+
+            if (!Regex.IsMatch(registerDTO.Password, pattern))
+            {
+                throw new Exception("Oops! Your password doesn't meet the criteria. Please try again!");
+                //Contains at least one lowercase letter.
+                //Contains at least one uppercase letter.
+                //Contains at least one digit.
+                //Contains at least one special character from the set @$!%*?&.
+                //Has a minimum length of 8 characters.
+            }
+
+            var user = await _userManager.FindByEmailAsync(registerDTO.Email);
 
             if (user is not null)
                 throw new Exception("You are already registred");
