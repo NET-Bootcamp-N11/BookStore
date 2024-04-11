@@ -41,7 +41,7 @@ namespace BookStore.Application.useCases.Books.Commands
                 fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                 filePath = Path.Combine(_webHostEnvironment.WebRootPath, "Books", fileName);
 
-                PhotofileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                PhotofileName = Guid.NewGuid().ToString() + Path.GetExtension(PhotoFile.FileName);
                 PhotofilePath = Path.Combine(_webHostEnvironment.WebRootPath, "BookPhoto", PhotofileName);
 
 
