@@ -21,7 +21,13 @@ body {
   margin-bottom: 60px;
 }
 
-
+/*Rasmlarni modalkaga o'xshab ochib beradi*/
 .fancybox-frame {
     display: inline-flex;
+}
+
+/*hover qilinsa kulrang bo'ladi*/
+img:hover {
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
 }
