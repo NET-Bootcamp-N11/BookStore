@@ -14,9 +14,9 @@
 - [x] Book va Author va Janrga Rasm qo'shishimiz kerak
 - [x] Books Index pageni update qilishimiz kerak(`List` emas `Card`lar ko'rinishida chiqishi kerak)
 - [x] Authors Index pageni update qilishimiz kerak(`List` emas `Card`lar ko'rinishida chiqishi kerak)
-- [ ] Profile photo qo'shish kerak
-- [ ] Rolelar(User,Admin,SuperAdmin) qo'shish kerak
-- [ ] Demak Admin page qo'shish kerak
+- [x] Profile photo qo'shish kerak
+- [x] Rolelar(User,Admin,SuperAdmin) qo'shish kerak
+- [x] Demak Admin page qo'shish kerak
 - [ ] Keyin UI ni chiroyli qilishimiz kerak
 - [ ] Savat qo'shish kerak
 - [ ] ...

@@ -28,7 +28,9 @@
                     {
                         <img src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg" style="width:100px" />
                     }else{
-                        <img src="@Model.User.PhotoPath" style="width:100px" />
+                        <a class="fancybox-frame profile-picture" data-fancybox href="@Model.User.PhotoPath">
+                            <img src="@Model.User.PhotoPath" style="width:100px" />
+                        </a>
                     }
                     <input asp-for="@Model.Photo" class="form-control" type="file" id="formFileMultiple" multiple>
                 </div>
