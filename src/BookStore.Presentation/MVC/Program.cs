@@ -2,6 +2,7 @@ using BookStore.Application;
 using BookStore.Domain.Entities.Auth;
 using BookStore.Infrastructure;
 using MVC.Middlewares;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +11,20 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddMemoryCache();
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
-builder.Services.AddApplicationServices();
+builder.Services.AddApplicationServices(builder.Configuration);
 
 builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<AppDBContext>();
+
+// Logger
+var logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+//builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
+
+
 
 var app = builder.Build();
 
