@@ -7,6 +7,7 @@ using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MVC.Filters;
 using MVC.Models;
 
 namespace MVC.Controllers
@@ -118,6 +119,8 @@ namespace MVC.Controllers
             return RedirectToAction(nameof(MoreInfo), new { id = id });
         }
 
+        [Delete]
+        [Permission]
         public async Task<IActionResult> Delete(int id)
         {
             var deleteBookCommand = new DeleteBookCommand()

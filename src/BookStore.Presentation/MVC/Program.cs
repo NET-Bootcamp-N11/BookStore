@@ -16,6 +16,8 @@ builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<AppDBContext>();
 
+builder.Services.AddAuthentication();
+
 // Logger
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
