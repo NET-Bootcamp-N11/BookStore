@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using BookStore.Application;
 using BookStore.Domain.Entities.Auth;
 using BookStore.Infrastructure;
@@ -27,7 +28,15 @@ var logger = new LoggerConfiguration()
 builder.Logging.AddSerilog(logger);
 
 
-
+//add rate limiting configuration
+builder.Services.AddRazorPages();
+builder.Services.AddMemoryCache();
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.Configure<IpRateLimitPolicies>(builder.Configuration.GetSection("IpRateLimitPolicies"));
+builder.Services.AddInMemoryRateLimiting();
+builder.Services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+builder.Services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -40,6 +49,8 @@ app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseIpRateLimiting();
 
 app.UseRouting();
 
