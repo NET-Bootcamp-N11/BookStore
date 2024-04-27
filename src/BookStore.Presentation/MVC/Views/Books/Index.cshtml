@@ -5,9 +5,15 @@
     ViewData["Title"] = "Book";
 }
 
-<form id="searchForm" class="d-flex gap-2 mb-5" asp-controller="Books" asp-action="Index" method="get">
-    <input type="search" id="searchInput" class="form-control" aria-describedby="search" name="text" placeholder="Enter book name...">
-</form>
+<div class="row mb-3">
+    <a class="col-2 text-dark btn btn-light" asp-area="" asp-controller="Genres" asp-action="Index"><i class='bx bx-category-alt'></i> Genres</a>
+    <div class="col-8 m-auto">
+        <form id="searchForm" class="d-flex gap-2" asp-controller="Books" asp-action="Index" method="get">
+            <input type="search" id="searchInput" class="form-control" aria-describedby="search" name="text" placeholder="Enter book name...">
+        </form>
+    </div>
+    <a class="col-2 text-dark btn btn-light" asp-area="" asp-controller="Likes" asp-action="Index"><i class='bx bx-heart'></i> Likes</a>
+</div>
 
 <script>
     document.addEventListener('DOMContentLoaded',
@@ -27,45 +33,42 @@
         });
 </script>
 
-@if (User.Identity.IsAuthenticated  && !User.IsInRole("User"))
+@if (User.Identity.IsAuthenticated && (User.IsInRole("SuperAdmin") || User.IsInRole("Admin")))
 {
     <a asp-controller="Books" asp-action="Create" class="btn btn-primary">
         <i class='bx bx-plus'></i>
     </a>
 }
-<br />
-<hr />
+
 <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
     @foreach (var book in Model.Objects)
     {
-        <div class="card mx-2" style="width: 18rem;">
+        <div class="card mx-2" style="width: 18rem; border:none">
             <a class="fancybox-frame profile-picture" data-fancybox href="@book.PhotoPath">
-                <img src="@book.PhotoPath" style="height: 250px; object-fit: cover;" class="card-img-top mt-3" alt="...">
+                <img src="@book.PhotoPath" style="height: 250px; object-fit: cover;" class="card-img card-img-top mt-3" alt="...">
             </a>
+
             <div class="card-body">
                 <h5 class="card-title"><a href="@Url.Action("MoreInfo", new { id = book.Id })">@book.Title</a></h5>
                 <p class="card-text">Author: <a href="@Url.Action("MoreInfo", "Authors", new { id = book.Author.Id })">@book.Author.Name</a></p>
             </div>
-            @if(User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
-            {
-                <div class="card-body">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <a href="@Url.Action("Delete", new { id = book.Id })" class="btn btn-danger">Delete</a>
-                        <a href="@Url.Action("Update", new { id = book.Id })" class="btn btn-secondary">Update</a>
-                    }
-                </div>
-            }
+
+            <div class="card-body">
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("SuperAdmin") || User.IsInRole("Admin")))
+                {
+                    <a href="@Url.Action("Delete", new { id = book.Id })" class="btn btn-danger">Delete</a>
+                    <a href="@Url.Action("Update", new { id = book.Id })" class="btn btn-secondary">Update</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("AddToBasket", new { id = book.Id })" class="btn add-card-btn btn-outline-primary"><i class='bx bx-cart-add'></i></a>
+                    <span class="price">@book.Price</span>
+                    <span class=""> so'm</span>
+                }
+            </div>
         </div>
     }
 </div>
-
-
-
-
-
-
-
 
 <!-- Pagination controls -->
 @if (Model.TotalPages > 1)

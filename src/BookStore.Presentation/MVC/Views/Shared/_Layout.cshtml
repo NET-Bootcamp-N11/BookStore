@@ -33,23 +33,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Authors" asp-action="Index">Authors</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Genres" asp-action="Index">Genres</a>
-                        </li>
                     </ul>
+
+                    <a asp-area="" asp-controller="" asp-action="" class="btn text-dark cart-btn btn-outline-primary mx-2"><i class='bx bx-cart'></i> Basket</a>
 
                     @if (!User.Identity.IsAuthenticated)
                     {      
                         <div class="d-flex">
-                            <a class="nav-link text-dark btn btn-outline-primary mx-2" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
-                            <a class="nav-link text-dark btn btn-primary mx-2" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
+                            <a class="nav-link text-dark btn btn-outline-primary mx-2" asp-area="" asp-controller="Auth" asp-action="Login"><i class='bx bx-log-in'></i> Login</a>
+                            <a class="nav-link text-dark btn btn-primary mx-2" asp-area="" asp-controller="Auth" asp-action="Register"><i class='bx bxs-user-plus'></i> Register</a>
                         </div>
                     }
                     else
                     {
                         <div class="d-flex">
-                            <a class="nav-link text-dark btn btn-outline-primary mx-2" asp-area="" asp-controller="Auth" asp-action="Profile">@User.Identity.Name</a>
-                            <a class="nav-link text-dark btn btn-primary mx-2" asp-area="" asp-controller="Auth" asp-action="LogOut">Log out</a>
+                            <a class="nav-link text-dark btn btn-outline-primary mx-2" asp-area="" asp-controller="Auth" asp-action="Profile"><i class='bx bx-user'></i> @User.Identity.Name</a>
+                            <a class="nav-link text-dark btn btn-primary mx-2" asp-area="" asp-controller="Auth" asp-action="LogOut"><i class='bx bx-log-out'></i> Log out</a>
                         </div>
                     }
                 </div>

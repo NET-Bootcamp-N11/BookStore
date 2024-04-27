@@ -1,0 +1,17 @@
+﻿.price{
+    font-size: 18px;
+}
+
+.add-card-btn{
+    border-radius: 50%;
+}
+
+.card-img{
+    border-radius: 10px;
+    border: 0.01px double;
+    border-color: lightgray;
+}
+
+.card-body {
+    padding: 4px 16px 0px 16px;
+}

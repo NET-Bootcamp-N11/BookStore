@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Profile";
+    string profileUrl = "https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg";
 }
 
 <h1>Welcome to your Profile</h1>
@@ -23,19 +24,19 @@
         
         <div class="col-6">
             <form enctype="multipart/form-data">
-                <div class="mb-3">
-                    @if (Model.User.PhotoPath is null)
-                    {
-                        <img src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg" style="width:100px" />
-                    }else{
-                        <a class="fancybox-frame profile-picture" data-fancybox href="@Model.User.PhotoPath">
-                            <img src="@Model.User.PhotoPath" style="width:100px" />
-                        </a>
-                    }
-                    <input asp-for="@Model.Photo" class="form-control" type="file" id="formFileMultiple" multiple>
-                </div>
+                @if (Model.User.PhotoPath is not null)
+                {
+                    profileUrl = Model.User.PhotoPath;
+                }
 
-                <button class="btn btn-primary" asp-controller="Auth" asp-action="UpdateProfilePhoto" formmethod="post">Upload</button>
+                <a class="fancybox-frame profile-picture" data-fancybox href="@Model.User.PhotoPath">
+                    <img src="@profileUrl"/>
+                </a>
+
+                <div class="row">
+                    <input asp-for="@Model.Photo" style="display:inline" class="form-control" type="file" id="formFileMultiple" multiple>
+                    <button class="btn btn-primary" style="display:inline" asp-controller="Auth" asp-action="UpdateProfilePhoto" formmethod="post">Upload</button>
+                </div>
             </form>
         </div>
     </div>
