@@ -1,9 +1,7 @@
 ﻿using BookStore.Application.Abstractions;
-using BookStore.Application.useCases.Authors.Queries;
 using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace BookStore.Application.useCases.Books.Queries
 {

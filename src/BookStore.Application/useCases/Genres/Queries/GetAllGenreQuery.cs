@@ -3,7 +3,7 @@ using MediatR;
 
 namespace BookStore.Application.useCases.Genres.Queries
 {
-    public class GetAllGenreQuery: IRequest<List<Genre>>
+    public class GetAllGenreQuery : IRequest<List<Genre>>
     {
 
     }

@@ -1,5 +1,4 @@
 ﻿using BookStore.Application.Abstractions;
-using BookStore.Application.useCases.Books.Queries;
 using BookStore.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
