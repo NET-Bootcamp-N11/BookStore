@@ -3,8 +3,8 @@ using MediatR;
 
 namespace BookStore.Application.useCases.Books.Queries
 {
-    public class SearchBookQuery : IRequest<List<Book>>
+    public class GetAllBooksByIdQuery : IRequest<List<Book>>
     {
-        public string Text { get; set; }
+        public List<long> Ids { get; set; }
     }
 }

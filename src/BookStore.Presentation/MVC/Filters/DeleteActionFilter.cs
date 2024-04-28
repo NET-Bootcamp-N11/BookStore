@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 using System.Security.Claims;
 
 namespace MVC.Filters
@@ -29,14 +28,14 @@ namespace MVC.Filters
 
             /*User shu bookni egasi ekanini tekshiramiz*/
 
-            if (bookId == 2)
-            {
-                context.Result = new StatusCodeResult(404);
-                return;
-            }
-            else
-            {
-            }
+            /*   if (bookId == 2)
+               {
+                   context.Result = new StatusCodeResult(404);
+                   return;
+               }
+               else
+               {
+               }*/
         }
     }
 }

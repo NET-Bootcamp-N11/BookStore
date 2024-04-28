@@ -10,9 +10,7 @@ namespace BookStore.Application.useCases.Books.Queries
         private readonly IAppDbContext _appDbContext;
 
         public GetAllBooksQueryHandler(IAppDbContext context)
-        {
-            _appDbContext = context;
-        }
+            => _appDbContext = context;
 
         public async Task<List<Book>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
         {
