@@ -1,0 +1,12 @@
+﻿.order-menu
+{
+    border: 1px double;
+    border-color: darkgrey;
+    border-radius: 10px;
+}
+
+.cart-photo{
+    width: 100px;
+    height: 100px;
+    object-fit:cover;
+}

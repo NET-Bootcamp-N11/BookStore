@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MVC</title>
+    <title>@ViewData["Title"] - Book Store</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/fancybox/jquery.fancybox.min.css" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -14,7 +14,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Books" asp-action="Index">BookStore</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Books" asp-action="Index">Book Store</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -41,14 +41,14 @@
                     {      
                         <div class="d-flex">
                             <a class="nav-link text-dark btn btn-outline-primary mx-2" asp-area="" asp-controller="Auth" asp-action="Login"><i class='bx bx-log-in'></i> Login</a>
-                            <a class="nav-link text-dark btn btn-primary mx-2" asp-area="" asp-controller="Auth" asp-action="Register"><i class='bx bxs-user-plus'></i> Register</a>
+                            <a class="nav-link text-dark btn btn-outline-primary mx-2" asp-area="" asp-controller="Auth" asp-action="Register"><i class='bx bxs-user-plus'></i> Register</a>
                         </div>
                     }
                     else
                     {
                         <div class="d-flex">
                             <a class="nav-link text-dark btn btn-outline-primary mx-2" asp-area="" asp-controller="Auth" asp-action="Profile"><i class='bx bx-user'></i> @User.Identity.Name</a>
-                            <a class="nav-link text-dark btn btn-primary mx-2" asp-area="" asp-controller="Auth" asp-action="LogOut"><i class='bx bx-log-out'></i> Log out</a>
+                            <a class="nav-link text-dark btn btn-outline-primary mx-2" asp-area="" asp-controller="Auth" asp-action="LogOut"><i class='bx bx-log-out'></i> Log out</a>
                         </div>
                     }
                 </div>

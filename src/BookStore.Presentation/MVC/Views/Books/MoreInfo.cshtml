@@ -23,8 +23,8 @@
             </p>
             <p><strong>Price:</strong> @Model.Book.Price so'm</p>
 
-            <a href="@Url.Action("AddToBasket", new { id = Model.Book.Id })" class="btn add-card-btn btn-primary"><i class='bx bx-cart-add'></i> Add To Basket</a>
-            <a href="@Url.Action("Basket", new { id = Model.Book.Id })" class="btn add-card-btn btn-primary">To Basket</a>
+            <a asp-controller="Cart" asp-action="AddToCart" asp-route-bookId="@Model.Book.Id" class="btn add-card-btn btn-primary"><i class='bx bx-cart-add'></i> Add To Basket</a>
+            <a asp-controller="Cart" asp-action="Basket" class="btn add-card-btn btn-primary">To Basket</a>
         </div>
         <div class="col-md-4 text-center">
             <a class="fancybox-frame product-image" data-fancybox href="@Model.Book.PhotoPath">
