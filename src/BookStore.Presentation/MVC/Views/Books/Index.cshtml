@@ -61,7 +61,7 @@
                 }
                 else
                 {
-                    <a href="@Url.Action("AddToBasket", new { id = book.Id })" class="btn add-card-btn btn-outline-primary"><i class='bx bx-cart-add'></i></a>
+                    <a asp-controller="Cart" asp-action="AddToCart" asp-route-bookId ="@book.Id" class="btn add-card-btn btn-outline-primary"><i class='bx bx-cart-add'></i></a>
                     <span class="price">@book.Price</span>
                     <span class=""> so'm</span>
                 }
