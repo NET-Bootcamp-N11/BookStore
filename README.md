@@ -3,10 +3,6 @@
 - [x] Book,Author,Role - CRUD amallari
 - [x] Authorization(Asp.Net.Identity bilan)
 - [x] PDF file uploading va PDF viwer
-- [x] ...
-
-#Endi nima qilishimiz kerak.
-
 - [x] Profile update qilishdagi exceptionlarni fix qilishimiz 
 - [x] Pagination qo'shish kerak
 - [x] Global Exception Handling va Exception page
@@ -17,11 +13,11 @@
 - [x] Profile photo qo'shish kerak
 - [x] Rolelar(User,Admin,SuperAdmin) qo'shish kerak
 - [x] Demak Admin page qo'shish kerak
-- [ ] Keyin UI ni chiroyli qilishimiz kerak
-- [ ] Savat qo'shish kerak
+- [x] Keyin UI ni chiroyli qilishimiz kerak
+- [x] Savat qo'shish kerak
 - [ ] ...
 
-#Uzoq muddatli
+#Nima qo'shishimiz kerak
 
 - [ ] Caching va logging qo'shish kerak
 - [ ] Rate limiting qo'shish
