@@ -1,6 +1,6 @@
 ﻿namespace BookStore.Domain.Entities
 {
-    public class CardItem
+    public class CartItem
     {
         public long BookId { get; set; }
         public int Count { get; set; }
