@@ -93,7 +93,7 @@ namespace MVC.Controllers
             return View("Details", updatedAuthor);
         }
 
-        public async Task<IActionResult> DeleteAuthor(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
             var query = new DeleteAuthorCommand()
             {
