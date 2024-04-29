@@ -1,9 +1,6 @@
-﻿
-using BookStore.Application.useCases.Extensions.TelegramBot;
+﻿using BookStore.Application.useCases.Extensions.TelegramBot;
 using BookStore.Domain.Exceptions;
-using Microsoft.VisualBasic;
 using Telegram.Bot;
-using Telegram.Bot.Types;
 
 namespace MVC.Middlewares
 {
@@ -44,7 +41,7 @@ namespace MVC.Middlewares
                 _logger.LogError($"{ex}\n\n\n");
 
                 int code = 500;
-                
+
                 await HandleExceptionAsync(context, ex, code);
             }
         }

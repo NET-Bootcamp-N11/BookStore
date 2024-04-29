@@ -1,7 +1,4 @@
-﻿using BookStore.Domain.Entities;
-using System.Drawing.Printing;
-
-namespace MVC.Models
+﻿namespace MVC.Models
 {
     public class PaginationViewModel<T>
     {

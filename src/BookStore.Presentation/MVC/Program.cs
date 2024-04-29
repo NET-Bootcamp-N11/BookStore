@@ -3,11 +3,16 @@ using BookStore.Domain.Entities.Auth;
 using BookStore.Infrastructure;
 using MVC.Middlewares;
 using Serilog;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.JsonSerializerOptions.WriteIndented = true;
+});
 builder.Services.AddMemoryCache();
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
@@ -15,6 +20,8 @@ builder.Services.AddApplicationServices(builder.Configuration);
 
 builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<AppDBContext>();
+
+builder.Services.AddAuthentication();
 
 // Logger
 var logger = new LoggerConfiguration()

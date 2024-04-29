@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 
 namespace BookStore.Application.useCases.Extensions.TelegramBot
 {

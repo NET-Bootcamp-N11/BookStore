@@ -1,5 +1,4 @@
-﻿using BookStore.Application.useCases.Books.Queries;
-using BookStore.Application.useCases.Extensions.PaginationExtensions;
+﻿using BookStore.Application.useCases.Extensions.PaginationExtensions;
 using BookStore.Application.useCases.Genres.Commands;
 using BookStore.Application.useCases.Genres.Queries;
 using BookStore.Domain.Entities;
