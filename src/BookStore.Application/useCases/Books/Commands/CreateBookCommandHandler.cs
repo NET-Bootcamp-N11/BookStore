@@ -38,12 +38,36 @@ namespace BookStore.Application.useCases.Books.Commands
 
             try
             {
+                var newFilePath = "";
+
                 fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                 filePath = Path.Combine(_webHostEnvironment.WebRootPath, "Books", fileName);
 
                 PhotofileName = Guid.NewGuid().ToString() + Path.GetExtension(PhotoFile.FileName);
                 PhotofilePath = Path.Combine(_webHostEnvironment.WebRootPath, "BookPhoto", PhotofileName);
 
+                if (!Directory.Exists(filePath))
+                {
+                    for (int i = 0; i < filePath.Split("\\").Length; i++)
+                    {
+                        if (i + 1 != filePath.Split("\\").Length)
+                            newFilePath += filePath.Split("\\")[i] + "\\";
+                    }
+
+                    Directory.CreateDirectory(newFilePath);
+                }
+
+                if (!Directory.Exists(PhotofilePath))
+                {
+                    newFilePath = "";
+                    for (int i = 0; i < PhotofilePath.Split("\\").Length; i++)
+                    {
+                        if (i + 1 != PhotofilePath.Split("\\").Length)
+                            newFilePath += PhotofilePath.Split("\\")[i] + "\\";
+                    }
+
+                    Directory.CreateDirectory(newFilePath);
+                }
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {

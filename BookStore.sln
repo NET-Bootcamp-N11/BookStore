@@ -5,17 +5,21 @@ VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E63592A0-27C4-4444-BD76-903F182458F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Domain", "src\BookStore.Domain\BookStore.Domain.csproj", "{6E8888F1-9B76-421E-ACEF-A499B3D04927}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Domain", "src\BookStore.Domain\BookStore.Domain.csproj", "{6E8888F1-9B76-421E-ACEF-A499B3D04927}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Application", "src\BookStore.Application\BookStore.Application.csproj", "{D22C7023-F7E3-468C-AEA1-37B97C680D15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Application", "src\BookStore.Application\BookStore.Application.csproj", "{D22C7023-F7E3-468C-AEA1-37B97C680D15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Infrastructure", "src\BookStore.Infrastructure\BookStore.Infrastructure.csproj", "{B6A4EF17-870B-4BF7-AAAE-FDC55E5831ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore.Infrastructure", "src\BookStore.Infrastructure\BookStore.Infrastructure.csproj", "{B6A4EF17-870B-4BF7-AAAE-FDC55E5831ED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BookStore.Presentation", "BookStore.Presentation", "{3F32713F-015A-4919-93CA-E1A5B34B4863}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "src\BookStore.Presentation\API\API.csproj", "{A71B8C92-ACA9-40D5-B277-E4CA6D2E195D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "src\BookStore.Presentation\API\API.csproj", "{A71B8C92-ACA9-40D5-B277-E4CA6D2E195D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC", "src\BookStore.Presentation\MVC\MVC.csproj", "{34FD9F69-7D8B-4762-BFF3-11DE5C98CFE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC", "src\BookStore.Presentation\MVC\MVC.csproj", "{34FD9F69-7D8B-4762-BFF3-11DE5C98CFE9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{216E730C-ACC0-4053-A332-713E53440962}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Infrastructure.Build", "src\BookStore.Infrastructure.Build\BookStore.Infrastructure.Build.csproj", "{785D78EE-F055-46F3-A7DD-6F8F488DDF1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +47,14 @@ Global
 		{34FD9F69-7D8B-4762-BFF3-11DE5C98CFE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34FD9F69-7D8B-4762-BFF3-11DE5C98CFE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34FD9F69-7D8B-4762-BFF3-11DE5C98CFE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{216E730C-ACC0-4053-A332-713E53440962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{216E730C-ACC0-4053-A332-713E53440962}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{216E730C-ACC0-4053-A332-713E53440962}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{216E730C-ACC0-4053-A332-713E53440962}.Release|Any CPU.Build.0 = Release|Any CPU
+		{785D78EE-F055-46F3-A7DD-6F8F488DDF1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{785D78EE-F055-46F3-A7DD-6F8F488DDF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{785D78EE-F055-46F3-A7DD-6F8F488DDF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{785D78EE-F055-46F3-A7DD-6F8F488DDF1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +66,8 @@ Global
 		{3F32713F-015A-4919-93CA-E1A5B34B4863} = {E63592A0-27C4-4444-BD76-903F182458F1}
 		{A71B8C92-ACA9-40D5-B277-E4CA6D2E195D} = {3F32713F-015A-4919-93CA-E1A5B34B4863}
 		{34FD9F69-7D8B-4762-BFF3-11DE5C98CFE9} = {3F32713F-015A-4919-93CA-E1A5B34B4863}
+		{216E730C-ACC0-4053-A332-713E53440962} = {E63592A0-27C4-4444-BD76-903F182458F1}
+		{785D78EE-F055-46F3-A7DD-6F8F488DDF1E} = {E63592A0-27C4-4444-BD76-903F182458F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C5D27F3-0D32-4A29-AE50-8C54EE56B386}
