@@ -23,6 +23,8 @@
   <ItemGroup>
     <Folder Include="wwwroot\AuthorsProfileImage\" />
     <Folder Include="wwwroot\BookPhoto\" />
+    <Folder Include="wwwroot\BookPhoto\" />
+    <Folder Include="wwwroot\Books\" />
     <Folder Include="wwwroot\UserProfileImage\" />
   </ItemGroup>
 
