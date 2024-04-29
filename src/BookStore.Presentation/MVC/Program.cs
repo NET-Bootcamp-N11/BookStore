@@ -21,12 +21,12 @@ builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<AppDBContext>();
 
-builder.Services.AddAuthentication()
+/*builder.Services.AddAuthentication()
     .AddGoogle(options =>
     {
         options.ClientId = "733255891197-6kjvhbtu55ioc4uansrsuhh7bn4gi4ig.apps.googleusercontent.com";
         options.ClientSecret = "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";
-    });
+    });*/
 
 // Logger
 var logger = new LoggerConfiguration()
