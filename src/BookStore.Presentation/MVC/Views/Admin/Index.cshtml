@@ -1,1 +1,25 @@
-﻿Qales Admin
+﻿@using BookStore.Domain.Entities.Auth
+@model List<User>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">PhoneNumber</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@user.PhoneNumber</td>
+                <td><a asp-controller="Admin" asp-action="UpdateAdmin" asp-route-id="@user.Id" class="btn btn-success">Admin</a></td>
+                <td><a asp-controller="Admin" asp-action="UpdateUser" asp-route-id="@user.Id" class="btn btn-danger">Ignor</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
