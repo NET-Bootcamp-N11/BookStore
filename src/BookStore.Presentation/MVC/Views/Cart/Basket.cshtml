@@ -10,6 +10,7 @@
                     <th scope="col">Title</th>
                     <th scope="col">Price</th>
                     <th scope="col">Count</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,11 +18,17 @@
                 {
                     <tr>
                         <th>
-                            <img class="cart-photo" src="@Model.Items[i].Book.PhotoPath" alt="Photo path"/>
+                            <img class="cart-photo" src="@Model.Items[i].Book.PhotoPath" alt="Photo path" />
                         </th>
                         <th>@Model.Items[i].Book.Title</th>
                         <td>@Model.Items[i].Book.Price</td>
                         <td>@Model.Items[i].Count</td>
+                        <td>
+                            <a asp-controller="Cart" asp-action="Delete" asp-route-bookId="@Model.Items[i].Book.Id" class="btn btn-danger">
+                                <i class='bx bxs-trash'></i>
+                            </a>
+                        </td>
+
                     </tr>
                 }
             </tbody>
