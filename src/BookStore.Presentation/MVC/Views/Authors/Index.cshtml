@@ -46,8 +46,9 @@
             @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
             {  
                 <div class="card-body">
-                    <a href="#" class="btn btn-warning">Update</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
+                    <a href ="@Url.Action("Update", new { id = author.Id })" class="btn btn-warning">
+                        Update</a>
+                    <a a asp-controller="Authors" asp-action="Delete" asp-route-id="@author.Id" class="btn btn-danger">Delete</a>
                 </div>
             }
         </div>

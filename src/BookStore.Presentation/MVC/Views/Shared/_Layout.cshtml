@@ -21,7 +21,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        @if(User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("SuperAdmin"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Index">NewUsers</a>
@@ -32,13 +32,15 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Authors" asp-action="Index">Authors</a>
-                        </li>
+                        </li> 
                     </ul>
-
-                    <a asp-area="" asp-controller="Cart" asp-action="Basket" class="btn text-dark cart-btn btn-outline-primary mx-2"><i class='bx bx-cart'></i> Basket</a>
+                    @if (!User.IsInRole("SuperAdmin"))
+                    {
+                        <a asp-area="" asp-controller="Cart" asp-action="Basket" class="btn text-dark cart-btn btn-outline-primary mx-2"><i class='bx bx-cart'></i> Basket</a>
+                    }
 
                     @if (!User.Identity.IsAuthenticated)
-                    {      
+                    {
                         <div class="d-flex">
                             <a class="nav-link text-dark btn btn-outline-primary mx-2" asp-area="" asp-controller="Auth" asp-action="Login"><i class='bx bx-log-in'></i> Login</a>
                             <a class="nav-link text-dark btn btn-outline-primary mx-2" asp-area="" asp-controller="Auth" asp-action="Register"><i class='bx bxs-user-plus'></i> Register</a>
