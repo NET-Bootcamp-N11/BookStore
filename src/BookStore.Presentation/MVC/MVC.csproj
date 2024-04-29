@@ -20,10 +20,4 @@
     <ProjectReference Include="..\..\BookStore.Infrastructure\BookStore.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\AuthorsProfileImage\" />
-    <Folder Include="wwwroot\BookPhoto\" />
-    <Folder Include="wwwroot\UserProfileImage\" />
-  </ItemGroup>
-
 </Project>
