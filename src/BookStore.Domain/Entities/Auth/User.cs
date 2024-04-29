@@ -6,5 +6,6 @@ namespace BookStore.Domain.Entities.Auth
     {
         public string FullName { get; set; }
         public string? PhotoPath { get; set; }
+        public bool? Check {  get; set; } = false;
     }
 }
