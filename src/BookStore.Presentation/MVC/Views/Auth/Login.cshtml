@@ -1,7 +1,8 @@
 ﻿@using MVC.Models.Auth
 @model LoginDTO
 
-<form class="container-form">
+<div class="container-form">
+<form>
     <div class="mb-3">
         <label asp-for="Email" class="form-label">Email address</label>
         <input asp-for="Email" type="email" class="form-control" aria-describedby="emailHelp">
@@ -11,8 +12,29 @@
         <input asp-for="Password" type="password" class="form-control">
     </div>
 
-    <button asp-controller="Auth" asp-action="Login" formmethod="post" type="submit" class="btn btn-primary">Login</button>
+    <button asp-controller="Auth" style="background-color:aliceblue; width:100%;" asp-action="Login" formmethod="post" type="submit" class="btn">Login</button>
 </form>
+
+@if (Model.ExternalLogins?.Count == 0)
+{
+    <div>No external logins configured</div>
+}
+else
+{
+    <form class="login-google" method="post" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
+        <div>
+            @foreach (var provider in Model.ExternalLogins)
+            {
+                <button type="submit" class="btn"
+                        name="provider" value="@provider.Name"
+                        title="Log in using your @provider.DisplayName account">
+                    <i class='bx bxl-google'></i> Login with @provider.DisplayName
+                </button>
+            }
+        </div>
+    </form>
+}
+</div>
 
 <style>
     .container-form {

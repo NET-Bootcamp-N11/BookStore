@@ -1,5 +1,10 @@
-﻿form{
-    width:50%;
-    margin:auto;
-    background-color:black;
+﻿.container-form {
+    width: 50%;
+    margin: auto;
+}
+
+.btn{
+    width: 100%;
+    background-color:aliceblue;
+    margin-top: 10px;
 }
