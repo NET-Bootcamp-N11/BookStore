@@ -1,38 +1,63 @@
 ﻿@using MVC.Models.Auth
 @model RegisterDTO
+<div class="move">
+    <div class="back">
+        <form class="forma">
+            <br />
+            <div class="mb-3">
+                <input placeholder="Full Name" type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp">
+            </div>
 
-<form class="container-form">
-    <div class="mb-3">
-        <label asp-for="FullName" class="form-label">FullName</label>
-        <input asp-for="FullName" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    </div>
-    <div class="mb-3">
-        <label asp-for="Username" class="form-label">Username</label>
-        <input asp-for="Username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    </div>
-    <div class="mb-3">
-        <label asp-for="PhoneNumber" class="form-label">PhoneNumber</label>
-        <input asp-for="PhoneNumber" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    </div>
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label">Email address</label>
-        <input asp-for="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    </div>
-    <div class="mb-3">
-        <label asp-for="Password" class="form-label">Password</label>
-        <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="mb-3">
-        <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
-        <input asp-for="ConfirmPassword" type="password" class="form-control" id="exampleInputPassword1">
-    </div>
+            <div class="mb-3">
+                <input placeholder="Username" type="text" class="form-control" id="Username" aria-describedby="emailHelp">
+            </div>
 
-    <button asp-controller="Auth" asp-action="Register" formmethod="post" type="submit" class="btn btn-primary">Register</button>
-</form>
+            <div class="mb-3">
+                <input placeholder="Phonenumber" type="text" class="form-control" id="PhoneNumber" aria-describedby="emailHelp">
+            </div>
+
+            <div class="mb-3">
+                <input placeholder="Email Address" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text" style="color:white">We'll never share your email with anyone else.</div>
+            </div>
+
+            <div class="mb-3">
+                <input placeholder="Password" type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+
+            <div class="mb-3">
+                <input placeholder="Confirm Password" type="password" class="form-control" id="ConfirmPassword">
+            </div>
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1" style="color:white">Check me out</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+    </div>
+</div>
+
 
 <style>
-    .container-form {
-        width: 50%;
-        margin: 0 auto;
+    .move{
+        display:flex;
+        justify-content:center;
+        width: 100%;
+        height: 80vh;
+    }
+    .forma{
+        width: 55%;
+    }
+    .back{
+        display: flex;
+        justify-content: center;
+        background-image: url('../assets/book2.jfif');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width:35%;
     }
 </style>
