@@ -90,7 +90,13 @@ namespace MVC.Controllers
 
             var updatedAuthor = await _mediator.Send(updateAuthorCommand);
 
-            return View("Details", updatedAuthor);
+            var detailsModel = new AuthorDetailsViewModel
+            {
+                Author = updatedAuthor,
+                Host = HttpContext.Request.Host.ToString(),
+            };
+
+            return View("Details", detailsModel);
         }
 
         public async Task<IActionResult> DeleteAsync(int id)
