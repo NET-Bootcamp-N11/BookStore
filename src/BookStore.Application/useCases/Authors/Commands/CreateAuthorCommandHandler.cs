@@ -3,6 +3,7 @@ using BookStore.Domain.Entities;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace BookStore.Application.useCases.Authors.Commands
 {
@@ -24,18 +25,30 @@ namespace BookStore.Application.useCases.Authors.Commands
             string fileName = "";
             try
             {
+                var newFilePath = "";
                 fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                 filePath = Path.Combine(_webHostEnvironment.WebRootPath, "AuthorsProfileImage", fileName);
 
-                using (var stream = new FileStream(filePath, FileMode.Create))
+
+                if (!Directory.Exists(newFilePath))
                 {
-                    await file.CopyToAsync(stream);
+                    for (int i = 0; i < filePath.Split("\\").Length; i++)
+                    {
+                        if (i + 1 != filePath.Split("\\").Length)
+                            newFilePath += filePath.Split("\\")[i] + "\\";
+                    }
+                 
+                    Directory.CreateDirectory(newFilePath);
                 }
-            }
-            catch (Exception ex)
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                    await file.CopyToAsync(stream);
+
+            } catch (Exception ex)
             {
                 await Console.Out.WriteLineAsync($"Error: {ex.Message}");
             }
+
             var author = command.Adapt<Author>();
             author.PhotoPath = "/AuthorsProfileImage/" + fileName;
             var res = await _context.Authors.AddAsync(author);
