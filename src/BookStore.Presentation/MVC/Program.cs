@@ -2,6 +2,7 @@ using BookStore.Application;
 using BookStore.Domain.Entities.Auth;
 using BookStore.Infrastructure;
 using MVC.Middlewares;
+using MVC.Models.ConfigurationModels;
 using Serilog;
 using System.Text.Json.Serialization;
 
@@ -21,7 +22,14 @@ builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<AppDBContext>();
 
-builder.Services.AddAuthentication();
+var googleAuth = builder.Configuration.GetSection("Auth-Google").Get<AuthGoogleConfiguration>();
+
+builder.Services.AddAuthentication()
+    .AddGoogle(options =>
+    {
+        options.ClientId = googleAuth.ClientId;
+        options.ClientSecret = googleAuth.ClientSecret;
+    });
 
 // Logger
 var logger = new LoggerConfiguration()
