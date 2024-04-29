@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\AuthorsProfileImage\**" />
+    <Compile Remove="wwwroot\BookPhoto\**" />
+    <Content Remove="wwwroot\AuthorsProfileImage\**" />
+    <Content Remove="wwwroot\BookPhoto\**" />
+    <EmbeddedResource Remove="wwwroot\AuthorsProfileImage\**" />
+    <EmbeddedResource Remove="wwwroot\BookPhoto\**" />
+    <None Remove="wwwroot\AuthorsProfileImage\**" />
+    <None Remove="wwwroot\BookPhoto\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR" Version="11.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
       <PrivateAssets>all</PrivateAssets>
@@ -21,8 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\AuthorsProfileImage\" />
-    <Folder Include="wwwroot\BookPhoto\" />
     <Folder Include="wwwroot\UserProfileImage\" />
   </ItemGroup>
 

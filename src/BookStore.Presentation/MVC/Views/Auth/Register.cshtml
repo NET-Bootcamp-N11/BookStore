@@ -1,6 +1,8 @@
 ﻿@using MVC.Models.Auth
 @model RegisterDTO
+
 <div class="move">
+    <img class="move-img" src="~/assets/boook.png" />
     <div class="back">
         <form class="forma">
             <br />
@@ -35,7 +37,6 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
-
         </form>
     </div>
 </div>
@@ -47,6 +48,17 @@
         justify-content:center;
         width: 100%;
         height: 80vh;
+        /* background-image: url('../assets/boook.png'); */
+        background-size: cover;
+        background-position: center;
+
+        background-repeat: no-repeat;
+    }
+    .move-img{
+        position: absolute;
+        width: 100%;
+        height: 79.5%;
+        z-index: -1;  
     }
     .forma{
         width: 55%;
@@ -56,6 +68,7 @@
         justify-content: center;
         background-image: url('../assets/book2.jfif');
         background-size: cover;
+        backdrop-filter: blur(20px);
         background-position: center;
         background-repeat: no-repeat;
         width:35%;
