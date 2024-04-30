@@ -86,6 +86,44 @@ namespace MVC.Controllers
             return RedirectToAction(nameof(Basket));
         }
 
+        public async Task<IActionResult> DeleteAsync(int bookId)
+        {
+            HttpContext.Request.Cookies.TryGetValue("cart", out string cartItemsJson);
+            cartItemsJson ??= "[]";
+
+            var cartItems = JsonSerializer.Deserialize<List<CartItem>>(cartItemsJson);
+
+            if (cartItems == null)
+            {
+                return RedirectToAction(nameof(Basket));
+            }
+
+            var item = cartItems.FirstOrDefault(x => x.BookId == bookId);
+
+            if (item != null)
+            {
+                item.Count--;
+
+                if (item.Count <= 0)
+                {
+                    cartItems.Remove(item);
+                }
+
+                HttpContext.Response.Cookies.Append(
+                    "cart",
+                    JsonSerializer.Serialize(
+                        cartItems,
+                        new JsonSerializerOptions()
+                        {
+                            ReferenceHandler = ReferenceHandler.IgnoreCycles
+                        }
+                    )
+                );
+            }
+
+            return RedirectToAction(nameof(Basket));
+        }
+
         public async Task<IActionResult> CreateOrderAsync()
         {
             if (!HttpContext.User.Identity.IsAuthenticated)
