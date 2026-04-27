@@ -5,7 +5,7 @@ namespace BookStore.Application.useCases.Extensions.TelegramBot
 
     public class WriteToTelegramBotService : IWriteToTelegramBotService
     {
-        private readonly long _groupId = -1002007183401;
+        private readonly long _groupId = 5569322769;
         private readonly TelegramBotClient _botClient;
 
         public WriteToTelegramBotService(TelegramBotClient botClient)
