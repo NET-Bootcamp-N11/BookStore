@@ -15,7 +15,7 @@ namespace BookStore.Application
 
             services.AddSingleton<TelegramBotClient>(provider =>
             {
-                var botToken = $"7040566448:AAGuJLoJsg8xqAAW4yWGPkZDR6PIxBlU0ns";
+                var botToken = configuration.GetSection("TelegramBotToken:Token").Value;
                 return new TelegramBotClient(botToken);
             });
 
