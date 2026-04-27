@@ -26,13 +26,38 @@
         <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
         <input required asp-for="ConfirmPassword" type="password" class="form-control" id="exampleInputPassword1">
     </div>
+</div>
 
-    <button asp-controller="Auth" asp-action="Register" formmethod="post" type="submit" class="btn btn-primary">Register</button>
-</form>
 
 <style>
-    .container-form {
-        width: 50%;
-        margin: 0 auto;
+    .move{
+        display:flex;
+        justify-content:center;
+        width: 100%;
+        height: 80vh;
+        /* background-image: url('../assets/boook.png'); */
+        background-size: cover;
+        background-position: center;
+
+        background-repeat: no-repeat;
+    }
+    .move-img{
+        position: absolute;
+        width: 100%;
+        height: 79.5%;
+        z-index: -1;  
+    }
+    .forma{
+        width: 55%;
+    }
+    .back{
+        display: flex;
+        justify-content: center;
+        background-image: url('../assets/book2.jfif');
+        background-size: cover;
+        backdrop-filter: blur(20px);
+        background-position: center;
+        background-repeat: no-repeat;
+        width:35%;
     }
 </style>
