@@ -1,43 +1,30 @@
 ﻿@using MVC.Models.Auth
 @model RegisterDTO
 
-<div class="move">
-    <img class="move-img" src="~/assets/boook.png" />
-    <div class="back">
-        <form class="forma">
-            <br />
-            <div class="mb-3">
-                <input placeholder="Full Name" type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp">
-            </div>
-
-            <div class="mb-3">
-                <input placeholder="Username" type="text" class="form-control" id="Username" aria-describedby="emailHelp">
-            </div>
-
-            <div class="mb-3">
-                <input placeholder="Phonenumber" type="text" class="form-control" id="PhoneNumber" aria-describedby="emailHelp">
-            </div>
-
-            <div class="mb-3">
-                <input placeholder="Email Address" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text" style="color:white">We'll never share your email with anyone else.</div>
-            </div>
-
-            <div class="mb-3">
-                <input placeholder="Password" type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-
-            <div class="mb-3">
-                <input placeholder="Confirm Password" type="password" class="form-control" id="ConfirmPassword">
-            </div>
-
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1" style="color:white">Check me out</label>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+<form class="container-form">
+    <div class="mb-3">
+        <label asp-for="FullName" class="form-label">FullName</label>
+        <input required asp-for="FullName" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Username" class="form-label">Username</label>
+        <input required asp-for="Username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label asp-for="PhoneNumber" class="form-label">PhoneNumber</label>
+        <input required asp-for="PhoneNumber" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email address</label>
+        <input required asp-for="Email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label">Password</label>
+        <input required asp-for="Password" type="password" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+        <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+        <input required asp-for="ConfirmPassword" type="password" class="form-control" id="exampleInputPassword1">
     </div>
 </div>
 
